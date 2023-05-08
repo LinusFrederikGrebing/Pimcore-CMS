@@ -52,3 +52,12 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+// Teams expansion panel 
+const panels = document.querySelectorAll('.panel');
+
+panels.forEach(panel => {
+  panel.addEventListener('click', () => {
+    panel.classList.toggle('active');
+  });
+});
