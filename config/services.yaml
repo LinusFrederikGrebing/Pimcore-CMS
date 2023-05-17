@@ -77,3 +77,13 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: artist-brick }
+
+    App\Document\Areabrick\PanelBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: panel-brick }
+
+    App\Document\Areabrick\SpecializationBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: specialization-brick }

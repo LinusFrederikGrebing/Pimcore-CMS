@@ -55,9 +55,9 @@ window.addEventListener('DOMContentLoaded', event => {
 
 // Teams expansion panel 
 const panels = document.querySelectorAll('.panel');
-
 panels.forEach(panel => {
-  panel.addEventListener('click', () => {
+  const panelHeader = panel.querySelector('.panel-header');
+  panelHeader.addEventListener('click', () => {
     panel.classList.toggle('active');
   });
 });

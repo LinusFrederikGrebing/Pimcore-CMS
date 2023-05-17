@@ -42,38 +42,9 @@
                     <h2 class="section-heading text-uppercase">{{ pimcore_input("Schwerpunkte") }}</h2>
                     <h3 class="section-subheading text-muted">{{ pimcore_input("SchwerpunkteSubtext") }}</h3>
                 </div>
-                <div class="row justify-content-center text-center">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="{{ asset('static/assets/img/portfolio/1.jpg') }}" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">{{ pimcore_input("WebMobile") }}</div>
-                                <div class="portfolio-caption-subheading text-muted">{{ pimcore_input("WebMobileText") }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="{{ asset('static/assets/img/portfolio/2.jpg') }}" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">{{ pimcore_input("Medien") }}</div>
-                                <div class="portfolio-caption-subheading text-muted">{{ pimcore_input("MedienText") }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {{ pimcore_areablock('specialization', {
+                        'allowed': ['specialization-brick']
+                    }) }}
             </div>
         </section>
         <!-- Team-->
@@ -82,87 +53,9 @@
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
                 </div>
-                 <div class="panel">
-                    <div class="panel-header">
-                        <h6 class="panel-title">Team Web & Mobile</h6>
-                    </div>
-                    <div class="panel-content">
-                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle"  src="{{ asset('static/assets/img/team/1.jpg') }}" alt="..." />
-                                        <h4>Parveen Anand</h4>
-                                        <p class="text-muted">Lead Designer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle" src="{{ asset('static/assets/img/team/2.jpg') }}" alt="..." />
-                                        <h4>Diana Petersen</h4>
-                                        <p class="text-muted">Lead Marketer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle" src="{{ asset('static/assets/img/team/3.jpg') }}" alt="..." />
-                                        <h4>Larry Parker</h4>
-                                        <p class="text-muted">Lead Developer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                 <div class="panel">
-                    <div class="panel-header">
-                        <h6 class="panel-title">Team GD</h6>
-                    </div>
-                    <div class="panel-content">
-                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle"  src="{{ asset('static/assets/img/team/1.jpg') }}" alt="..." />
-                                        <h4>Parveen Anand</h4>
-                                        <p class="text-muted">Lead Designer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle" src="{{ asset('static/assets/img/team/2.jpg') }}" alt="..." />
-                                        <h4>Diana Petersen</h4>
-                                        <p class="text-muted">Lead Marketer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="team-member">
-                                        <img class="mx-auto rounded-circle" src="{{ asset('static/assets/img/team/3.jpg') }}" alt="..." />
-                                        <h4>Larry Parker</h4>
-                                        <p class="text-muted">Lead Developer</p>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+                {{ pimcore_areablock('panel', {
+                    'allowed': ['panel-brick']
+                }) }}
             </div>
         </section>
-        {{ pimcore_areablock('content', {
-            'allowed': ['artist-brick'] })
-        }}
         {% endblock %}
