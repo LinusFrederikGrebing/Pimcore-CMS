@@ -73,10 +73,10 @@ services:
     # App\EventListener\TestListener:
     #     tags:
     #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
-    App\Document\Areabrick\ArtistBrick:
+    App\Document\Areabrick\TeachingBrick:
         arguments: [ '@logger' ]
         tags:
-            - { name: pimcore.area.brick, id: artist-brick }
+            - { name: pimcore.area.brick, id: teaching-brick }
 
     App\Document\Areabrick\PanelBrick:
         arguments: [ '@logger' ]
@@ -87,3 +87,18 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: specialization-brick }
+
+    App\Document\Areabrick\InformationBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: information-brick }
+
+    App\Document\Areabrick\InformationListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: information-list-brick }
+
+    App\Document\Areabrick\SpecializationListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: specialization-list-brick }

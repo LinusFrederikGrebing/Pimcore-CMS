@@ -5,11 +5,11 @@ namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class ArtistBrick extends AbstractTemplateAreabrick
+class InformationBrick extends AbstractTemplateAreabrick
 {
     public function getName()
     {
-        return 'ArtistBrick';
+        return 'InformationBrick';
     }
 
     public function getDescription()
