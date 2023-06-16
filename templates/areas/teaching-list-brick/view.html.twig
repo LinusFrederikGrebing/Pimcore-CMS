@@ -1,0 +1,15 @@
+<div class="row">
+<p>AV</p>
+    {% for teachingAV in teachingsAV %}
+        <div class="col-lg-4" style="display: flex;">
+            <div class="team-member" style="margin-right: 20px;">
+                <img class="mx-auto rounded-circle" src="{{ asset('static/assets/img/team/1.jpg') }}" alt="..." />
+                <h4>{{ teachingAV.title }}</h4>
+                <p class="text-muted">{{ teachingAV.select }}</p>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

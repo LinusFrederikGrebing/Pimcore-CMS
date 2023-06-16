@@ -31,7 +31,7 @@ class InformationListBrick extends AbstractTemplateAreabrick
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
     }
-    public function action(Info $info)
+    public function action(Info $info):? RedirectResponse
     {
         $informations = new DataObject\Informations\Listing();
         $info->setParam('informations', $informations);

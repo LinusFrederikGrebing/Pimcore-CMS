@@ -78,6 +78,11 @@ services:
         tags:
             - { name: pimcore.area.brick, id: teaching-brick }
 
+    App\Document\Areabrick\TeachingListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: teaching-list-brick }
+
     App\Document\Areabrick\PanelBrick:
         arguments: [ '@logger' ]
         tags:
