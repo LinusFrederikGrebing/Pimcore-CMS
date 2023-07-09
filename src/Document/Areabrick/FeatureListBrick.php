@@ -2,14 +2,16 @@
 // src/Document/Areabrick/Iframe.php
 
 namespace App\Document\Areabrick;
+use Pimcore\Model\Document\Editable\Area\Info;
+use \Pimcore\Model\DataObject;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class InformationBrick extends AbstractTemplateAreabrick
+class FeatureListBrick extends AbstractTemplateAreabrick
 {
     public function getName()
     {
-        return 'InformationBrick';
+        return 'FeatureListBrick';
     }
 
     public function getDescription()
@@ -29,4 +31,11 @@ class InformationBrick extends AbstractTemplateAreabrick
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
     }
+    public function action(Info $info):? RedirectResponse
+    {
+        $informations = new DataObject\Informations\Listing();
+        $info->setParam('informations', $informations);
+        return null;
+    }
+
 }

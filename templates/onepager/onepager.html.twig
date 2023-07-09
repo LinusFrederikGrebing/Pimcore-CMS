@@ -6,7 +6,7 @@
       <div class="text-center mb-5">
         <h2 class="section-heading text-uppercase">{{ pimcore_input('allgemeines') }}</h2>
       </div>
-      {{ pimcore_areablock('information', { allowed: ['information-list-brick'] }) }}
+      {{ pimcore_areablock('feature', { allowed: ['feature-list-brick'] }) }}
     </div>
   </section>
   <!-- Portfolio Grid -->
@@ -16,7 +16,7 @@
         <h2 class="section-heading text-uppercase">{{ pimcore_input('Schwerpunkte') }}</h2>
         <h3 class="section-subheading text-muted">{{ pimcore_input('SchwerpunkteSubtext') }}</h3>
       </div>
-      {{ pimcore_areablock('specialization', { allowed: ['specialization-list-brick'] }) }}
+      {{ pimcore_areablock('portfolio', { allowed: ['portfolio-list-brick'] }) }}
     </div>
   </section>
   <!-- Team -->
@@ -25,7 +25,7 @@
       <div class="text-center">
         <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
       </div>
-      {{ pimcore_areablock('panel', { allowed: ['panel-brick'] }) }}
+      {{ pimcore_areablock('team', { allowed: ['team-list-brick'] }) }}
     </div>
   </section>
 {% endblock %}

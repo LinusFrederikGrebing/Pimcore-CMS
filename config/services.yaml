@@ -73,37 +73,18 @@ services:
     # App\EventListener\TestListener:
     #     tags:
     #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
-    App\Document\Areabrick\TeachingBrick:
+    
+    App\Document\Areabrick\TeamListBrick:
         arguments: [ '@logger' ]
         tags:
-            - { name: pimcore.area.brick, id: teaching-brick }
+            - { name: pimcore.area.brick, id: team-list-brick }
 
-    App\Document\Areabrick\TeachingListBrick:
+    App\Document\Areabrick\FeatureListBrick:
         arguments: [ '@logger' ]
         tags:
-            - { name: pimcore.area.brick, id: teaching-list-brick }
+            - { name: pimcore.area.brick, id: feature-list-brick }
 
-    App\Document\Areabrick\PanelBrick:
+    App\Document\Areabrick\PortfolioListBrick:
         arguments: [ '@logger' ]
         tags:
-            - { name: pimcore.area.brick, id: panel-brick }
-
-    App\Document\Areabrick\SpecializationBrick:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: pimcore.area.brick, id: specialization-brick }
-
-    App\Document\Areabrick\InformationBrick:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: pimcore.area.brick, id: information-brick }
-
-    App\Document\Areabrick\InformationListBrick:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: pimcore.area.brick, id: information-list-brick }
-
-    App\Document\Areabrick\SpecializationListBrick:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: pimcore.area.brick, id: specialization-list-brick }
+            - { name: pimcore.area.brick, id: portfolio-list-brick }

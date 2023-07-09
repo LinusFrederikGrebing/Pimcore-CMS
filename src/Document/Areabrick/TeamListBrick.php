@@ -2,14 +2,16 @@
 // src/Document/Areabrick/Iframe.php
 
 namespace App\Document\Areabrick;
+use Pimcore\Model\Document\Editable\Area\Info;
+use \Pimcore\Model\DataObject;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class SpecializationBrick extends AbstractTemplateAreabrick
+class TeamListBrick extends AbstractTemplateAreabrick
 {
     public function getName()
     {
-        return 'SpecializationBrick';
+        return 'TeamListBrick';
     }
 
     public function getDescription()
@@ -28,5 +30,20 @@ class SpecializationBrick extends AbstractTemplateAreabrick
         // here you can decide whether adding this bricks should trigger a reload
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
+    }
+
+   /*public function action(Info $info)
+    {
+        $teachings = new DataObject\Teaching\Listing();
+        $info->setParam('teachings', $teachings);
+        return null;
+    }
+       */
+    public function action(Info $info)
+    {
+        $teachings = new DataObject\Teaching\Listing();
+
+        $info->setParam('team', $teachings);
+        return null;
     }
 }
