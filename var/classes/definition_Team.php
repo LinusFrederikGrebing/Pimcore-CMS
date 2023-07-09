@@ -5,18 +5,21 @@
  * Variants: no
  *
  * Fields Summary:
- * - title [input]
- * - description [textarea]
- * - select [select]
+ * - firstname [input]
+ * - lastname [input]
+ * - image [image]
+ * - mail [input]
+ * - link [input]
+ * - team [select]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => '3',
-   'name' => 'Teaching',
+   'name' => 'Team',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1684589251,
+   'modificationDate' => 1688920569,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -66,8 +69,8 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'title',
-             'title' => 'Title',
+             'name' => 'firstname',
+             'title' => 'Firstname',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -96,9 +99,9 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-             'name' => 'description',
-             'title' => 'Description',
+          Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'lastname',
+             'title' => 'Lastname',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -107,7 +110,38 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
-             'fieldtype' => 'textarea',
+             'fieldtype' => 'input',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'width' => '',
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
+            array (
+            ),
+             'unique' => false,
+             'showCharCount' => false,
+             'defaultValueGenerator' => '',
+          )),
+          2 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+             'name' => 'image',
+             'title' => 'Image',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'fieldtype' => 'image',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -117,14 +151,74 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             ),
              'width' => '',
              'height' => '',
-             'maxLength' => NULL,
-             'showCharCount' => false,
-             'excludeFromSearchIndex' => false,
+             'uploadPath' => '',
           )),
-          2 => 
+          3 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'mail',
+             'title' => 'Mail',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'fieldtype' => 'input',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'width' => '',
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
+            array (
+            ),
+             'unique' => false,
+             'showCharCount' => false,
+             'defaultValueGenerator' => '',
+          )),
+          4 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'link',
+             'title' => 'Link',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'fieldtype' => 'input',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'width' => '',
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
+            array (
+            ),
+             'unique' => false,
+             'showCharCount' => false,
+             'defaultValueGenerator' => '',
+          )),
+          5 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-             'name' => 'select',
-             'title' => 'Select',
+             'name' => 'team',
+             'title' => 'Team',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -150,13 +244,13 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               ),
               1 => 
               array (
-                'key' => 'Web',
-                'value' => 'Web',
+                'key' => 'Medienproduktion',
+                'value' => 'Medienproduktion',
               ),
               2 => 
               array (
-                'key' => 'Medien',
-                'value' => 'Medien',
+                'key' => 'Web & Mobile',
+                'value' => 'Web & Mobile',
               ),
             ),
              'width' => '',

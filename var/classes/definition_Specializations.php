@@ -8,6 +8,7 @@
  * - title [input]
  * - descriptions [textarea]
  * - subtitle [input]
+ * - image [image]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -16,7 +17,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Specializations',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1684403857,
+   'modificationDate' => 1688911135,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -152,6 +153,30 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'showCharCount' => false,
              'defaultValueGenerator' => '',
           )),
+          3 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+             'name' => 'image',
+             'title' => 'Image',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'fieldtype' => 'image',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'width' => '',
+             'height' => '',
+             'uploadPath' => '',
+          )),
         ),
          'locked' => false,
          'blockedVarsForExport' => 
@@ -211,6 +236,32 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+       'name' => 'Image',
+       'title' => 'Image',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'datatype' => 'data',
+       'fieldtype' => 'image',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'queryColumnType' => 'int(11)',
+       'columnType' => 'int(11)',
+       'width' => '',
+       'height' => '',
+       'uploadPath' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

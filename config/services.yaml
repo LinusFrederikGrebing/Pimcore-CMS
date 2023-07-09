@@ -88,3 +88,8 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: portfolio-list-brick }
+
+    App\Document\Areabrick\SpacerBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: spacer-brick }
