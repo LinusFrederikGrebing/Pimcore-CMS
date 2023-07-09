@@ -41,9 +41,9 @@ class TeamListBrick extends AbstractTemplateAreabrick
        */
     public function action(Info $info)
     {
-        $teachings = new DataObject\Teaching\Listing();
+        $teams = new DataObject\Teaching\Listing();
 
-        $info->setParam('team', $teachings);
+        $info->setParam('teams', $teams);
         return null;
     }
 }

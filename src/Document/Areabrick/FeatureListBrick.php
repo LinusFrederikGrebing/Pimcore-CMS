@@ -33,8 +33,8 @@ class FeatureListBrick extends AbstractTemplateAreabrick
     }
     public function action(Info $info):? RedirectResponse
     {
-        $informations = new DataObject\Informations\Listing();
-        $info->setParam('informations', $informations);
+        $features = new DataObject\Informations\Listing();
+        $info->setParam('features', $features);
         return null;
     }
 
