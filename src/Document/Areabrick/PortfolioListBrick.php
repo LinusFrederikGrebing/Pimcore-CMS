@@ -33,7 +33,7 @@ class PortfolioListBrick extends AbstractTemplateAreabrick
     }
     public function action(Info $info)
     {
-        $portfolio = new DataObject\Specializations\Listing();
+        $portfolio = new DataObject\Portfolio\Listing();
         $info->setParam('portfolios', $portfolio);
         return null;
     }

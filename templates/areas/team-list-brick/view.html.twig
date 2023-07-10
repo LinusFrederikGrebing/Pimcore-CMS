@@ -1,116 +1,53 @@
-<section class="page-section bg-light" id="team">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-		</div>
-		<div class="row">
-			<div id="accordion">
-				<div class="card">
-					<div class="card-header" id="headingOne">
-						<h5 class="mb-0">
-							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								Web & Mobile
-							</button>
-						</h5>
-					</div>
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-						<div class="card-body">
-							<div class="row">
-								{% for team in teams %}
-                                {% if team.team == 'Web & Mobile' %}
-									<div class="col-lg-4">
-										<div class="team-member">
-											<img class="mx-auto rounded-circle" src="{{ team.image }}" alt="..."/>
-											<h4>{{team.firstname}}
-												{{team.lastname}}</h4>
-											<p class="text-muted">{{ team.team }}</p>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile">
-												<i class="fab fa-twitter"></i>
-											</a>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</div>
-									</div>
-                                {% endif %}
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingTwo">
-						<h5 class="mb-0">
-							<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								Grafische Datenverarbeitung
-							</button>
-						</h5>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-						<div class="card-body">
-							<div class="row">
-								{% for team in teams %}
-                                {% if team.team == 'Medienproduktion' %}
-									<div class="col-lg-4">
-										<div class="team-member">
-											<img class="mx-auto rounded-circle" src="{{ team.image }}" alt="..."/>
-											<h4>{{team.firstname}}
-												{{team.lastname}}</h4>
-											<p class="text-muted">{{ team.team }}</p>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile">
-												<i class="fab fa-twitter"></i>
-											</a>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</div>
-									</div>
-                                {% endif %}
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingThree">
-						<h5 class="mb-0">
-							<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-								Medienproduktion
-							</button>
-						</h5>
-					</div>
-					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-						<div class="card-body">
-							<div class="row">
-								{% for team in teams %}
-                                {% if team.team == 'AV' %}
-									<div class="col-lg-4">
-										<div class="team-member">
-											<img class="mx-auto rounded-circle" src="{{ team.image }}" alt="..."/>
-											<h4>{{team.firstname}}
-												{{team.lastname}}</h4>
-											<p class="text-muted">{{ team.team }}</p>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile">
-												<i class="fab fa-solid fa-envelope"></i>
-											</a>
-											<a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile">
-												<i class="fab fa-solid fa-address-card"></i>
-											</a>
-										</div>
-									</div>
-                                {% endif %}
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<section class="page-section" id="team">
+    <div class="container">
+        {{ pimcore_areablock('headline', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+        <div class="row">
+            <div id="accordion">
+                {% set categories = [
+                    {'name': 'Web & Mobile', 'id': 'One'},
+                    {'name': 'Grafische Datenverarbeitung', 'id': 'Two'},
+                    {'name': 'Medienproduktion', 'id': 'Three'}
+                ] %}
+                {% for category in categories %}
+                    <div class="card">
+                        <div class="card-header" id="heading{{ category.id }}">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link{% if loop.first %} collapsed{% endif %}" data-toggle="collapse" data-target="#collapse{{ category.id }}" aria-expanded="false" aria-controls="collapse{{ category.id }}">
+                                    {{ category.name }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapse{{ category.id }}" class="collapse{% if loop.first %} show{% endif %}" aria-labelledby="heading{{ category.id }}" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    {% for team in teams %}
+                                        {% if team.team == category.name %}
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                <div class="team-member">
+                                                    <img class="mx-auto rounded-circle" src="{{ team.image }}" alt="..." />
+                                                    <h4 class="text-secondary">
+                                                        {{ team.firstname }} {{ team.lastname }}
+                                                    </h4>
+                                                    <p class="text-muted">
+                                                        {{ team.team }}
+                                                    </p>
+                                                    <a class="btn btn-dark btn-social mx-2" href="mailto:{{ team.mail }}">
+                                                        <i class="fa-solid fa-envelope"></i>
+                                                    </a>
+                                                    <a class="btn btn-dark btn-social mx-2" target="_blank" href="{{ team.link }}">
+                                                        <i class="fa-solid fa-address-card"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {{ pimcore_areablock('below', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+    </div>
 </section>

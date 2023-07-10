@@ -1,18 +1,16 @@
 <?php
-// src/Document/Areabrick/SpacerBrick.php
+// src/Document/Areabrick/Iframe.php
 
 namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class SpacerBrick extends AbstractTemplateAreabrick
+class CenteredTextBrick extends AbstractTemplateAreabrick
 {
     public function getName()
     {
-        return 'SpacerBrick';
+        return 'CenteredTextBrick';
     }
-    
     public function getDescription()
     {
         return 'Embed contents from other URL (websites) via iframe';
@@ -30,5 +28,4 @@ class SpacerBrick extends AbstractTemplateAreabrick
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
     }
-    
 }

@@ -1,10 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-  <!-- Services -->
-  {{ pimcore_areablock('feature', { allowed: ['feature-list-brick'] }) }}
-  <!-- Portfolio Grid -->
-  {{ pimcore_areablock('portfolio', { allowed: ['portfolio-list-brick'] }) }}
-  <!-- Team -->
-  {{ pimcore_areablock('team', { allowed: ['team-list-brick'] }) }}
+
+  {{ pimcore_areablock('feature', { allowed: ['feature-list-brick', 'portfolio-list-brick', 'team-list-brick'] }) }}
 
 {% endblock %}

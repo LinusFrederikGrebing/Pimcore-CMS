@@ -93,3 +93,18 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: spacer-brick }
+
+    App\Document\Areabrick\HeadlineBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: headline-brick }
+
+    App\Document\Areabrick\SubheadlineBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: subheadline-brick }
+
+    App\Document\Areabrick\CenteredTextBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: centeredtext-brick }

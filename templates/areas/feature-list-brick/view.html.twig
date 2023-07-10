@@ -1,24 +1,21 @@
 <section class="page-section" id="services">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-heading text-uppercase">{{ pimcore_input('allgemeines') }}</h2>
-      </div>
+    {{ pimcore_areablock('over', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
       <div class="row text-center">
-      {{ pimcore_areablock('spacer', { allowed: ['spacer-brick'] }) }}
           <div class="col-md-4">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
             <i class="fas fa-stack-1x fa-solid fa-graduation-cap fa-inverse"></i>
           </span>
-          <h4 class="my-3">{{ pimcore_input('graduation') }}</h4>
-          <p class="text-muted">{{ pimcore_input('graduation-sub') }}</p>
+          <h4 class="my-3 text-secondary">{{ pimcore_input('graduation') }}</h4>
+          <p class="text-secondary text-muted">{{ pimcore_input('graduation-sub') }}</p>
           </div>
           <div class="col-md-4">
           <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-stack-1x fa-solid fa-calendar-days fa-inverse"></i>
           </span>
-          <h4 class="my-3">{{ pimcore_input('calendar') }}</h4>
+          <h4 class="my-3 text-secondary">{{ pimcore_input('calendar') }}</h4>
           <p class="text-muted">{{ pimcore_input('calendar-sub') }}</p>
           </div>
           <div class="col-md-4">
@@ -26,9 +23,10 @@
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-stack-1x fa-solid fa-hourglass fa-inverse"></i>
           </span>
-          <h4 class="my-3">{{ pimcore_input('hourglass') }}</h4>
+          <h4 class="my-3 text-secondary">{{ pimcore_input('hourglass') }}</h4>
           <p class="text-muted">{{ pimcore_input('hourglass-sub') }}</p>
           </div>
       </div>
+      {{ pimcore_areablock('below', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
     </div>
 </section>

@@ -19,7 +19,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Team',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1688920569,
+   'modificationDate' => 1689004557,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -239,8 +239,8 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               array (
-                'key' => 'AV',
-                'value' => 'AV',
+                'key' => 'Grafische Datenverarbeitung',
+                'value' => 'Grafische Datenverarbeitung',
               ),
               1 => 
               array (

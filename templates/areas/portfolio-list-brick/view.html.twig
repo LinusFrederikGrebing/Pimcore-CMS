@@ -1,12 +1,9 @@
 <section class="page-section bg-light" id="portfolio">
 <div class="container">
-  <div class="text-center">
-    <h2 class="section-heading text-uppercase">{{ pimcore_input('Schwerpunkte') }}</h2>
-    <h3 class="section-subheading text-muted">{{ pimcore_input('SchwerpunkteSubtext') }}</h3>
-  </div>
+{{ pimcore_areablock('over', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
   <div class="row justify-content-center text-center">
   {% for portfolio in portfolios %}
-    <div class="col-lg-4 col-sm-6 mb-4 mx-5">
+    <div class="col-lg-6 col-sm-6 mb-4">
       <div class="portfolio-item">
         <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ loop.index }}">
           <div class="portfolio-hover">
@@ -17,14 +14,14 @@
           <img class="img-fluid" src="{{ portfolio.image }}" />
         </a>
         <div class="portfolio-caption">
-          <div class="portfolio-caption-heading">{{ portfolio.title }}</div>
-          <div class="portfolio-caption-subheading text-muted">{{ portfolio.subtitle }}</div>
+          <div class="portfolio-caption-heading text-secondary">{{ portfolio.name }}</div>
+          <div class="portfolio-caption-subheading text-muted">{{ portfolio.subheading }}</div>
         </div>
       </div>
     </div>
   {% endfor %}
   </div>
-  
+  {{ pimcore_areablock('below', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 </div>
 </section>
 
@@ -41,10 +38,10 @@
           <div class="col-lg-8">
             <div class="modal-body">
               <!-- Project details -->
-              <h2 class="text-uppercase">{{ portfolio.title }}</h2>
-              <p class="item-intro text-muted">{{ portfolio.subtitle }}</p>
+              <h2 class="text-uppercase">{{ portfolio.name }}</h2>
+              <p class="item-intro text-muted">{{ portfolio.subheading }}</p>
               <img class="img-fluid d-block mx-auto" src="{{ portfolio.image }}" />
-              <p>{{ portfolio.descriptions }}</p>
+              <p>{{ portfolio.description }}</p>
               <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                 <i class="fas fa-xmark me-1"></i>
                 Schließen

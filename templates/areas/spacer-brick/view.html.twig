@@ -1,0 +1,10 @@
+{% if editmode %}
+    {{ pimcore_select("valid_size", {
+            "store": [
+                ["2em", "Klein"],
+                ["3em", "Mittel"],
+                ["4em", "Groß"]
+            ]
+        }) }}
+{% endif %}
+<div style="height: {{ pimcore_select("valid_size").getData() }}"></div>
