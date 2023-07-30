@@ -2,8 +2,6 @@
 // src/Document/Areabrick/Iframe.php
 
 namespace App\Document\Areabrick;
-use Pimcore\Model\Document\Editable\Area\Info;
-use \Pimcore\Model\DataObject;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 

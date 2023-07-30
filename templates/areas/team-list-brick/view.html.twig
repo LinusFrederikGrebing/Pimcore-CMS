@@ -3,25 +3,20 @@
         {{ pimcore_areablock('headline', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
         <div class="row">
             <div id="accordion">
-                {% set categories = [
-                    {'name': 'Web & Mobile', 'id': 'One'},
-                    {'name': 'Grafische Datenverarbeitung', 'id': 'Two'},
-                    {'name': 'Medienproduktion', 'id': 'Three'}
-                ] %}
-                {% for category in categories %}
+                {% for teamValue in teamValues %}
                     <div class="card">
-                        <div class="card-header" id="heading{{ category.id }}">
+                        <div class="card-header" id="heading{{ teamValue.key }}">
                             <h5 class="mb-0">
-                                <button class="btn btn-link{% if loop.first %} collapsed{% endif %}" data-toggle="collapse" data-target="#collapse{{ category.id }}" aria-expanded="false" aria-controls="collapse{{ category.id }}">
-                                    {{ category.name }}
+                                <button class="btn btn-link{% if loop.first %} collapsed{% endif %}" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                    {{ teamValue.value }}
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapse{{ category.id }}" class="collapse{% if loop.first %} show{% endif %}" aria-labelledby="heading{{ category.id }}" data-parent="#accordion">
+                        <div id="collapse{{ loop.index }}" class="collapse{% if loop.first %} show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="row">
                                     {% for team in teams %}
-                                        {% if team.team == category.name %}
+                                        {% if team.team == teamValue.value %}
                                             <div class="col-lg-3 col-md-4 col-sm-6">
                                                 <div class="team-member">
                                                     <img class="mx-auto rounded-circle" src="{{ team.image }}" alt="..." />
@@ -48,6 +43,6 @@
                 {% endfor %}
             </div>
         </div>
-        {{ pimcore_areablock('below', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+        {{ pimcore_areablock('below', { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
     </div>
 </section>

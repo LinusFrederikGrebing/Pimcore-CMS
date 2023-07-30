@@ -32,18 +32,19 @@ class TeamListBrick extends AbstractTemplateAreabrick
         return false;
     }
 
-   /*public function action(Info $info)
-    {
-        $teachings = new DataObject\Teaching\Listing();
-        $info->setParam('teachings', $teachings);
-        return null;
-    }
-       */
     public function action(Info $info)
     {
-        $teams = new DataObject\Team\Listing();
+        $teamMembers = new DataObject\Team\Listing();
+        $teamMembers->setOrderKey("lastname");
+        $teamMembers->setOrder("asc");     
+        
+        $teamValues = $teamMembers->getClass()->getFieldDefinition("team")->getOptions();
+        usort($teamValues, function ($a, $b) {
+            return -strcmp($a['value'], $b['value']);
+        });
 
-        $info->setParam('teams', $teams);
+        $info->setParam('teamValues', $teamValues);
+        $info->setParam('teams', $teamMembers);
         return null;
     }
 }
