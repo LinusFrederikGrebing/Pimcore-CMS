@@ -4,3 +4,14 @@ _pimcore:
 app:
     resource: "../src/Controller/"
     type: annotation
+
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+    methods: [GET, POST]
+
+
+register:
+    path: /register
+    controller: App\Controller\RegisterController::register
+    methods: [GET, POST]
