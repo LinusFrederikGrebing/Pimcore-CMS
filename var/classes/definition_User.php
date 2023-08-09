@@ -5,19 +5,18 @@
  * Variants: no
  *
  * Fields Summary:
- * - name [input]
- * - subheading [input]
- * - image [image]
- * - description [textarea]
+ * - username [input]
+ * - email [input]
+ * - password [password]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
-   'id' => '2',
-   'name' => 'Portfolio',
+   'id' => '4',
+   'name' => 'User',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1691565553,
+   'modificationDate' => 1691567416,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -67,10 +66,10 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'name',
-             'title' => 'Name',
+             'name' => 'username',
+             'title' => 'Username',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -92,14 +91,14 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'regexFlags' => 
             array (
             ),
-             'unique' => false,
+             'unique' => true,
              'showCharCount' => false,
              'defaultValueGenerator' => '',
           )),
           1 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'subheading',
-             'title' => 'Subheading',
+             'name' => 'email',
+             'title' => 'Email',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -128,9 +127,9 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           2 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-             'name' => 'image',
-             'title' => 'Image',
+          Pimcore\Model\DataObject\ClassDefinition\Data\Password::__set_state(array(
+             'name' => 'password',
+             'title' => 'Password',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -139,7 +138,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
-             'fieldtype' => 'image',
+             'fieldtype' => 'password',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -148,34 +147,10 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
             ),
              'width' => '',
-             'height' => '',
-             'uploadPath' => '',
-          )),
-          3 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-             'name' => 'description',
-             'title' => 'Description',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'datatype' => 'data',
-             'fieldtype' => 'textarea',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'width' => '',
-             'height' => '',
-             'maxLength' => NULL,
-             'showCharCount' => false,
-             'excludeFromSearchIndex' => false,
+             'algorithm' => 'password_hash',
+             'salt' => '',
+             'saltlocation' => 'back',
+             'minimumLength' => NULL,
           )),
         ),
          'locked' => false,
