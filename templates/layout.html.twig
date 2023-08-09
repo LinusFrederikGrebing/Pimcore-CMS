@@ -35,11 +35,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        {% if app.session.get('user_logged_in') %}
+                            <li class="nav-item"><a class="nav-link" href="#team">Web & Mobile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#team">Medienproduktion</a></li>
+                        {% endif %}
                         <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg"></i></a></button>
                     </ul>
                 </div>
@@ -143,6 +142,8 @@
                 </div>
             </div>
         </div>
+
+        {% if not app.session.get('user_logged_in') %}
          <!-- Login popup-->
          <div class="portfolio-modal modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
@@ -165,7 +166,7 @@
                                           <input type="password" id="password" class="form-control" name="password" />
                                           <label class="form-label" for="password">Password</label>
                                         </div>
-                                        
+
                                         <!-- 2 column grid layout for inline styling -->
                                         <div class="row mb-4">
                                           <div class="col d-flex justify-content-center">
@@ -197,7 +198,67 @@
                 </div>
             </div>
         </div>
-         
+        {% else %}
+        <!-- Logout popup-->
+            <div class="portfolio-modal modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <section>
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-md-9 col-lg-7 col-xl-5">
+                                    <div class="card" style="border-radius: 15px;">
+                                        <div class="card-body p-4">
+                                            <div class="d-flex text-black">
+                                                <div class="flex-shrink-0">
+                                                    <img 
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                                        alt="Generic placeholder image" 
+                                                        class="img-fluid"
+                                                        style="width: 180px; border-radius: 10px;"
+                                                    >
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="mb-1">Danny McLoan</h5>
+                                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">Senior Journalist</p>
+                                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
+                                                        <div>
+                                                            <p class="small text-muted mb-1">Articles</p>
+                                                            <p class="mb-0">41</p>
+                                                        </div>
+                                                        <div class="px-3">
+                                                            <p class="small text-muted mb-1">Followers</p>
+                                                            <p class="mb-0">976</p>
+                                                        </div>
+                                                        <div>
+                                                            <p class="small text-muted mb-1">Rating</p>
+                                                            <p class="mb-0">8.5</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex pt-1">
+                                                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                                        <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {% if app.session.get('user_logged_in') %}
+                            <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
+                        {% else %}
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#login">
+                                <i class="fa-solid fa-user fa-lg"></i>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            
+        {% endif %}
+        
         <!-- Register popup-->
         <div class="portfolio-modal modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -228,11 +289,14 @@
                                                 <input type="password" class="form-control" placeholder="Confirm Password *" name="confirm_password" value="" />
                                             </div>
                                         </div>
+                                        <!-- Profile image-->
+                                        <div class="file-upload-wrapper mt-5">
+                                            <input type="file" id="profileimage" name="profileimage" class="file-upload" />
+                                        </div>                                      
                                     </div>
-                                    <button type="submit" id="registerButton" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="submit" id="registerButton" class="btn btn-primary btn-block mt-4">Sign in</button>
                                 </div>
                             </form>
-                            
                         </div>
                     </div>
                 </div>
