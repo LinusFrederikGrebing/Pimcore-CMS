@@ -56,6 +56,6 @@ class LoginController extends FrontendController
         $session->remove('user_logged_in');
 
         // Redirect to the login page
-        return $this->render('onepager/onepager.html.twig'); // Replace with the actual route name for your login page
+        return $this->render('onepager/onepager.html.twig'); 
     }
 }

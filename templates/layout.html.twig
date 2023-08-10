@@ -39,7 +39,7 @@
                             <li class="nav-item"><a class="nav-link" href="#team">Web & Mobile</a></li>
                             <li class="nav-item"><a class="nav-link" href="#team">Medienproduktion</a></li>
                         {% endif %}
-                        <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg"></i></a></button>
+                        <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></a></button>
                     </ul>
                 </div>
             </div>
@@ -267,7 +267,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="container register-form">
-                            <form id="registerForm" method="POST" action="{{ path('register') }}">
+                            <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
                                 <div class="note">
                                     <p>Create an account to gain access to all features!</p>
                                 </div>
@@ -290,9 +290,10 @@
                                             </div>
                                         </div>
                                         <!-- Profile image-->
-                                        <div class="file-upload-wrapper mt-5">
-                                            <input type="file" id="profileimage" name="profileimage" class="file-upload" />
-                                        </div>                                      
+                                        <div class="form-group">                                        
+                                            <input  class="form-control" id="profileimage" type="file" name="profileimage" required autofocus />
+                                        </div>
+                                                                           
                                     </div>
                                     <button type="submit" id="registerButton" class="btn btn-primary btn-block mt-4">Sign in</button>
                                 </div>
