@@ -19,3 +19,8 @@ logout:
     path: /logout
     controller: App\Controller\LoginController::logout
     methods: [GET, POST]
+
+web_and_mobile:
+    path: /webAndMobile
+    controller: App\Controller\WebAndMobileController::show
+    methods: [GET, POST]
