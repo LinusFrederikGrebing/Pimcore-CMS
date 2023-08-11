@@ -27,5 +27,5 @@ web_and_mobile:
 
 medienproduktion:
     path: /mediaproduction
-    controller: App\Controller\Mediaproduction::show
+    controller: App\Controller\MediaproductionController::show
     methods: [GET, POST]
