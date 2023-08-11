@@ -24,3 +24,8 @@ web_and_mobile:
     path: /webAndMobile
     controller: App\Controller\WebAndMobileController::show
     methods: [GET, POST]
+
+medienproduktion:
+    path: /medienproduktion
+    controller: App\Controller\Medienproduktion::show
+    methods: [GET, POST]
