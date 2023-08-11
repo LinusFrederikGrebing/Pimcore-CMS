@@ -1,10 +1,10 @@
 {% if editmode %}
     {{ pimcore_select("valid_size", {
             "store": [
-                ["2em", "Klein"],
-                ["3em", "Mittel"],
-                ["4em", "Groß"]
+                ["spacer-small", "Klein"],
+                ["spacer-medium", "Mittel"],
+                ["spacer-large", "Groß"]
             ]
         }) }}
 {% endif %}
-<div style="height: {{ pimcore_select("valid_size").getData() }}"></div>
+<div class="{{ pimcore_select("valid_size").getData() }}"></div>

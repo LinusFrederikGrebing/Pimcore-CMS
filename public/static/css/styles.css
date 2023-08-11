@@ -73,8 +73,8 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #80ba24;
-  --bs-link-hover-color: #547A17;
+  --bs-link-color: #fff; /*#80ba24*/
+  --bs-link-hover-color: #80ba24; /*#547A17*/
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff4cc;
   --thm-grey: #4a5c66;
@@ -11360,16 +11360,16 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 /* Kleiner Spacer */
-.spacer.small {
-  height: 10px;
+.spacer-small {
+  height: 2em;
 }
 
 /* Mittlerer Spacer */
-.spacer.medium {
-  height: 20px;
+.spacer-medium {
+  height: 3em;
 }
 
 /* Großer Spacer */
-.spacer.large {
-  height: 30px;
+.spacer-large {
+  height: 4em;
 }
