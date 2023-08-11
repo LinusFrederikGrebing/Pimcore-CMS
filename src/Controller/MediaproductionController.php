@@ -6,7 +6,7 @@ use Pimcore\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MedienproduktionController extends FrontendController
+class MediaproductionController extends FrontendController
 {
     /**
      * @param Request $request
@@ -14,6 +14,6 @@ class MedienproduktionController extends FrontendController
      */
     public function show(): Response
     {
-        return $this->render('medienproduktion/medienproduktion.html.twig');
+        return $this->render('mediaproduction/mediaproduction.html.twig');
     }
 }
