@@ -16,33 +16,38 @@ cd ./my-project
 
 ## Docker
 
-You can also use Docker to setup a new Pimcore Installation.
+You can also use Docker to set up a new Pimcore Installation.
 You don't need to have a PHP environment with composer installed.
 
-### Prerequisits
+### Prerequisites
 
 * Your user must be allowed to run docker commands (directly or via sudo).
-* You must have docker-compose installed.
+* You must have docker compose installed.
 * Your user must be allowed to change file permissions (directly or via sudo).
 
 ### Follow these steps
 1. Initialize the skeleton project using the `pimcore/pimcore` image
-``docker run -u `id -u`:`id -g` --rm -v `pwd`:/var/www/html pimcore/pimcore:php8.1-latest composer create-project pimcore/skeleton my-project``
+``docker run -u `id -u`:`id -g` --rm -v `pwd`:/var/www/html pimcore/pimcore:php8.2-latest composer create-project pimcore/skeleton my-project``
 
 2. Go to your new project
 `cd my-project/`
 
 3. Part of the new project is a docker compose file
-    * Run `` echo `id -u`:`id -g` `` to retrieve your local user and group id
-    * Open the `docker-compose.yml` file in an editor, uncomment all the `user: '1000:1000'` lines and update the ids if necessary
-    * Start the needed services with `docker-compose up -d`
+    * Run `sed -i "s|#user: '1000:1000'|user: '$(id -u):$(id -g)'|g" docker-compose.yaml` to set the correct user id and group id.
+    * Start the needed services with `docker compose up -d`
 
 4. Install pimcore and initialize the DB
-    `docker-compose exec php vendor/bin/pimcore-install --mysql-host-socket=db --mysql-username=pimcore --mysql-password=pimcore --mysql-database=pimcore`
+    `docker compose exec php vendor/bin/pimcore-install`
     * When asked for admin user and password: Choose freely
     * This can take a while, up to 20 minutes
-    
-5. :heavy_check_mark: DONE - You can now visit your pimcore instance:
+    * If you select to install the SimpleBackendSearchBundle please make sure to add the `pimcore_search_backend_message` to your `.docker/supervisord.conf` file.
+
+5. Run codeception tests:
+   * `docker compose run --user=root --rm test-php chown -R $(id -u):$(id -g) var/ public/var/`
+   * `docker compose run --rm test-php vendor/bin/pimcore-install -n`
+   * `docker compose run --rm test-php vendor/bin/codecept run -vv`
+
+6. :heavy_check_mark: DONE - You can now visit your pimcore instance:
     * The frontend: <http://localhost>
     * The admin interface, using the credentials you have chosen above:
       <http://localhost/admin>

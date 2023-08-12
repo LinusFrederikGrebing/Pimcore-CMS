@@ -28,7 +28,7 @@ jobs:
         set -ex
         
         # Pull latest build of pimcore's image
-        docker pull docker.io/pimcore/pimcore:PHP8.1-fpm
+        docker pull docker.io/pimcore/pimcore:php8.2-latest
 
     - name: Create project from skeleton in latest pimcore environment
       run: |
@@ -45,7 +45,7 @@ jobs:
           --volume=${{ github.workspace }}/:/test/ \
           --workdir=/test/ \
           --user=$(id -u):$(id -g) \
-          docker.io/pimcore/pimcore:PHP8.1-fpm \
+          docker.io/pimcore/pimcore:php8.2-latest \
             composer create-project \
               pimcore/skeleton:@dev \
               --repository='{"type": "path", "url": "./skeleton"}' \
@@ -57,9 +57,9 @@ jobs:
         set -ex
         
         # Check (lint) the compose file
-        docker-compose -v
+        docker compose version
         cd sample-project/
-        docker-compose config
+        docker compose config -q
 
     - name: Test pimcore installation
       run: |
@@ -68,24 +68,28 @@ jobs:
 
         cd sample-project/
 
+        # Set up docker-compose.yaml to use current user's uid:gid, just like README.md suggests.
+        sed -i "s|#user: '1000:1000'|user: '$(id -u):$(id -g)'|g" docker-compose.yaml
+
         # Start containers
-        docker-compose pull --quiet
-        docker-compose up -d
-
-        # Install dockerize into the php container. We need it to block until
-        # database is ready to serve connections.
-        docker-compose exec -T -- php bash -c '\
-          curl -sfL https://github.com/powerman/dockerize/releases/download/v0.11.5/dockerize-`uname -s`-`uname -m` \
-          | install /dev/stdin /usr/local/bin/dockerize'
-
-        # Wait for the database to set up.
-        docker-compose exec -T -- php dockerize -wait tcp://db:3306 -timeout 5m
+        docker compose pull --quiet
+        docker compose up -d
 
         # Run pimcore installation.
-        docker-compose exec -T \
+        docker compose exec -T \
         -e PIMCORE_INSTALL_ADMIN_USERNAME=pimcore \
         -e PIMCORE_INSTALL_ADMIN_PASSWORD=pimcore \
-        -e PIMCORE_INSTALL_MYSQL_USERNAME=pimcore \
-        -e PIMCORE_INSTALL_MYSQL_PASSWORD=pimcore \
         -- \
-        php vendor/bin/pimcore-install -n --mysql-host-socket=db --mysql-database=pimcore
+        php vendor/bin/pimcore-install -n
+
+    - name: Run codeception tests
+      run: |
+        # Echo commands and terminate on first error
+        set -ex
+        
+        cd sample-project/
+
+        # Set up and execute codeception tests, just like README.md suggests.
+        docker compose run --user=root --rm test-php chown -R $(id -u):$(id -g) var/ public/var/
+        docker compose run --rm -T test-php vendor/bin/pimcore-install -n
+        docker compose run --rm -T test-php vendor/bin/codecept run -vv
