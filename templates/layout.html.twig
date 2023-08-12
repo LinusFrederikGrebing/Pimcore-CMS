@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>CMS</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ asset('static/assets/favicon.ico') }}" />
+        <!-- Font Awesome icons (free version)-->
+        {% do pimcore_head_script().appendFile(asset('https://use.fontawesome.com/releases/v6.3.0/js/all.js')) %} 
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> 
+
+        <!-- Google fonts-->
+        {% do pimcore_head_link().appendStylesheet('https://fonts.googleapis.com/css?family=Montserrat:400,700') %}
+        {% do pimcore_head_link().appendStylesheet('https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700') %}
+    
+        <!-- script -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.css')) %}
+        {{ pimcore_head_link() }}
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="{{ asset('static/assets/img/logos/schriftzug-logo.svg') }}" alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        {% if app.session.get('user_logged_in') %}
+                            <li class="nav-item"><a class="nav-link" href="/webAndMobile">Web & Mobile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/mediaproduction">Medienproduktion</a></li>
+                        {% endif %}
+                        <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></a></button>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <h2 class="masthead-subheading">Technische Hochschule Mittelhessen</h2>
+                <h1 class="masthead-heading text-uppercase">Medieninformatik</h1>
+            </div>
+        </header>
+
+        {{ block('content') }}
+
+         <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start text-white">Copyright &copy; CMS SoSe2023</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/THMittelhessen" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/thm.de" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/school/technische-hochschule-mittelhessen" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="text-decoration-none me-3" href="https://www.thm.de/site/datenschutz.html">Datenschutz</a>
+                        <a class="text-decoration-none" href="https://www.thm.de/site/impressum.html ">Impressum</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Portfolio Modals-->
+        <!-- Portfolio item 1 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('static/assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">Project Name</h2>
+                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
+                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Client:</strong>
+                                            Threads
+                                        </li>
+                                        <li>
+                                            <strong>Category:</strong>
+                                            Illustration
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 2 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('static/assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">Project Name</h2>
+                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ asset('static/assets/img/portfolio/2.svg') }}" alt="..." />
+                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Client:</strong>
+                                            Explore
+                                        </li>
+                                        <li>
+                                            <strong>Category:</strong>
+                                            Graphic Design
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close Project
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if not app.session.get('user_logged_in') %}
+         <!-- Login popup-->
+         <div class="portfolio-modal modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('static/assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Login form -->
+                                    <form id="loginForm" method="POST" action="{{ path('login') }}">
+                                        <!-- Email input -->
+                                        <div class="form-outline mb-4">
+                                          <input type="email" id="email" class="form-control" name="email" />
+                                          <label class="form-label" for="email">Email address</label>
+                                        </div>
+                                        
+                                        <!-- Password input -->
+                                        <div class="form-outline mb-4">
+                                          <input type="password" id="password" class="form-control" name="password" />
+                                          <label class="form-label" for="password">Password</label>
+                                        </div>
+
+                                        <!-- 2 column grid layout for inline styling -->
+                                        <div class="row mb-4">
+                                          <div class="col d-flex justify-content-center">
+                                            <!-- Checkbox -->
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked />
+                                              <label class="form-check-label" for="rememberMe"> Remember me </label>
+                                            </div>
+                                          </div>
+                                        
+                                          <div class="col">
+                                            <!-- Simple link -->
+                                            <a href="#!">Forgot password?</a>
+                                          </div>
+                                        </div>
+                                        
+                                        <!-- Submit button -->
+                                        <button type="submit" id="loginButton" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                        
+                                        <!-- Register buttons -->
+                                        <div class="text-center">
+                                          <p>Not a member? <a class="greenLink" data-bs-toggle="modal" href="#register">Register</a></p>
+                                        </div>
+                                      </form>                                      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Logout popup-->
+            <div class="portfolio-modal modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <section>
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col col-md-9 col-lg-7 col-xl-5">
+                                    <div class="card" style="border-radius: 15px;">
+                                        <div class="card-body p-4">
+                                            <div class="d-flex text-black">
+                                                <div class="flex-shrink-0">
+                                                    <img 
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                                        alt="Generic placeholder image" 
+                                                        class="img-fluid"
+                                                        style="width: 180px; border-radius: 10px;"
+                                                    >
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="mb-1">Danny McLoan</h5>
+                                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">Senior Journalist</p>
+                                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
+                                                        <div>
+                                                            <p class="small text-muted mb-1">Articles</p>
+                                                            <p class="mb-0">41</p>
+                                                        </div>
+                                                        <div class="px-3">
+                                                            <p class="small text-muted mb-1">Followers</p>
+                                                            <p class="mb-0">976</p>
+                                                        </div>
+                                                        <div>
+                                                            <p class="small text-muted mb-1">Rating</p>
+                                                            <p class="mb-0">8.5</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex pt-1">
+                                                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                                        <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        {% if app.session.get('user_logged_in') %}
+                            <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
+                        {% else %}
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#login">
+                                <i class="fa-solid fa-user fa-lg"></i>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            
+        {% endif %}
+        
+        <!-- Register popup-->
+        <div class="portfolio-modal modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('static/assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="container register-form">
+                            <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
+                                <div class="note">
+                                    <p>Create an account to gain access to all features!</p>
+                                </div>
+                                <div class="form-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Your Name *" name="name" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Email" name="email" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Your Password *" name="password" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Confirm Password *" name="confirm_password" value="" />
+                                            </div>
+                                        </div>
+                                        <!-- Profile image-->
+                                        <div class="form-group">                                        
+                                            <input  class="form-control" id="profileimage" type="file" name="profileimage" required autofocus />
+                                        </div>
+                                                                           
+                                    </div>
+                                    <button type="submit" id="registerButton" class="btn btn-primary btn-block mt-4">Sign in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+  <!-- Section: Design Block -->
+        <!-- Bootstrap core JS-->
+
+        {% do pimcore_head_script().appendFile(asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')) %}
+        <!-- Core theme JS-->
+        {% do pimcore_head_script().appendFile(asset('static/js/scripts.js')) %}
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        {% do pimcore_head_script().appendFile(asset('https://cdn.startbootstrap.com/sb-forms-latest.js')) %}
+        {{ pimcore_head_script() }}
+    </body>
+</html>

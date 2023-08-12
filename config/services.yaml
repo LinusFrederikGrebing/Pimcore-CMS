@@ -73,3 +73,37 @@ services:
     # App\EventListener\TestListener:
     #     tags:
     #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
+    App\Document\Areabrick\TeamListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: team-list-brick }
+
+    App\Document\Areabrick\FeatureListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: feature-list-brick }
+
+    App\Document\Areabrick\PortfolioListBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: portfolio-list-brick }
+
+    App\Document\Areabrick\SpacerBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: spacer-brick }
+
+    App\Document\Areabrick\HeadlineBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: headline-brick }
+
+    App\Document\Areabrick\SubheadlineBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: subheadline-brick }
+
+    App\Document\Areabrick\CenteredTextBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: centeredtext-brick }

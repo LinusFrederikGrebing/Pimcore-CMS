@@ -4,3 +4,28 @@ _pimcore:
 app:
     resource: "../src/Controller/"
     type: annotation
+
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+    methods: [GET, POST]
+
+register:
+    path: /register
+    controller: App\Controller\RegisterController::register
+    methods: [GET, POST]
+
+logout:
+    path: /logout
+    controller: App\Controller\LoginController::logout
+    methods: [GET, POST]
+
+web_and_mobile:
+    path: /webAndMobile
+    controller: App\Controller\WebAndMobileController::show
+    methods: [GET, POST]
+
+medienproduktion:
+    path: /mediaproduction
+    controller: App\Controller\MediaproductionController::show
+    methods: [GET, POST]
