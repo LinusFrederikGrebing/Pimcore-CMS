@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Asset\Image;
 use Pimcore\Controller\FrontendController;
+use \Pimcore\Model\DataObject;
+
 
 class RegisterController extends Frontendcontroller
 {   
@@ -35,11 +37,12 @@ class RegisterController extends Frontendcontroller
     
         // Create a new User object (Pimcore DataObject)
         $user = new User();
-        
+        $userFolder = DataObject::getByPath("/User");
+        $userFolderId = $userFolder->getId();
         $user->setKey($username); // Set a unique key, typically username or email
-        $user->setParentId(7); // Set the parent folder's ID where users are stored
+        $user->setParentId($userFolderId); // Set the parent folder's ID where users are stored
         $user->setPublished(true); // Mark the user as published
-        
+       
         // Set user properties using setter methods
         $user->setUsername($username);
         $user->setEmail($email);
