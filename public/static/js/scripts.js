@@ -53,3 +53,14 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+const rotateLeftButton = document.getElementById('rotateRightButton');
+const rotateRightButton = document.getElementById('rotateLeftButton');
+const timelineContainer = document.getElementById('timeline-container');
+
+rotateLeftButton.addEventListener('click', () => {
+    timelineContainer.classList.toggle('rotateLeft');
+});
+
+rotateRightButton.addEventListener('click', () => {
+    timelineContainer.classList.toggle('rotateRight');
+});

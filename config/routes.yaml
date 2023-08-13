@@ -22,7 +22,7 @@ logout:
 
 web_and_mobile:
     path: /webAndMobile
-    controller: App\Controller\WebAndMobileController::show
+    controller: App\Controller\WebAndMobileController::defaultAction
     methods: [GET, POST]
 
 medienproduktion:
