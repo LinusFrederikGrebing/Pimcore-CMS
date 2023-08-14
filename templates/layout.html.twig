@@ -40,7 +40,6 @@
                             <li class="nav-item"><a class="nav-link" href="/mediaproduction">Medienproduktion</a></li>
                         {% endif %}
                         <button id="showPopup" class="btn"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></button>
-
                     </ul>
                 </div>
             </div>
@@ -144,156 +143,102 @@
             </div>
         </div>
 
-        {% if not app.session.get('user_logged_in') %}
         <div id="popupContainer">
             <div id="popup">
-                <!-- Your existing HTML code here -->            
+                {% if not app.session.get('user_logged_in') %}  
                 <div id="container">
-                <!-- Cover Box -->
-                <div id="cover">
-                    <!-- Sign Up Section -->
-                    <h1 class="sign-up">Hello, Friend!</h1>
-                    <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
-                    <a class="button sign-up" href="#cover">Sign Up</a>
-                    <!-- Sign In Section -->
-                    <h1 class="sign-in">Welcome back!</h1>
-                    <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
-                    <br>
-                    <a class="button sub sign-in" href="#">Sign In</a>
+                    
+                    <div id="cover">
+                        <!-- Sign Up Section -->
+                        <h1 class="sign-up">Hello, Friend!</h1>
+                        <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
+                        <a class="button sign-up" href="#cover">Sign Up</a>
+                        <!-- Sign In Section -->
+                        <h1 class="sign-in">Welcome back!</h1>
+                        <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
+                        <br>
+                        <a class="button sub sign-in" href="#">Sign In</a>
+                    </div>
+                    <!-- Login Box -->
+                    <div id="login">
+                        <h1>Sign In</h1>
+                        <form id="loginForm" method="POST" action="{{ path('login') }}">
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email"><br>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password"><br>
+                            <a id="forgot-pass" href="#">Forgot your password?</a><br>
+                            <input class="submit-btn" type="submit" value="Sign In">
+                        </form>
+                    </div>
+                    <!-- Register Box -->
+                    <div id="register">
+                        <h1>Create an account</h1>
+                        <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
+                            <input type="text" placeholder="Name" name="name"><br>
+                            <input type="email" placeholder="Email" name="email"><br>
+                            <input type="password" placeholder="Password" name="password"><br>
+                            <input type="password" placeholder="Confirm Password *" name="confirm_password" value="" />
+                            <input id="profileimage" type="file" name="profileimage" required autofocus /><br>                                       
+                            <input class="submit-btn" type="submit" value="Sign Up">
+                        </form>
+                    </div>
                 </div>
-                <!-- Login Box -->
-                <div id="login">
-                    <h1>Sign In</h1>
-                    <form id="loginForm" method="POST" action="{{ path('login') }}">
-                        <input type="email" class="form-control" placeholder="Email" name="email"><br>
-                        <input type="password" class="form-control" placeholder="Password"><br>
-                        <a id="forgot-pass" href="#">Forgot your password?</a><br>
-                        <input class="submit-btn" type="submit" value="Sign In">
-                    </form>
-                </div>
-                <!-- Register Box -->
-                <div id="register">
-                    <h1>Create an account</h1>
-                    <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
-                        <input type="text" placeholder="Name" name="name"><br>
-                        <input type="email" placeholder="Email" name="email"><br>
-                        <input type="password" placeholder="Password" name="password"><br>
-                        <input type="password" placeholder="Confirm Password *" name="confirm_password" value="" />
-                        <input id="profileimage" type="file" name="profileimage" required autofocus /><br>                                       
-                        <input class="submit-btn" type="submit" value="Sign Up">
-                    </form>
-                </div>
-            </div>
             </div>
         </div>
         {% else %}
         <!-- Logout popup-->
-            <div class="portfolio-modal modal fade" id="login" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <section>
-                            <div class="row d-flex justify-content-center align-items-center h-100">
-                                <div class="col col-md-9 col-lg-7 col-xl-5">
-                                    <div class="card" style="border-radius: 15px;">
-                                        <div class="card-body p-4">
-                                            <div class="d-flex text-black">
-                                                <div class="flex-shrink-0">
-                                                    <img 
-                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                                        alt="Generic placeholder image" 
-                                                        class="img-fluid"
-                                                        style="width: 180px; border-radius: 10px;"
-                                                    >
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h5 class="mb-1">Danny McLoan</h5>
-                                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">Senior Journalist</p>
-                                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
-                                                        <div>
-                                                            <p class="small text-muted mb-1">Articles</p>
-                                                            <p class="mb-0">41</p>
-                                                        </div>
-                                                        <div class="px-3">
-                                                            <p class="small text-muted mb-1">Followers</p>
-                                                            <p class="mb-0">976</p>
-                                                        </div>
-                                                        <div>
-                                                            <p class="small text-muted mb-1">Rating</p>
-                                                            <p class="mb-0">8.5</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex pt-1">
-                                                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
-                                                        <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+        <section>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-md-9 col-lg-7 col-xl-5">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-4">
+                            <div class="d-flex text-black">
+                                <div class="flex-shrink-0">
+                                    <img 
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                        alt="Generic placeholder image" 
+                                        class="img-fluid"
+                                        style="width: 180px; border-radius: 10px;"
+                                    >
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Danny McLoan</h5>
+                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">Senior Journalist</p>
+                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
+                                        <div>
+                                            <p class="small text-muted mb-1">Articles</p>
+                                            <p class="mb-0">41</p>
                                         </div>
+                                        <div class="px-3">
+                                            <p class="small text-muted mb-1">Followers</p>
+                                            <p class="mb-0">976</p>
+                                        </div>
+                                        <div>
+                                            <p class="small text-muted mb-1">Rating</p>
+                                            <p class="mb-0">8.5</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pt-1">
+                                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                        <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                        {% if app.session.get('user_logged_in') %}
-                            <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
-                        {% else %}
-                            <button class="btn" data-bs-toggle="modal" data-bs-target="#login">
-                                <i class="fa-solid fa-user fa-lg"></i>
-                            </button>
-                        {% endif %}
-                    </div>
-                </div>
-
-            </div>
-            
-        {% endif %}
-        
-        <!-- Register popup-->
-        <div class="portfolio-modal modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('static/assets/img/close-icon.svg') }}" alt="Close modal" /></div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="container register-form">
-                            <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
-                                <div class="note">
-                                    <p>Create an account to gain access to all features!</p>
-                                </div>
-                                <div class="form-content">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Your Name *" name="name" />
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Email" name="email" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" placeholder="Your Password *" name="password" />
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" placeholder="Confirm Password *" name="confirm_password" value="" />
-                                            </div>
-                                        </div>
-                                        <!-- Profile image-->
-                                        <div class="form-group">                                        
-                                            <input  class="form-control" id="profileimage" type="file" name="profileimage" required autofocus />
-                                        </div>
-                                                                           
-                                    </div>
-                                    <button type="submit" id="registerButton" class="btn btn-primary btn-block mt-4">Sign in</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-        
-
+        </section>
+        {% if app.session.get('user_logged_in') %}  
+            <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
+        {% else %}
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#login">
+                <i class="fa-solid fa-user fa-lg"></i>
+            </button>
+        {% endif %}
+        {% endif %}
+       
+       
+       
   <!-- Section: Design Block -->
         <!-- Bootstrap core JS-->
 

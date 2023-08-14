@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Pimcore\Model\DataObject;
+use Pimcore\Model\DataObject\User; // Import the User class from DataObject
 use Pimcore\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,15 +27,17 @@ class LoginController extends FrontendController
         $password = $request->request->get('password');
 
         // Fetch the user from the "User" folder using manual search
-        $users = new DataObject\User\Listing();        
+        $users = new User\Listing(); // Get a listing of User objects
         $users->setCondition("email = ?", [$email]);
         $users->setLimit(1);
+
         foreach ($users as $user) {
             if ($user instanceof User) {
                 // Verify the password
                 if (password_verify($password, $user->getPassword())) {
-                    dd($user);
                     // Password is correct, proceed with the login logic
+
+                    // Redirect the user to a protected page or perform any other actions
                     $session = $request->getSession();
                     $session->set('user_logged_in', true);
 
