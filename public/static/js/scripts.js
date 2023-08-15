@@ -54,18 +54,21 @@ const timelinecontainer = document.getElementById("timeline-container");
 const timelineEvents = document.querySelectorAll(".timeline__event");
 const arrows = document.querySelectorAll(".arrow");
 var images = document.querySelectorAll(".image");
-var additionalcontent = document.getElementById("additional-content");
-additionalcontent.style.display = "none";
+const additionalcontent = document.querySelectorAll(".additional-content");
+
+additionalcontent.forEach(function (event) {
+    event.style.display = "none";
+});
 function hideTimeline(clickedArrow) {
     var timelineIndex = clickedArrow
         .closest(".timeline__event")
         .getAttribute("data-timeline-index");
-        additionalcontent.style.display = "block";
+        additionalcontent[timelineIndex-1].style.display = "block";
         if (timelineIndex % 2 === 0) {
-            additionalcontent.classList.add("additional-content-order2");
+            additionalcontent[timelineIndex-1].classList.add("additional-content-order2");
             timelinecontainer.classList.add("timeline-order1");
         } else {
-            additionalcontent.classList.add("additional-content-order1");
+            additionalcontent[timelineIndex-1].classList.add("additional-content-order1");
             timelinecontainer.classList.add("timeline-order2");
         }
     timelineEvents.forEach(function (event) {
@@ -92,16 +95,23 @@ function hideTimeline(clickedArrow) {
 
 function showTimeline() {
     timelineEvents.forEach(event => {
-        additionalcontent.style.display = "none";
+        additionalcontent.forEach(function (event) {
+            event.style.display = "none";
+        });
         event.style.display = "flex";
         event.classList.remove("timeline__event_detailed");
         images.forEach(image => image.style.display = "block");
         event.classList.add("timeline__event");
         arrows.forEach(arrow => arrow.style.display = "block");
         event.classList.remove("timeline_detailed_left", "timeline_detailed_right");
-        additionalcontent.classList.remove("additional-content-order1");
-        additionalcontent.classList.remove("additional-content-order2");
-        timelinecontainer.classList.remove("timeline-order1");
-        timelinecontainer.classList.remove("timeline-order2");
+    
+        additionalcontent.forEach(function (event) {
+            event.classList.remove("additional-content-order1");
+            event.classList.remove("additional-content-order2");
+        });
+        timelineEvents.forEach(function (event) {
+            event.classList.remove("timeline-order1");
+            event.classList.remove("timeline-order2");
+        });
     });
 }

@@ -1,38 +1,40 @@
 <div class="container-test">
-    <div class="timeline" id="timeline-container">
-        {% for timeline in timelines %}
-                {% if loop.index is even %}
-                <div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}" id="rotateRightButton">
-                    <div class="arrow arrow-right"  onclick="hideTimeline(this)">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                {% else %}
-                <div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}"  id="rotateLeftButton">
-                    <div class="arrow arrow-left"  onclick="hideTimeline(this)">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                {% endif %}
-                <div class="image">
-                    <img class="" src="{{ timeline.image }}" alt="..." style="height: 100%; max-width: 200px; object-fit: cover;" />
-                </div>
+	<div class="timeline" id="timeline-container">
+		{% for timeline in timelines %}
+			<div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}">
+				{% if loop.index is even %}
+					<div class="arrow arrow-right" onclick="hideTimeline(this)">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				{% else %}
+					<div class="arrow arrow-left" onclick="hideTimeline(this)">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				{% endif %}
+				<div class="image">
+					<img class="" src="{{ timeline.image }}" alt="..." style="height: 100%; max-width: 200px; object-fit: cover;"/>
+				</div>
 
-                <div class="timeline__event__content" onclick="showTimeline(this)">
-                    <div class="timeline__event__title">
-                        {{ timeline.name }}
-                    </div>
-                    <div class="timeline__event__description">
-                        <p>{{ timeline.description }}</p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-<div class="additional-content" id="additional-content">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.416/build/spline-viewer.js"></script>
-    <spline-viewer hint loading-anim url="https://prod.spline.design/gMqTSwaHDgNlEu3X/scene.splinecode"></spline-viewer>
-</div>
+				<div class="timeline__event__content" onclick="showTimeline(this)">
+					<div class="timeline__event__title">
+						{{ timeline.name }}
+					</div>
+					<div class="timeline__event__description">
+						<p>{{ timeline.description }}</p>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
+	{% for timeline in timelines %}
+		<div class="additional-content" id="additional-content" data-timeline-index="{{ loop.index }}">
+			{% set areaName = 'end' ~ loop.index %}
+			{{ pimcore_areablock(areaName, { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+		</div>
+	{% endfor %}
 </div>

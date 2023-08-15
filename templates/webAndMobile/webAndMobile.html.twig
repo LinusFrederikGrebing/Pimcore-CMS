@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-
+{{ pimcore_areablock('headline', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 {{ pimcore_areablock('feature', {
     allowed: ['timeline-brick'],
 	params: ['value1']
- 	}) }}
-
+}) }}
+{{ pimcore_areablock('end', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 {% endblock %}
