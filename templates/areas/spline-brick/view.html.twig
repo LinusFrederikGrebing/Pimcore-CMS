@@ -1,0 +1,13 @@
+
+{% if editmode %}
+<p>Gib im folgenden den Link zum Spline-script ein</p>
+{{ pimcore_input("splinescript") }}
+<p>Gib im folgenden den Link zum Spline-viewer ein</p>
+{{ pimcore_input("splineviewer") }}
+{% set splinescript = pimcore_input("splinescript").getValue() %}
+{% set splineviewer = pimcore_input("splineviewer").getValue() %}
+{% endif %}
+<!-- https://prod.spline.design/gMqTSwaHDgNlEu3X/scene.splinecode 
+https://unpkg.com/@splinetool/viewer@0.9.416/build/spline-viewer.js-->
+<script type="module" src="{{splinescript}}"></script>
+<spline-viewer hint loading-anim url="{{splineviewer}}"></spline-viewer>

@@ -38,7 +38,6 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                        {% if app.session.get('user_logged_in') %}
                             {# get root node if there is no document defined (for pages which are routed directly through static route) #}
                             {% if not document is defined or not document %}
                                 {% set document = pimcore_document(1) %}
@@ -51,20 +50,21 @@
                             {% endif %}
 
                             {% set mainNavigation = pimcore_build_nav({
-                            active: document,
-                            root: navStartNode
+                                active: document,
+                                root: navStartNode
                             }) %}
                             {% set renderer = pimcore_nav_renderer('menu') %}
-                            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                           
+                            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"> 
+                            {% if app.session.get('user_logged_in') %}
                             {% for page in mainNavigation %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ page.getHref }}" {% if page.active %}class="active"{% endif %}>{{ page.label }}</a>
                                 </li>
-                            {% endfor %}
-                        </ul>
-              
-                        {% endif %}
-                        <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></a></button>   
+                            {% endfor %} 
+                          {% endif %} 
+                         <button class="btn"><a class="portfolio-link" data-bs-toggle="modal" href="#login"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></a></button>   
+                        </ul> 
                 </div>
             </div>
         </nav>
