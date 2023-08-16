@@ -1,5 +1,22 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-<script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.416/build/spline-viewer.js"></script>
-<spline-viewer hint loading-anim url="https://prod.spline.design/gMqTSwaHDgNlEu3X/scene.splinecode"></spline-viewer>
+
+{{ pimcore_areablock('headlineMedia', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+
+{% if editmode %}
+    {{ pimcore_select("options_value", {
+        "store": timelineOptions|map(option => [option.value, option.value]),
+    }) }}
+{% endif %}
+
+{% set selectedOption = pimcore_select("options_value").getData() %}
+  
+
+{{ pimcore_areablock('timelineMedia', {
+    allowed: ['timeline-brick'],
+    params: [selectedOption]
+}) }}
+
+{{ pimcore_areablock('endMedia', { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
+
 {% endblock %}

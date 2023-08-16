@@ -34,11 +34,18 @@ class TimelineBrick extends AbstractTemplateAreabrick
 
     public function action(Info $info): ?RedirectResponse
     {
-        $param = $info->getEditable()->getConfig()['params'];
-       
+        $param = $info->getEditable()->getConfig()['params'][0];
+        
         $timeline = new DataObject\Timeline\Listing();
-  
-        $info->setParam('timelines', $timeline);
+        $filteredTimelines = [];
+
+        foreach ($timeline as $item) {
+            if ($item->getMajor() === $param) {
+                $filteredTimelines[] = $item;
+            }
+        }
+
+        $info->setParam('timelines', $filteredTimelines);
 
         return null;
     }
