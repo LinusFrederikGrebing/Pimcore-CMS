@@ -50,68 +50,38 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
-const timelinecontainer = document.getElementById("timeline-container");
-const timelineEvents = document.querySelectorAll(".timeline__event");
-const arrows = document.querySelectorAll(".arrow");
-var images = document.querySelectorAll(".image");
-const additionalcontent = document.querySelectorAll(".additional-content");
+const timelinecontainer = $("#timeline-container");
+const timelineEvents = $(".timeline__event");
+const arrows = $(".arrow");
+const images = $(".image");
+const additionalcontent = $(".additional-content");
 
-additionalcontent.forEach(function (event) {
-    event.style.display = "none";
-});
-function hideTimeline(clickedArrow) {
-    var timelineIndex = clickedArrow
-        .closest(".timeline__event")
-        .getAttribute("data-timeline-index");
-        additionalcontent[timelineIndex-1].style.display = "block";
-        if (timelineIndex % 2 === 0) {
-            additionalcontent[timelineIndex-1].classList.add("additional-content-order2");
-            timelinecontainer.classList.add("timeline-order1");
+function hideTimeline(timelineIndex) {
+    additionalcontent.eq(timelineIndex - 1).show().addClass("additional-content-order" + (timelineIndex % 2 === 0 ? "2" : "1"));
+    timelinecontainer.addClass("timeline-order" + (timelineIndex % 2 === 0 ? "1" : "2"));
+    timelineEvents.each(function (index, event) {
+        event = $(event);
+        if (event.data("timeline-index") !== timelineIndex) {
+            event.hide();
         } else {
-            additionalcontent[timelineIndex-1].classList.add("additional-content-order1");
-            timelinecontainer.classList.add("timeline-order2");
-        }
-    timelineEvents.forEach(function (event) {
-        if (event.getAttribute("data-timeline-index") !== timelineIndex) {
-            event.style.display = "none";
-        } else {
-            event.classList.add("timeline__event_detailed");
-
-            images.forEach(function (image) {
-                image.style.display = "none";
-            });
-            event.classList.remove("timeline__event");
-            arrows.forEach(function (arrow) {
-                arrow.style.display = "none";
-            });
-            if (timelineIndex % 2 === 0) {
-                event.classList.add("timeline_detailed_left");
-            } else {
-                event.classList.add("timeline_detailed_right");
-            }
+            images.hide(); 
+            arrows.hide();
+            event.addClass("timeline__event_detailed timeline_detailed_" + (timelineIndex % 2 === 0 ? "left" : "right"));
+            event.removeClass("timeline__event");
         }
     });
 }
 
 function showTimeline() {
-    timelineEvents.forEach(event => {
-        additionalcontent.forEach(function (event) {
-            event.style.display = "none";
+    timelineEvents.each(function (index, event) {
+        event = $(event);
+        event.show();
+        event.removeClass("timeline__event_detailed timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right");
+        event.addClass("timeline__event");
+        $(".additional-content").each(function (index, event) {
+            $(event).hide().removeClass("additional-content-order1 additional-content-order2");
         });
-        event.style.display = "flex";
-        event.classList.remove("timeline__event_detailed");
-        images.forEach(image => image.style.display = "block");
-        event.classList.add("timeline__event");
-        arrows.forEach(arrow => arrow.style.display = "block");
-        event.classList.remove("timeline_detailed_left", "timeline_detailed_right");
-    
-        additionalcontent.forEach(function (event) {
-            event.classList.remove("additional-content-order1");
-            event.classList.remove("additional-content-order2");
-        });
-        timelineEvents.forEach(function (event) {
-            event.classList.remove("timeline-order1");
-            event.classList.remove("timeline-order2");
-        });
+        images.show();
+        arrows.show();
     });
 }

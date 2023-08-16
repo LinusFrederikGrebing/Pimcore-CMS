@@ -3,13 +3,13 @@
 		{% for timeline in timelines %}
 			<div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}">
 				{% if loop.index is even %}
-					<div class="arrow arrow-right" onclick="hideTimeline(this)">
+					<div class="arrow arrow-right" onclick="hideTimeline({{loop.index}})">
 						<span></span>
 						<span></span>
 						<span></span>
 					</div>
 				{% else %}
-					<div class="arrow arrow-left" onclick="hideTimeline(this)">
+					<div class="arrow arrow-left" onclick="hideTimeline({{loop.index}})">
 						<span></span>
 						<span></span>
 						<span></span>
@@ -32,7 +32,7 @@
 		{% endfor %}
 	</div>
 	{% for timeline in timelines %}
-		<div class="additional-content" id="additional-content" data-timeline-index="{{ loop.index }}">
+		<div class="additional-content" style="display: none;" data-timeline-index="{{ loop.index }}">
 			{% set areaName = 'end' ~ loop.index %}
 			{{ pimcore_areablock(areaName, { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 		</div>
