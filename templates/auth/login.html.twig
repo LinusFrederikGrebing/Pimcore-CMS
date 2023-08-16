@@ -1,0 +1,99 @@
+{%  block content %}
+
+
+<div id="popupContainer">
+    <div id="popup">
+        {% if not app.session.get('user_logged_in') %}  
+        <div id="container">
+            
+            <div id="cover">
+                <!-- Sign Up Section -->
+                <h1 class="sign-up">Hello, Friend!</h1>
+                <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
+                <a class="button sign-up" href="#cover">Sign Up</a>
+                <!-- Sign In Section -->
+                <h1 class="sign-in">Welcome back!</h1>
+                <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
+                <br>
+                <a class="button sub sign-in" href="#">Sign In</a>
+            </div>
+            <!-- Login Box -->
+            <div id="login">
+                <h1>Sign In</h1>
+                <form id="loginForm" method="POST" action="{{ path('login') }}">
+                    <input type="email" id="email" placeholder="Email" name="email"><br>
+                    <input type="password" id="password" placeholder="Password" name="password"><br>
+                    <a id="forgot-pass"  href="/resetPassword">Forgot your password?</a><br>
+                    <input class="submit-btn" type="submit" value="Sign In">
+                </form>
+            </div>
+            <!-- Register Box -->
+            <div id="register">
+                <h1>Create an account</h1>
+                <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
+                    <input type="text" placeholder="Name" name="name"><br>
+                    <input type="email" placeholder="Email" name="email"><br>
+                    <input type="password" placeholder="Password" name="password"><br>
+                    <input type="password" placeholder="Confirm Password *" name="confirm_password" value="" />
+                    <input id="profileimage" type="file" name="profileimage" required autofocus /><br>                                       
+                    <input class="submit-btn" type="submit" value="Sign Up">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<!-- Logout popup-->
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="upper">
+            <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+        </div>
+        <div class="user text-center">
+            <div class="profile">
+                {% if user is defined %}  
+                <img src="{{ user.getImage() }}" class="rounded-circle">
+                {% endif %}
+            </div>
+        </div>
+        <div class="mt-5 text-center">
+            {% if user is defined %}        
+            <h4 class="mb-0">{{ user.getUsername() }}</h4>
+            <span class="text-muted d-block mb-2">Los Angles</span>       
+            <div class="d-flex justify-content-between align-items-center mt-4 px-4">       
+                <div class="stats">
+                    <h6 class="mb-0">Followers</h6>
+                    <span>8,797</span>       
+                </div>
+                <div class="stats">
+                    <h6 class="mb-0">Projects</h6>
+                    <span>142</span>
+                </div>
+                <div class="stats">
+                    <h6 class="mb-0">Ranks</h6>
+                    <span>129</span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% if app.session.get('user_logged_in') %}  
+    <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
+{% endif %}
+{% endif %}
+
+
+
+            <!-- Reset Password Box -->
+            <div id="resetPassword">
+                <h1>Reset your password</h1>
+                <p class="card-text py-2">
+                    Enter your email address and we'll send you an email with instructions to reset your password.
+                </p>
+                <form id="sendEmailForm" method="POST" action="{{ path('resetPassword') }}">
+                    <input type="email" id="email" placeholder="Email" name="email"><br>
+                    <input class="submit-btn" type="submit" value="Send link">
+                </form>
+            </div>
+{% endblock %}

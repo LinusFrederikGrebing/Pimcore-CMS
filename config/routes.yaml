@@ -7,17 +7,17 @@ app:
 
 login:
     path: /login
-    controller: App\Controller\LoginController::login
+    controller: App\Controller\AccountController::login
     methods: [GET, POST]
 
 register:
     path: /register
-    controller: App\Controller\RegisterController::register
+    controller: App\Controller\AccountController::register
     methods: [GET, POST]
 
 logout:
     path: /logout
-    controller: App\Controller\LoginController::logout
+    controller: App\Controller\AccountController::logout
     methods: [GET, POST]
 
 web_and_mobile:
@@ -25,7 +25,17 @@ web_and_mobile:
     controller: App\Controller\WebAndMobileController::show
     methods: [GET, POST]
 
-medienproduktion:
+medianproduktion:
     path: /mediaproduction
     controller: App\Controller\MediaproductionController::show
+    methods: [GET, POST]
+
+resetPassword:
+    path: /resetPassword
+    controller: App\Controller\AccountController::sendPasswordResetEmail
+    methods: [GET, POST]
+
+setNewPassword:
+    path: /setNewPassword/{linkTimestamp}/{email}
+    controller: App\Controller\AccountController::showResetPasswordTemplate
     methods: [GET, POST]

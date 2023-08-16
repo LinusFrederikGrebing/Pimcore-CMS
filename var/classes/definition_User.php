@@ -18,7 +18,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1691918745,
+   'modificationDate' => 1692187946,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -232,9 +232,9 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'deletedDataComponents' => 
   array (
     0 => 
-    Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-       'name' => 'profileimage',
-       'title' => 'Profileimage',
+    Pimcore\Model\DataObject\ClassDefinition\Data\Password::__set_state(array(
+       'name' => 'resetToken',
+       'title' => 'Reset Token',
        'tooltip' => '',
        'mandatory' => false,
        'noteditable' => false,
@@ -250,9 +250,11 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
        'blockedVarsForExport' => 
       array (
       ),
-       'uploadPath' => '',
+       'algorithm' => 'password_hash',
+       'salt' => '',
+       'saltlocation' => 'back',
+       'minimumLength' => NULL,
        'width' => '',
-       'height' => '',
     )),
   ),
    'blockedVarsForExport' => 
