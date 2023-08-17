@@ -11639,3 +11639,29 @@ text-align: center;
   padding: 15px 50px;
   text-transform: uppercase;
 }
+.center-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 10vh;
+  transform: translate(-50%, -50%);
+}
+
+#setNewPassword{
+  color: #80ba24;
+  margin-top: 15vh;
+  margin-bottom: 1em;
+}
+
+#confirmNewPasswordBtn {
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  background-color: #80ba24;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  padding: 15px 50px;
+  text-transform: uppercase;;
+}

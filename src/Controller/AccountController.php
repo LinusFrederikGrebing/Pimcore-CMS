@@ -155,6 +155,20 @@ class AccountController extends FrontendController
         ]);
     }
 
+    public function setNewUserPassword(Request $request, string $email): Response
+    {
+        $user = $this->findUserByEmail($email);
+        $newPassword = $request->request->get('newPassword');
+        $confirmPassword = $request->request->get('confirmNewPassword');
+        if ($newPassword !== $confirmPassword) {
+            return new Response('Passwords do not match!');
+        }
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $user->setPassword($hashedNewPassword); // Set the new hashed password
+        $user->save();
+        return $this->render('onepager/onepager.html.twig');
+    }
+
     public function findUserByEmail($email) {
         $users = new User\Listing(); // Get a listing of User objects
         $users->setCondition("email = ?", [$email]);
@@ -167,4 +181,5 @@ class AccountController extends FrontendController
         }
     }
 }
-    
+
+

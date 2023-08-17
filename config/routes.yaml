@@ -39,3 +39,8 @@ setNewPassword:
     path: /setNewPassword/{linkTimestamp}/{email}
     controller: App\Controller\AccountController::showResetPasswordTemplate
     methods: [GET, POST]
+
+setNewUserPassword:
+    path: /setNewUserPassword/{email}
+    controller: App\Controller\AccountController::setNewUserPassword
+    methods: [GET, POST]
