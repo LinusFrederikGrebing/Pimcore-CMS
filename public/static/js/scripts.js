@@ -85,3 +85,17 @@ function showTimeline() {
         arrows.show();
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const showButton = document.getElementById("showPopup");
+    const popupContainer = document.getElementById("popupContainer");
+    
+    showButton.addEventListener("click", function () {
+        popupContainer.style.display = "block";
+    });
+    
+    popupContainer.addEventListener("click", function (event) {
+        if (event.target === popupContainer) {
+            popupContainer.style.display = "none";
+        }
+    });
+});

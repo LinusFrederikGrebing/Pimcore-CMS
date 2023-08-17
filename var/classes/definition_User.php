@@ -18,7 +18,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1692013015,
+   'modificationDate' => 1692187946,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -231,6 +231,31 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    Pimcore\Model\DataObject\ClassDefinition\Data\Password::__set_state(array(
+       'name' => 'resetToken',
+       'title' => 'Reset Token',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => 0,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'algorithm' => 'password_hash',
+       'salt' => '',
+       'saltlocation' => 'back',
+       'minimumLength' => NULL,
+       'width' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (
