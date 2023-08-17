@@ -85,10 +85,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function() {
     var popupContainer = document.getElementById("popupContainerRP");
-    var popup = document.getElementById("popupRP");
     var closeButton = document.getElementById("closeButton");
 
     closeButton.addEventListener("click", function() {
         popupContainer.style.display = "none";
     });
 });
+
+
+function coverLogin() {
+    document.location.href = "#cover";
+}
+
+
+function coverRegister() {
+    document.location.href = "#";
+}
