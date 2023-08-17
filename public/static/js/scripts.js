@@ -68,14 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-    $(document).ready(function(){
-        $('.pass_show').append('<span class="ptxt">Show</span>');  
+document.addEventListener("DOMContentLoaded", function () {
+    const showButtonRP = document.getElementById("forgot-pass");
+    const popupContainerRP = document.getElementById("popupContainerRP");
+    
+    showButtonRP.addEventListener("click", function () {
+        popupContainerRP.style.display = "block";
     });
-      
-    $(document).on('click','.pass_show .ptxt', function(){ 
     
-    $(this).text($(this).text() == "Show" ? "Hide" : "Show"); 
-    
-    $(this).prev().attr('type', function(index, attr){return attr == 'password' ? 'text' : 'password'; }); 
-    
-    });  
+    popupContainerRP.addEventListener("click", function (event) {
+        if (event.target === popupContainer) {
+            popupContainer.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var popupContainer = document.getElementById("popupContainerRP");
+    var popup = document.getElementById("popupRP");
+    var closeButton = document.getElementById("closeButton");
+
+    closeButton.addEventListener("click", function() {
+        popupContainer.style.display = "none";
+    });
+});

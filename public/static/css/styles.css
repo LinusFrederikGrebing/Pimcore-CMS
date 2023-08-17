@@ -11433,15 +11433,16 @@ width: 50em;
 }
 
 #login {
-background: #fff;
-float: left;
-height: 100%;
-position: relative;
-width: 50%;
-text-align: center;
-top: -550px;
-z-index: 1;
+  background: #fff;
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 50%;
+  text-align: center;
+  top: -550px;
+  z-index: 1;
 }
+
 #register {
 background: #fff;
 float: right;
@@ -11453,10 +11454,12 @@ top: -550px;
 z-index: 1;
 }
 #login h1,
-#register h1,
-#resetPassword h1 {
+#register h1 {
 padding: 20% 0 25px;
 color: #80ba24;
+}
+#resetPassword h1{
+  color: #80ba24;
 }
 
 #login p,
@@ -11512,13 +11515,16 @@ display: none;
 #cover:target .sign-in {
 display: inline-block;
 }
+
 #cover:target .login-div {
 width: 35%;
 }
+
 #credit {
 color: #999;
 font-size: 14px;
 }
+
 #info {
 background: #eaeaea;
 color: #555;
@@ -11533,7 +11539,7 @@ text-align: center;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999;
+  z-index: 2;
 }
 
 #popup {
@@ -11546,8 +11552,29 @@ text-align: center;
   border-radius: 5px;
 }
 
-.card{
+#popupContainerRP {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
 
+#popupRP {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+
+.card{
   width: 380px;
   border: none;
   border-radius: 15px;
@@ -11591,12 +11618,13 @@ text-align: center;
   border:3px solid #fff;
   border-radius: 50%;
  }
-
- #resetPassword {
-  background: #fff;
-  height: 100%;
-  position: relative;
-  width: 50%;
-  text-align: center;
-  z-index: 1;
-  }
+ .btn-close-custom {
+  box-sizing: content-box;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.25em;
+  color: #DB0005;
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23d9534f'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1.5em 1.5em no-repeat; /* Adjust the dimensions */
+  border: 0;
+  border-radius: 0.375rem;
+}
