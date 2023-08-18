@@ -15,7 +15,6 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Part\HtmlPart;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Uid\Uuid;
 
 
 
@@ -114,9 +113,10 @@ class AccountController extends FrontendController
         // Retrieve the user's email from the form data
         $email = $request->request->get('email');
         $user = $this->findUserByEmail($email);
+        $token = $this->createUniqueToken($user);
         $params = array('username' => $user->getUsername());        
 
-        $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['linkTimestamp' => time(), 'email' => $email], UrlGeneratorInterface::ABSOLUTE_URL);
+        $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
         // Create the HTML content for the email
         $htmlContent = '<p>Hello ' .  $params['username'] . ',</p>'
                     . '<p>Your password reset link: <a href="'. $resetPasswordUrl .'">Reset Password</a></p>'.
@@ -136,15 +136,14 @@ class AccountController extends FrontendController
         return new Response('Password reset email sent successfully');
     }
     
-    public function showResetPasswordTemplate(Request $request, string $linkTimestamp, string $email): Response
+    public function showResetPasswordTemplate(Request $request, string $token): Response
     {
-        // Find the user by token
-        // Get the token timestamp from your database or source
-
-        // Calculate the current time + 20 minutes
+        // Calculate the current time + 20 minutes        
+        $user = $this->findUserByToken($token);
         $currentTime = time();
-        $expiryTime = $linkTimestamp + (20 * 60); // 20 minutes in seconds
-        $user = $this->findUserByEmail($email);
+        $tokenProperty = $user->getClass()->getFieldDefinition('token');
+        $expiryTime = $tokenProperty->getTooltip();; // 20 minutes in seconds
+
         if ($currentTime > $expiryTime) {
             return new Response('Your token expired, request a new password reset!');
         }
@@ -155,11 +154,55 @@ class AccountController extends FrontendController
         ]);
     }
 
+    public function setNewUserPassword(Request $request, string $email): Response
+    {
+        $user = $this->findUserByEmail($email);
+        $newPassword = $request->request->get('newPassword');
+        $confirmPassword = $request->request->get('confirmNewPassword');
+        if ($newPassword !== $confirmPassword) {
+            return new Response('Passwords do not match!');
+        }
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $user->setPassword($hashedNewPassword); // Set the new hashed password
+        $user->save();
+        return $this->render('onepager/onepager.html.twig');
+    }
+
+    public function createUniqueToken(object $user): string {
+        $token = bin2hex(random_bytes(16));
+        $userId = $user->getId();
+        $combinedToken = $userId . '_' . $token;
+        $tokenExpiryTime =  time() + (20 * 60); // 20 minutes in seconds
+        $user->setToken($combinedToken);
+        // Manually set the tooltip for the token property
+        $tokenProperty = $user->getClass()->getFieldDefinition('token');
+        $tooltip = $tokenExpiryTime; // Adjust this tooltip text as needed
+        $tokenProperty->setTooltip($tooltip);
+    
+        // Save the user with updated token and tooltip
+        $user->save();
+        // Return the combined token
+        return $combinedToken;
+    }
+    
+
     public function findUserByEmail($email) {
         $users = new User\Listing(); // Get a listing of User objects
         $users->setCondition("email = ?", [$email]);
         $users->setLimit(1);
+        
+        foreach ($users as $user) {
+            if ($user instanceof User) {
+                return $user;
+            }
+        }
+    }
 
+    public function findUserByToken($token) {
+        $users = new User\Listing(); // Get a listing of User objects
+        $users->setCondition("token = ?", [$token]);
+        $users->setLimit(1);
+        
         foreach ($users as $user) {
             if ($user instanceof User) {
                 return $user;
@@ -167,4 +210,5 @@ class AccountController extends FrontendController
         }
     }
 }
-    
+
+

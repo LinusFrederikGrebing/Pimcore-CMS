@@ -1,29 +1,30 @@
 {%  block content %}
-
-
 <div id="popupContainer">
     <div id="popup">
         {% if not app.session.get('user_logged_in') %}  
-        <div id="container">
-            
             <div id="cover">
                 <!-- Sign Up Section -->
-                <h1 class="sign-up">Hello, Friend!</h1>
-                <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
-                <a class="button sign-up" href="#cover">Sign Up</a>
+                <div class="sign-up">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details<br> and start a journey with us</p>
+                    <button id="signUpButton" class="coverSwitchBtn" onClick="coverLogin()">Sign Up</button>
+                </div>
                 <!-- Sign In Section -->
-                <h1 class="sign-in">Welcome back!</h1>
-                <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
-                <br>
-                <a class="button sub sign-in" href="#">Sign In</a>
+                <div class="sign-in">
+                    <h1>Welcome back!</h1>
+                    <p>To keep connected with us please<br> login with your personal info</p>
+                    <br>
+                    <button id="signInButton"  class="coverSwitchBtn" onClick="coverRegister()">Sign In</button>
+                </div>
             </div>
+            
             <!-- Login Box -->
             <div id="login">
                 <h1>Sign In</h1>
                 <form id="loginForm" method="POST" action="{{ path('login') }}">
                     <input type="email" id="email" placeholder="Email" name="email"><br>
                     <input type="password" id="password" placeholder="Password" name="password"><br>
-                    <a id="forgot-pass"  href="/resetPassword">Forgot your password?</a><br>
+                    <a id="forgot-pass" href="#" >Forgot your password?</a><br>
                     <input class="submit-btn" type="submit" value="Sign In">
                 </form>
             </div>
@@ -39,9 +40,36 @@
                     <input class="submit-btn" type="submit" value="Sign Up">
                 </form>
             </div>
+        <div id="popupContainerRP">
+            <div id="popupRP" class="d-flex flex-column align-items-end justify-content-start">
+                <!-- Close Button -->
+                <button id="closeButton" type="button" class="btn-close-custom align-self-end" aria-label="Close"></button>
+                <!-- Reset Password Box -->
+                <div id="containerRP">
+                    <div id="resetPassword">
+                        <h1 class="text-center">Reset your password</h1>
+                        <p class="card-text text-center py-2">
+                            Enter your email address and we'll send you an email with a link to reset your password.
+                        </p>
+                        <form id="sendEmailForm" method="POST" action="{{ path('resetPassword') }}" class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <input type="email" id="email" class="form-control mb-2" placeholder="Email" name="email">
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <input class="btn btn-primary" type="submit" value="Send link">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
         </div>
     </div>
 </div>
+
 {% else %}
 <!-- Logout popup-->
 <div class="container d-flex justify-content-center align-items-center">
@@ -82,18 +110,4 @@
     <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
 {% endif %}
 {% endif %}
-
-
-
-            <!-- Reset Password Box -->
-            <div id="resetPassword">
-                <h1>Reset your password</h1>
-                <p class="card-text py-2">
-                    Enter your email address and we'll send you an email with instructions to reset your password.
-                </p>
-                <form id="sendEmailForm" method="POST" action="{{ path('resetPassword') }}">
-                    <input type="email" id="email" placeholder="Email" name="email"><br>
-                    <input class="submit-btn" type="submit" value="Send link">
-                </form>
-            </div>
 {% endblock %}

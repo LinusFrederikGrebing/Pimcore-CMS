@@ -102,3 +102,37 @@ function showTimeline() {
 }
 
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const showButtonRP = document.getElementById("forgot-pass");
+    const popupContainerRP = document.getElementById("popupContainerRP");
+    
+    showButtonRP.addEventListener("click", function () {
+        popupContainerRP.style.display = "block";
+    });
+    
+    popupContainerRP.addEventListener("click", function (event) {
+        if (event.target === popupContainer) {
+            popupContainer.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var popupContainer = document.getElementById("popupContainerRP");
+    var closeButton = document.getElementById("closeButton");
+
+    closeButton.addEventListener("click", function() {
+        popupContainer.style.display = "none";
+    });
+});
+
+
+function coverLogin() {
+    document.location.href = "#cover";
+}
+
+
+function coverRegister() {
+    document.location.href = "#";
+}
