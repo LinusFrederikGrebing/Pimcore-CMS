@@ -36,7 +36,7 @@ resetPassword:
     methods: [GET, POST]
 
 setNewPassword:
-    path: /setNewPassword/{linkTimestamp}/{email}
+    path: /setNewPassword/{token}
     controller: App\Controller\AccountController::showResetPasswordTemplate
     methods: [GET, POST]
 
