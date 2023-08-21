@@ -34,7 +34,7 @@
 	{% for timeline in timelines %}
 		<div class="additional-content" style="display: none;" data-timeline-index="{{ loop.index }}">
 			{% set areaName = 'spline' ~ loop.index %}
-			{{ pimcore_areablock(areaName, { allowed: ['spline-brick'] }) }}
+			{{ pimcore_areablock(areaName, { allowed: ['spline-brick', 'algorithm-brick'] }) }}
 		</div>
 	{% endfor %}
 </div>
