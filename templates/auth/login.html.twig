@@ -5,39 +5,39 @@
             <div id="cover">
                 <!-- Sign Up Section -->
                 <div class="sign-up">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details<br> and start a journey with us</p>
-                    <button id="signUpButton" class="coverSwitchBtn" onClick="coverLogin()">Sign Up</button>
+                    <h3 class="section-heading text-white">{{ pimcore_input('registerHeadline') }}</h3>
+                    <p class="text-white">{{ pimcore_input('registerText') }}</p>
+                    <button id="signUpButton" class="coverSwitchBtn" onClick="coverLogin()">Registrieren</button>
                 </div>
                 <!-- Sign In Section -->
                 <div class="sign-in">
-                    <h1>Welcome back!</h1>
-                    <p>To keep connected with us please<br> login with your personal info</p>
+                    <h3 class="section-heading text-white">{{ pimcore_input('loginHeadline') }}</h3>
+                    <p class="text-white">{{ pimcore_input('loginText') }}</p>
                     <br>
-                    <button id="signInButton"  class="coverSwitchBtn" onClick="coverRegister()">Sign In</button>
+                    <button id="signInButton"  class="coverSwitchBtn" onClick="coverRegister()">Einloggen</button>
                 </div>
             </div>
             
             <!-- Login Box -->
             <div id="login">
-                <h1>Sign In</h1>
+                <h1>Log dich ein</h1>
                 <form id="loginForm" method="POST" action="{{ path('login') }}">
                     <input type="email" id="email" placeholder="Email" name="email"><br>
-                    <input type="password" id="password" placeholder="Password" name="password"><br>
-                    <a id="forgot-pass" href="#" >Forgot your password?</a><br>
-                    <input class="submit-btn" type="submit" value="Sign In">
+                    <input type="password" id="password" placeholder="Passwort" name="password"><br>
+                    <a id="forgot-pass" href="#">Passwort vergessen?</a><br>
+                    <input class="submit-btn" type="submit" value="Einloggen">
                 </form>
             </div>
             <!-- Register Box -->
             <div id="register">
-                <h1>Create an account</h1>
+                <h1>Lege einen Account an</h1>
                 <form id="registerForm" method="POST" action="{{ path('register') }}"  enctype="multipart/form-data">
                     <input type="text" placeholder="Name" name="name"><br>
                     <input type="email" placeholder="Email" name="email"><br>
-                    <input type="password" placeholder="Password" name="password"><br>
-                    <input type="password" placeholder="Confirm Password *" name="confirm_password" value="" />
+                    <input type="password" placeholder="Passwort" name="password"><br>
+                    <input type="password" placeholder="Bestätige das Passwort" name="confirm_password" value="" />
                     <input id="profileimage" type="file" name="profileimage" required autofocus /><br>                                       
-                    <input class="submit-btn" type="submit" value="Sign Up">
+                    <input class="submit-btn" type="submit" value="Registrieren">
                 </form>
             </div>
         <div id="popupContainerRP">
@@ -47,16 +47,16 @@
                 <!-- Reset Password Box -->
                 <div id="containerRP">
                     <div id="resetPassword">
-                        <h1 class="text-center">Reset your password</h1>
+                        <h1 class="text-center">{{ pimcore_input('resetPasswordTitle') }}</h1>
                         <p class="card-text text-center py-2">
-                            Enter your email address and we'll send you an email with a link to reset your password.
+                            {{ pimcore_input('resetPasswordText') }}
                         </p>
                         <form id="sendEmailForm" method="POST" action="{{ path('resetPassword') }}" class="text-center">
                             <div class="d-flex justify-content-center">
                                 <input type="email" id="email" class="form-control mb-2" placeholder="Email" name="email">
                             </div>
                             <div class="d-flex justify-content-center mt-4">
-                                <input class="btn btn-primary" type="submit" value="Send link">
+                                <input class="btn btn-primary" type="submit" value="Versende den Link">
                             </div>
                         </form>
                     </div>

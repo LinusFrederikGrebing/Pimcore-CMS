@@ -118,15 +118,15 @@ class AccountController extends FrontendController
 
         $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
         // Create the HTML content for the email
-        $htmlContent = '<p>Hello ' .  $params['username'] . ',</p>'
-                    . '<p>Your password reset link: <a href="'. $resetPasswordUrl .'">Reset Password</a></p>'.
-                    '<p>This link will expire in 20 minutes!</p>';
+        $htmlContent = '<p>Hallo ' .  $params['username'] . ',</p> <br>'
+                    . '<p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href="'. $resetPasswordUrl .'">Passwort zurücksetzen</a></p><br>'.
+                    '<p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>';
 
         // Create an Email instance
         $email = (new Email())
-            ->from('your@email.com') // Set the sender's email address here
+            ->from('THMStudyPlanner@gmail.com') // Set the sender's email address here
             ->to($email) // Use the provided email from the form data
-            ->subject('Password Reset')
+            ->subject('Zurücksetzen deines Passworts')
             ->html($htmlContent);
 
         // Sending the email
