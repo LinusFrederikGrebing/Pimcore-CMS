@@ -177,6 +177,8 @@ document.addEventListener("DOMContentLoaded", function() {
             await insertionSort(array);
         } else if (selectedAlgorithm === "bubble") {
             await bubbleSort(array);
+        } else if (selectedAlgorithm === "selection") {
+            await selectionSort(array);
         }
     });
 
@@ -258,7 +260,28 @@ async function insertionSort(array) {
 
     displayBars(array);
 }
-
+async function selectionSort(inputArr) { 
+    let n = inputArr.length;
+        
+    for(let i = 0; i < n; i++) {
+        // Finding the smallest number in the subarray
+        let min = i;
+        for(let j = i+1; j < n; j++){
+            if(inputArr[j] < inputArr[min]) {
+                min=j; 
+            }
+            displayBars(inputArr, [j + 1]);
+            await sleep(500);
+         }
+         if (min != i) {
+             // Swapping the elements
+             let tmp = inputArr[i]; 
+             inputArr[i] = inputArr[min];
+             inputArr[min] = tmp;      
+        }
+    }
+    displayBars(inputArr);
+}
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -283,5 +306,16 @@ async function startVisualizationInsertion(event) {
         .map((element) => parseInt(element.trim()));
 
     await insertionSort(array);
+}
+
+async function startVisualizationSelection(event) {
+    event.preventDefault();
+    var arrayElementsInput = document.getElementById("arrayElements");
+    var arrayString = arrayElementsInput.value;
+    var array = arrayString
+        .split(",")
+        .map((element) => parseInt(element.trim()));
+
+    await selectionSort(array);
 }
 // End
