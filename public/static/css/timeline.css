@@ -96,12 +96,22 @@ body {
 }
 
 .timeline__event__content {
-	
 	border: #80ba24 2px;
 	padding: 20px;
 	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
 	background: #fff;
 	width: calc(50vw - 84px);
+	border-radius: 0 6px 6px 0;
+}
+
+.timeline_additional_content {
+	margin-top: 3.5em;
+	margin-bottom: 3.5em;
+	border: #80ba24 2px;
+	padding: 20px;
+	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+	background: #fff;
+	min-height: 25em;
 	border-radius: 0 6px 6px 0;
 }
 

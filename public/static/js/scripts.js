@@ -227,7 +227,7 @@ function displayBars(array, selectedIndexes = []) {
     barsDiv.innerHTML = "";
     var maxValue = Math.max(...array);
     for (var i = 0; i < array.length; i++) {
-        var barHeight = (array[i] / maxValue) * 25;
+        var barHeight = (array[i] / maxValue) * 19;
         var bar = document.createElement("div");
         bar.className = "bar";
         if (selectedIndexes.includes(i)) {
@@ -319,3 +319,33 @@ async function startVisualizationSelection(event) {
     await selectionSort(array);
 }
 // End
+
+
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("demo");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}

@@ -1,0 +1,27 @@
+<div class="container">
+	{{ pimcore_areablock('headline', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
+	<div class="row">
+		<div id="accordion">
+			{% for timeline in pdfassets %}
+				<div class="card">
+					<div class="card-header" id="heading{{ timeline.key }}">
+						<h5 class="mb-0">
+							<button class="btn btn-link{% if loop.first %} collapsed{% endif %}" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+								{{filenames[(loop.index)-1]}}
+							</button>
+						</h5>
+					</div>
+					<div id="collapse{{ loop.index }}" class="collapse{% if loop.first %} show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<iframe style="height: 40em" src="{{timeline}}"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{{ pimcore_areablock('below', { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
+</div>
+

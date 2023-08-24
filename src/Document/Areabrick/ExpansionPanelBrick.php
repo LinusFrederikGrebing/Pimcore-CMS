@@ -2,17 +2,16 @@
 // src/Document/Areabrick/Iframe.php
 
 namespace App\Document\Areabrick;
-
-use \Pimcore\Model\Document;
-use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
+use \Pimcore\Model\DataObject;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 
-class AlgorithmBrick extends AbstractTemplateAreabrick
+class ExpansionPanelBrick extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'AlgorithmBrick';
+        return 'ExpansionPanelBrick';
     }
 
     public function getDescription(): string
@@ -35,16 +34,16 @@ class AlgorithmBrick extends AbstractTemplateAreabrick
 
     public function action(Info $info): ?RedirectResponse
     {
-        $linkFolder = Document::getByPath("/Links/AV2-Links");
-
-        foreach ($linkFolder->getChildren() as $document) {
-            $hrefArray[] = $document;
-            $fileNames[] = $document->getKey();
+        $pdfassets = \Pimcore\Model\Asset::getByPath("/Mediengestaltung");
+        foreach ($pdfassets->getChildren() as $document) {
+            $hrefArray[] = $document; 
+            $filename = $document->getFilename();
+            $filenameWithoutExtension = str_replace('.pdf', '', $filename);
+        
+            $fileNames[] = $filenameWithoutExtension;
         }
-       
-        $info->setParam('fileNames', $fileNames);
-        $info->setParam('links', $hrefArray);
-
+        $info->setParam('filenames', $fileNames);
+        $info->setParam('pdfassets', $hrefArray);
         return null;
     }
 }

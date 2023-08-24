@@ -122,3 +122,8 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: algorithm-brick }
+    
+    App\Document\Areabrick\ExpansionPanelBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: expansion-panel-brick }

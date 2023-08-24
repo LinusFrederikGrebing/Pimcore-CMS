@@ -5,7 +5,8 @@
                 ["av2", "AV2"],
                 ["gdvm", "GDVM"],
                 ["gdvs", "GDVS"],
-				["tia", "TiA"]
+				["tia", "TiA"],
+                ["custom", "custom"]
             ]
         }) }}
 {% endif %}
@@ -17,4 +18,8 @@
 
 {% if selectedOption == "tia" %}
 	{{ include('detailedModules/algorithm.html.twig') }}
+{% endif %}
+
+{% if selectedOption == "custom" %}
+	{{ include('detailedModules/custom.html.twig') }}
 {% endif %}
