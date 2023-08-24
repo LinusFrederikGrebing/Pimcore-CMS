@@ -133,7 +133,7 @@ class AccountController extends FrontendController
         $mailer->send($email);
 
         // Return a response
-        return new Response('Password reset email sent successfully');
+        return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
     }
     
     public function showResetPasswordTemplate(Request $request, string $token): Response

@@ -318,4 +318,36 @@ async function startVisualizationSelection(event) {
 
     await selectionSort(array);
 }
+
 // End
+document.getElementById('show-alert-button').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+
+    var emailInput = document.getElementById('emailInput');
+    var email = emailInput.value;
+  
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/resetPassword', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          Swal.fire({
+            title: 'Success!',
+            text: xhr.responseText,
+            icon: 'success',
+            confirmButtonText: 'Okay'
+          });
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while sending the reset email.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+          });
+        }
+      }
+    };
+    xhr.send('email=' + encodeURIComponent(email));
+  });
