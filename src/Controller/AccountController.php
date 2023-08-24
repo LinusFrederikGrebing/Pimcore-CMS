@@ -46,8 +46,9 @@ class AccountController extends FrontendController
             $session->set('user', $user);
             return $this->render('onepager/onepager.html.twig');
         
+        } else {
+            return new Response('Überprüfe deine Eingaben!', 400);
         }
-
         // User not found or incorrect password, handle the error accordingly
         return new Response('Invalid email or password!');
     }
@@ -113,6 +114,10 @@ class AccountController extends FrontendController
         // Retrieve the user's email from the form data
         $email = $request->request->get('email');
         $user = $this->findUserByEmail($email);
+
+        if(!$user instanceof User) {
+            return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
+        }
         $token = $this->createUniqueToken($user);
         $params = array('username' => $user->getUsername());        
 
@@ -131,7 +136,7 @@ class AccountController extends FrontendController
 
         // Sending the email
         $mailer->send($email);
-
+ 
         // Return a response
         return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
     }

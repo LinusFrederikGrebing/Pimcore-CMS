@@ -1,11 +1,3 @@
-/*!
- * Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency)
- * Copyright 2013-2023 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
- */
-//
-// Scripts
-//
 
 window.addEventListener("DOMContentLoaded", (event) => {
     // Navbar shrink function
@@ -323,26 +315,35 @@ async function startVisualizationSelection(event) {
 document.getElementById('show-alert-button').addEventListener('click', function() {
     // Use SweetAlert to display a popup
     event.preventDefault(); // Prevent form submission
-
     var emailInput = document.getElementById('emailInput');
     var email = emailInput.value;
-  
+    sweetAlert('/resetPassword', email)
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+
+    sweetAlert('/resetPassword', email)
+  });
+
+  function sweetAlert(route, email) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/resetPassword', true);
+    xhr.open('POST', route, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
           Swal.fire({
-            title: 'Success!',
+            title: 'Erfolg!',
             text: xhr.responseText,
             icon: 'success',
             confirmButtonText: 'Okay'
           });
         } else {
           Swal.fire({
-            title: 'Error!',
-            text: 'An error occurred while sending the reset email.',
+            title: 'Upps...',
+            text: xhr.responseText,
             icon: 'error',
             confirmButtonText: 'Okay'
           });
@@ -350,4 +351,4 @@ document.getElementById('show-alert-button').addEventListener('click', function(
       }
     };
     xhr.send('email=' + encodeURIComponent(email));
-  });
+  }
