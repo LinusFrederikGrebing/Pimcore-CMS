@@ -34,3 +34,7 @@ setNewUserPassword:
     path: /setNewUserPassword/{email}
     controller: App\Controller\AccountController::setNewUserPassword
     methods: [GET, POST]
+
+onepager:
+    path: /onepager
+    controller: App\Controller\OnePagerController::defaultAction

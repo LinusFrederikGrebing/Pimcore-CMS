@@ -141,6 +141,7 @@ function coverRegister() {
     document.location.href = "#";
 }
 
+
 // sort script
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -315,7 +316,7 @@ async function startVisualizationSelection(event) {
 document.getElementById('show-alert-button').addEventListener('click', function() {
     // Use SweetAlert to display a popup
     event.preventDefault(); // Prevent form submission
-    var emailInput = document.getElementById('emailInput');
+    var emailInput = document.getElementById('emailInputRp');
     var email = emailInput.value;
     sweetAlert('/resetPassword', email)
   });
@@ -323,32 +324,46 @@ document.getElementById('show-alert-button').addEventListener('click', function(
   document.getElementById('loginBtn').addEventListener('click', function() {
     // Use SweetAlert to display a popup
     event.preventDefault(); // Prevent form submission
-
-    sweetAlert('/resetPassword', email)
+    var emailInput = document.getElementById('emailInputLogin');
+    var email = emailInput.value;
+    var passwordInput = document.getElementById('passwordInputLogin');
+    var password = passwordInput.value;
+    sweetAlert('/login', email, password);
   });
 
-  function sweetAlert(route, email) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', route, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          Swal.fire({
-            title: 'Erfolg!',
-            text: xhr.responseText,
-            icon: 'success',
-            confirmButtonText: 'Okay'
-          });
-        } else {
-          Swal.fire({
-            title: 'Upps...',
-            text: xhr.responseText,
-            icon: 'error',
-            confirmButtonText: 'Okay'
-          });
-        }
+  function sweetAlert(route, email, password) {
+    const formData = new FormData();
+    formData.append('email', email);
+  
+    if (password) {
+      formData.append('password', password);
+    }
+  
+    fetch(route, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(responseText => {
+      if (responseText.startsWith('/')) {
+        window.location.href = responseText; // Redirect dynamically to the route
+      } else {
+        // Handle error response
+        Swal.fire({
+          title: 'Oops...',
+          text: responseText,
+          icon: 'error',
+          confirmButtonText: 'Okay'
+        });
       }
-    };
-    xhr.send('email=' + encodeURIComponent(email));
+    })
+    .catch(error => {
+      Swal.fire({
+        title: 'Oops...',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      });
+    });
   }
+  

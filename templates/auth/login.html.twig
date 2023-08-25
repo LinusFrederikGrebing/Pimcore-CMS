@@ -21,8 +21,8 @@
             <div id="login">
                 <h1 class="mb-4">Log dich ein</h1>
                 <form id="loginForm" method="POST" action="{{ path('login') }}">
-                    <input type="email" id="email" placeholder="Email" name="email"><br>
-                    <input type="password" id="password" placeholder="Passwort" name="password" class="mb-4"><br>
+                    <input type="email" id="emailInputLogin" placeholder="Email" name="email"><br>
+                    <input type="password" id="passwordInputLogin" placeholder="Passwort" name="password" class="mb-4"><br>
                     <a id="forgot-pass" href="#">Passwort vergessen?</a><br>
                     <input class="submit-btn" type="submit" id="loginBtn" value="Einloggen">
                 </form>
@@ -52,7 +52,7 @@
                             </p>
                             <form id="sendEmailForm" method="POST" action="{{ path('resetPassword') }}" class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <input type="email" id="emailInput" class="form-control mb-2" placeholder="Email" name="email">
+                                    <input type="email" id="emailInputRp" class="form-control mb-2" placeholder="Email" name="email">
                                 </div>
                                 <div class="d-flex justify-content-center mt-4">
                                     <input id="show-alert-button" class="btn btn-primary" type="submit" value="Versende den Link">
@@ -103,7 +103,13 @@
     </div>
 </div>
 {% if app.session.get('user_logged_in') %}  
-    <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-sign-out fa-lg"></i></a>
+<div class="centered">
+    <a href="{{ path('logout') }}" class="logout-btn">
+      <span class="btn-text">Logout</span>
+      <i class="fa-solid fa-sign-out fa-lg btn-icon"></i>
+    </a>
+  </div>
+  
 {% endif %}
 {% endif %}
 {% endblock %}

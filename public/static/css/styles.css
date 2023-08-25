@@ -11757,3 +11757,16 @@ text-align: center;
 #sortAlgorithm-option:hover {
   background-color: #f7f7f7;
 }
+
+.centered {
+  text-align: center;
+}
+
+.logout-btn {
+  display: inline-block;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+}

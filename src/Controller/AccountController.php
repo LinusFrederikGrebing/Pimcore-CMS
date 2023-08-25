@@ -35,22 +35,23 @@ class AccountController extends FrontendController
         // Retrieve the form data
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-
         $user= $this->findUserByEmail($email);
        
         // Verify the password
         if (password_verify($password, $user->getPassword())) {
-            // Password is correct, proceed with the login logic
+            // Successful login
             $session = $request->getSession();
             $session->set('user_logged_in', true);
             $session->set('user', $user);
-            return $this->render('onepager/onepager.html.twig');
-        
-        } else {
-            return new Response('Überprüfe deine Eingaben!', 400);
+
+            // Use Symfony's path function to generate the route
+            $onepagerRoute = $this->generateUrl('onepager');
+            return new Response($onepagerRoute); // Return the route
         }
         // User not found or incorrect password, handle the error accordingly
-        return new Response('Invalid email or password!');
+
+        return new Response('Überprüfe deine Eingaben!', 400);
+        
     }
 
     public function logout(Request $request): Response
@@ -115,30 +116,30 @@ class AccountController extends FrontendController
         $email = $request->request->get('email');
         $user = $this->findUserByEmail($email);
 
-        if(!$user instanceof User) {
+        if($user instanceof User) {        
+            $token = $this->createUniqueToken($user);
+            $params = array('username' => $user->getUsername());        
+
+            $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
+            // Create the HTML content for the email
+            $htmlContent = '<p>Hallo ' .  $params['username'] . ',</p> <br>'
+                        . '<p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href="'. $resetPasswordUrl .'">Passwort zurücksetzen</a></p><br>'.
+                        '<p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>';
+
+            // Create an Email instance
+            $email = (new Email())
+                ->from('THMStudyPlanner@gmail.com') // Set the sender's email address here
+                ->to($email) // Use the provided email from the form data
+                ->subject('Zurücksetzen deines Passworts')
+                ->html($htmlContent);
+
+            // Sending the email
+            $mailer->send($email);        
+            return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
+
+        } else {
             return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
         }
-        $token = $this->createUniqueToken($user);
-        $params = array('username' => $user->getUsername());        
-
-        $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
-        // Create the HTML content for the email
-        $htmlContent = '<p>Hallo ' .  $params['username'] . ',</p> <br>'
-                    . '<p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href="'. $resetPasswordUrl .'">Passwort zurücksetzen</a></p><br>'.
-                    '<p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>';
-
-        // Create an Email instance
-        $email = (new Email())
-            ->from('THMStudyPlanner@gmail.com') // Set the sender's email address here
-            ->to($email) // Use the provided email from the form data
-            ->subject('Zurücksetzen deines Passworts')
-            ->html($htmlContent);
-
-        // Sending the email
-        $mailer->send($email);
- 
-        // Return a response
-        return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
     }
     
     public function showResetPasswordTemplate(Request $request, string $token): Response
