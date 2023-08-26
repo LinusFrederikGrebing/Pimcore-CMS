@@ -11538,11 +11538,30 @@ text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 2;
 }
+#popupContainerLogout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
 
 #popup {
   position: absolute;
-  height: 50vh;
-  width: 75vw;
+  height: 30h;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+}
+#popupLogout {
+  position: absolute;
+  height: 30vh;
+  width: 50vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -11577,7 +11596,6 @@ text-align: center;
   padding: 8px;
   background-color: #fff;
   position: relative;
-  height: 370px;
  }
 
  .upper{
