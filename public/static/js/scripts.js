@@ -337,14 +337,38 @@ document.getElementById('show-alert-button').addEventListener('click', function(
     sweetAlert('/login', email, password);
   });
 
-  function sweetAlert(route, email, password) {
+  document.getElementById('registerBtn').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+    var emailInput = document.getElementById('emailInputRegister');
+    var email = emailInput.value;
+    var nameInput = document.getElementById('nameInputRegister');
+    var name = nameInput.value;
+    var passwordInput = document.getElementById('passwordInputRegister');
+    var password = passwordInput.value;
+    var passwordInputConfirmRegister = document.getElementById('passwordInputConfirmRegister');
+    var confirmPassword = passwordInputConfirmRegister.value;
+    var profileimageInput = document.getElementById('profileimage');
+    var profileimage = profileimageInput.files[0]; // Get the selected file
+
+    sweetAlert('/register', email, password, confirmPassword, profileimage, name);
+  });
+
+  function sweetAlert(route, email,  password, confirmPassword, profileimage, name,) {
     const formData = new FormData();
     formData.append('email', email);
-  
-    if (password) {
-      formData.append('password', password);
+    if(name) {
+        formData.append('name', name);
     }
-  
+    if (password) {
+        formData.append('password', password);
+    }
+    if (confirmPassword) {
+        formData.append('confirmPassword', confirmPassword);
+    }
+    if (profileimage) {
+        formData.append('profileimage', profileimage);
+    }
     fetch(route, {
       method: 'POST',
       body: formData,
@@ -356,9 +380,9 @@ document.getElementById('show-alert-button').addEventListener('click', function(
       } else {
         // Handle error response
         Swal.fire({
-          title: 'Oops...',
+          title: 'Erfolg!',
           text: responseText,
-          icon: 'error',
+          icon: 'success',
           confirmButtonText: 'Okay'
         });
       }

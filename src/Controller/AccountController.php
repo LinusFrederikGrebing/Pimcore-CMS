@@ -71,14 +71,11 @@ class AccountController extends FrontendController
         $username = str_replace(' ', '', $username);
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-        $confirmPassword = $request->request->get('confirm_password');
-        
+        $confirmPassword = $request->request->get('confirmPassword');
         // Validate the form data, perform any necessary checks
         if ($password !== $confirmPassword) {
             return new Response('Passwords do not match!');
         }
-        $uploadedFile = $request->files->get('profileimage');
-        $imagePath = $uploadedFile->getPathname();
 
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -98,8 +95,16 @@ class AccountController extends FrontendController
         $user->setEmail($email);
         $user->setPassword($hashedPassword); // Set the hashed password
         $user->save();
-        $userId = $user->getId();
         //Create new Asset from uploaded image
+        if($request->files->get('profileimage')) {
+            $uploadedFile = $request->files->get('profileimage');
+            $imagePath = $uploadedFile->getPathname();
+            $this->setProfileImage($user, $imagePath);
+        }
+        return new Response('Account erfolgreich angelegt!Log dich ein!', 200);
+    }
+    public function setProfileImage($user, $imagePath) {
+        $userId = $user->getId();
         $newAsset = new \Pimcore\Model\Asset\Image();
         $newAsset->setFilename($userId."Profileimage.png");
         $newAsset->setData(file_get_contents($imagePath));
@@ -107,9 +112,7 @@ class AccountController extends FrontendController
         $newAsset->save();
         $user->setImage($newAsset);
         $user->save();
-        return $this->render('onepager/onepager.html.twig');
     }
-
     public function sendPasswordResetEmail(Request $request, MailerInterface $mailer, UrlGeneratorInterface $urlGenerator): Response
     {
         // Retrieve the user's email from the form data
@@ -216,5 +219,3 @@ class AccountController extends FrontendController
         }
     }
 }
-
-
