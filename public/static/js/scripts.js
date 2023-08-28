@@ -151,23 +151,26 @@ function coverRegister() {
 
 // sort script
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var randomButton = document.getElementById("randomButton");
     var sortButton = document.getElementById("sortButton");
     var sortAlgorithmContainer = document.getElementById("sortAlgorithm");
     var arrayElementsInput = document.getElementById("arrayElements");
-    var sortAlgorithmOptions = document.querySelectorAll("#sortAlgorithm-option");
+    var sortAlgorithmOptions = document.querySelectorAll(
+        "#sortAlgorithm-option"
+    );
 
     var randomArray = generateRandomArray(10, 5, 50);
     arrayElementsInput.value = randomArray.join(", ");
 
-    randomButton.addEventListener("click", function() {
+    randomButton.addEventListener("click", function () {
         var randomArray = generateRandomArray(10, 5, 50);
         arrayElementsInput.value = randomArray.join(", ");
     });
 
-    sortButton.addEventListener("click", async function() {
-        var selectedAlgorithm = sortAlgorithmContainer.getAttribute("data-selected");
+    sortButton.addEventListener("click", async function () {
+        var selectedAlgorithm =
+            sortAlgorithmContainer.getAttribute("data-selected");
         var arrayString = arrayElementsInput.value;
         var array = arrayString
             .split(",")
@@ -182,15 +185,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    sortAlgorithmOptions.forEach(function(option) {
-        option.addEventListener("click", function() {
+    sortAlgorithmOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
             var selectedValue = option.getAttribute("data-value");
             sortAlgorithmContainer.setAttribute("data-selected", selectedValue);
-            sortAlgorithmContainer.querySelector("h3").textContent = option.textContent;
+            sortAlgorithmContainer.querySelector("h3").textContent =
+                option.textContent;
         });
     });
 });
-
 
 function generateRandomArray(length, minValue, maxValue) {
     var randomArray = [];
@@ -213,7 +216,7 @@ async function bubbleSort(array) {
                 array[j] = temp;
             }
             displayBars(array, [j + 1, j]);
-            await sleep(500); 
+            await sleep(500);
         }
         if (swaped) {
             break;
@@ -260,24 +263,24 @@ async function insertionSort(array) {
 
     displayBars(array);
 }
-async function selectionSort(inputArr) { 
+async function selectionSort(inputArr) {
     let n = inputArr.length;
-        
-    for(let i = 0; i < n; i++) {
+
+    for (let i = 0; i < n; i++) {
         // Finding the smallest number in the subarray
         let min = i;
-        for(let j = i+1; j < n; j++){
-            if(inputArr[j] < inputArr[min]) {
-                min=j; 
+        for (let j = i + 1; j < n; j++) {
+            if (inputArr[j] < inputArr[min]) {
+                min = j;
             }
             displayBars(inputArr, [j + 1]);
             await sleep(500);
-         }
-         if (min != i) {
-             // Swapping the elements
-             let tmp = inputArr[i]; 
-             inputArr[i] = inputArr[min];
-             inputArr[min] = tmp;      
+        }
+        if (min != i) {
+            // Swapping the elements
+            let tmp = inputArr[i];
+            inputArr[i] = inputArr[min];
+            inputArr[min] = tmp;
         }
     }
     displayBars(inputArr);
@@ -320,32 +323,36 @@ async function startVisualizationSelection(event) {
 }
 // End
 
-
 let slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+    showSlides((slideIndex += n));
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+    showSlides((slideIndex = n));
 }
 
 function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("demo");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("demo");
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
 }
+
