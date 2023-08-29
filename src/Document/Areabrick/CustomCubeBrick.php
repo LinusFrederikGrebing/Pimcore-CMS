@@ -3,18 +3,14 @@
 
 namespace App\Document\Areabrick;
 
-use \Pimcore\Model\Document;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
-use Pimcore\Model\Document\Editable\Area\Info;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class AlgorithmBrick extends AbstractTemplateAreabrick
+class CustomCubeBrick extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'AlgorithmBrick';
+        return 'CustomCubeBrick';
     }
-
     public function getDescription(): string
     {
         return 'Embed contents from other URL (websites) via iframe';
@@ -31,10 +27,5 @@ class AlgorithmBrick extends AbstractTemplateAreabrick
         // here you can decide whether adding this bricks should trigger a reload
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
-    }
-
-    public function action(Info $info): ?RedirectResponse
-    {
-        return null;
     }
 }

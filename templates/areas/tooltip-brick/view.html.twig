@@ -1,0 +1,17 @@
+
+{% if editmode %}
+    {{ pimcore_select("float_direction", {
+            "store": [
+                ["float-start", "Links"],
+                ["float-end", "Rechts"]
+            ]
+        }) }}
+{% endif %}
+
+<i data-toggle="tooltip" title="Das folgende Algorithmenunterseite ist beim nachvollziehen der Algorithmen auf studentischer Seite entstanden. Klicke dich gerne durch und lerne Teile des Moduls Algorithmen und Datendtrukturen kennen!" class=" {{ pimcore_select("float_direction").getData() }} fa-sharp fa-solid fa-question fa-2xl" style="width: 1.5em; height: 1.5em; color: #80ba24;"></i>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>

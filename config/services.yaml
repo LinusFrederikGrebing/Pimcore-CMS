@@ -127,3 +127,23 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: expansion-panel-brick }
+
+    App\Document\Areabrick\GDVMBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: gdvm-brick }
+    
+    App\Document\Areabrick\VideoSliderBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: videoslider-brick }
+
+    App\Document\Areabrick\CustomCubeBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: customcube-brick }
+
+    App\Document\Areabrick\TooltipBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: tooltip-brick }

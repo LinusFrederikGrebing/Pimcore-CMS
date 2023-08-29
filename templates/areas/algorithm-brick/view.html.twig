@@ -1,25 +1,23 @@
+<div id="sortAlgorithm" data-selected="insertion">
+ <h3 class="section-heading text-uppercase text-secondary">Insertion Sort</h3>
+	<div id="sortAlgorithm-options">
+		<div id="sortAlgorithm-option" data-value="insertion">Insertion Sort</div>
+		<div id="sortAlgorithm-option" data-value="bubble">Bubble Sort</div>
+		<div id="sortAlgorithm-option" data-value="selection">Selection Sort</div>
+	</div>
+</div>
 
-{% if editmode %}
-    {{ pimcore_select("include_file", {
-            "store": [
-                ["av2", "AV2"],
-                ["gdvm", "GDVM"],
-                ["gdvs", "GDVS"],
-				["tia", "TiA"],
-                ["custom", "custom"]
-            ]
-        }) }}
-{% endif %}
-{% set selectedOption = pimcore_select("include_file").getData() %}
+<br>
+<label for="arrayElements">Zahlenfolge:</label>
+<input type="text" id="arrayElements" name="arrayElements" required placeholder="input number less than 70">
+<br>
 
-{% if selectedOption == "av2" %}
-	{{ include('detailedModules/av2.html.twig') }}
-{% endif %}
+<button class="btn btn-primary text-uppercase" type="button" id="sortButton">
+	Sortieren
+</button>
+<button id="randomButton" class="btn btn-primary text-uppercase" type="button">Random</button>
 
-{% if selectedOption == "tia" %}
-	{{ include('detailedModules/algorithm.html.twig') }}
-{% endif %}
 
-{% if selectedOption == "custom" %}
-	{{ include('detailedModules/cssparser.html.twig') }}
-{% endif %}
+<div id="barsContainer">
+	<div id="bars"></div>
+</div>

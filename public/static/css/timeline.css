@@ -290,3 +290,7 @@ body {
         transform: rotate(45deg) translate(20px, 20px);
     }
 }
+
+input[type="range"] {
+	accent-color: #80ba24;
+  }

@@ -4,24 +4,28 @@
 	</div>
 	<div id="formContainer">
 		<form class="web_form">
-			<input id="x1" type="range" value="50" min="0" max="100">
-			<input id="x2" type="range" value="50" min="0" max="100">
+            <label>Höhe:</label>
 			<input id="y" type="range" value="50" min="0" max="100">
+            <label>Breite:</label>
+			<input id="x1" type="range" value="50" min="0" max="100">
+            <label>Tiefe:</label>
+			<input id="x2" type="range" value="50" min="0" max="100">
+            <label>Farbe:</label>
 			<input id="color" type="color" value="#80ba24">
 
 		</form>
 		<div id="wrapper">
 			<div id="controls">
-				<button onclick="moveUp()" id="keyboard_key_up" class="movements_control">
+				<button onclick="moveUp()" id="keyboard_key_up" class="movements_control btn btn-primary">
 					<i class="fa-solid fa-arrow-up"></i>
 				</button>
-				<button onclick="moveLeft()" id="keyboard_key_left" class="movements_control">
+				<button onclick="moveLeft()" id="keyboard_key_left" class="movements_control btn btn-primary">
 					<i class="fa-solid fa-arrow-left"></i>
 				</button>
-				<button onclick="moveDown()" id="keyboard_key_down" class="movements_control">
+				<button onclick="moveDown()" id="keyboard_key_down" class="movements_control btn btn-primary">
 					<i class="fa-solid fa-arrow-down"></i>
 				</button>
-				<button onclick="moveRight()" id="keyboard_key_right" class="movements_control">
+				<button onclick="moveRight()" id="keyboard_key_right" class="movements_control btn btn-primary">
 					<i class="fa-solid fa-arrow-right"></i>
 				</button>
 			</div>

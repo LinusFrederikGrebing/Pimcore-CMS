@@ -3,18 +3,17 @@
 
 namespace App\Document\Areabrick;
 
-use \Pimcore\Model\Document;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use \Pimcore\Model\Document;
 
-class AlgorithmBrick extends AbstractTemplateAreabrick
+class VideoSliderBrick extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'AlgorithmBrick';
+        return 'VideoSliderBrick';
     }
-
     public function getDescription(): string
     {
         return 'Embed contents from other URL (websites) via iframe';
@@ -32,9 +31,18 @@ class AlgorithmBrick extends AbstractTemplateAreabrick
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
     }
-
     public function action(Info $info): ?RedirectResponse
     {
+        $linkFolder = Document::getByPath("/Links/AV2-Links");
+
+        foreach ($linkFolder->getChildren() as $document) {
+            $hrefArray[] = $document;
+            $fileNames[] = $document->getKey();
+        }
+       
+        $info->setParam('fileNames', $fileNames);
+        $info->setParam('links', $hrefArray);
+
         return null;
     }
 }
