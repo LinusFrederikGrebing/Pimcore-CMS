@@ -36,9 +36,9 @@ class AccountController extends FrontendController
         $email = $request->request->get('email');
         $password = $request->request->get('password');
         $user= $this->findUserByEmail($email);
-       
-        // Verify the password
-        if (password_verify($password, $user->getPassword())) {
+        if(!$user instanceof User || !password_verify($password, $user->getPassword())) {
+            return new Response("Error: Überprüfe deine Eingaben!"); // Return the route
+        } else {
             // Successful login
             $session = $request->getSession();
             $session->set('user_logged_in', true);
@@ -48,10 +48,6 @@ class AccountController extends FrontendController
             $onepagerRoute = $this->generateUrl('onepager');
             return new Response($onepagerRoute); // Return the route
         }
-        // User not found or incorrect password, handle the error accordingly
-
-        return new Response('Überprüfe deine Eingaben!', 400);
-        
     }
 
     public function logout(Request $request): Response

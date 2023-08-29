@@ -42,25 +42,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
-window.addEventListener("DOMContentLoaded", function () {
-    const showButton = document.getElementById("showPopup");
+function myFunction(userIsLoggedIn) {
+    console.log(userIsLoggedIn)
+    // 'userData' will be the JSON data stored in the 'data-user' attribute
     const popupContainer = document.getElementById("popupContainer");
     const popupContainerLogout = document.getElementById("popupContainerLogout");
-    showButton.addEventListener("click", function () {
-        popupContainer.style.display = "block";
+    if(userIsLoggedIn) {
         popupContainerLogout.style.display = "block";
-    });
+    } else {
+        popupContainer.style.display = "block";
+    }
+    
+    if(userIsLoggedIn) {
+        popupContainerLogout.addEventListener("click", function (event) {
+            if (event.target === popupContainerLogout) {
+                popupContainerLogout.style.display = "none";
+            }
+        });
+    } else {
+        popupContainer.addEventListener("click", function (event) {
+            if (event.target === popupContainer) {
+                popupContainer.style.display = "none";
+            }
+        });
+    }
+}
 
-    popupContainer.addEventListener("click", function (event) {
-        if (event.target === popupContainer) {
-            popupContainer.style.display = "none";
-        }
-    });
-    popupContainerLogout.addEventListener("click", function (event) {
-        if (event.target === popupContainerLogout) {
-            popupContainerLogout.style.display = "none";
-        }
-    });
+document.getElementById("showPopup").addEventListener("click", function() {
+    var userAttribute = this.getAttribute("data-user");
+    var userData = JSON.parse(userAttribute);
+    myFunction(userData);
 });
 
 const timelinecontainer = $("#timeline-container");
@@ -378,13 +389,24 @@ document.getElementById('show-alert-button').addEventListener('click', function(
       if (responseText.startsWith('/')) {
         window.location.href = responseText; // Redirect dynamically to the route
       } else {
-        // Handle error response
-        Swal.fire({
-          title: 'Erfolg!',
-          text: responseText,
-          icon: 'success',
-          confirmButtonText: 'Okay'
-        });
+        // Inside the .then(responseText => {...}) block
+        if (responseText.toLowerCase().includes('error:')) {
+            // Handle error response
+            Swal.fire({
+            title: 'Fehler!',
+            text: responseText.replace(/Error:/i, ''), // Remove "Error:" from the message
+            icon: 'error',
+            confirmButtonText: 'Okay'
+            });
+        } else {
+            // Handle success response
+            Swal.fire({
+            title: 'Erfolg!',
+            text: responseText,
+            icon: 'success',
+            confirmButtonText: 'Okay'
+            });
+        }
       }
     })
     .catch(error => {
