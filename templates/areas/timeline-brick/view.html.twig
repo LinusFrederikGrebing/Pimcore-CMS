@@ -35,12 +35,13 @@
 	{% for timeline in timelines %}
 		<div class="additional-content mx-5" style="display: none;" data-timeline-index="{{ loop.index }}">
 			{% set areaName = 'spline' ~ loop.index %}
-			{% set tooltipname = 'tooltip' ~ loop.index %}
+			{% set above = 'above' ~ loop.index %}
+			{% set after = 'after' ~ loop.index %}
 			<div class="timeline_additional_content">
-			{{ pimcore_areablock(tooltipname, { allowed: ['tooltip-brick'] }) }}
+			{{ pimcore_areablock(above, { allowed: ['tooltip-brick','headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 			{{ pimcore_areablock(areaName, { allowed: ['spline-brick', 'algorithm-brick', 'expansion-panel-brick', 'gdvm-brick', 'videoslider-brick', 'customcube-brick'] }) }}
-			</div>
-			
+			{{ pimcore_areablock(after, { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
+			</div>		
 		</div>
 	{% endfor %}
 </div>
