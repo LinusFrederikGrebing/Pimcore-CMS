@@ -409,13 +409,5 @@ document.getElementById('show-alert-button').addEventListener('click', function(
         }
       }
     })
-    .catch(error => {
-      Swal.fire({
-        title: 'Oops...',
-        text: error.message,
-        icon: 'error',
-        confirmButtonText: 'Okay'
-      });
-    });
   }
   

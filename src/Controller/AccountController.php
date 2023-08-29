@@ -96,6 +96,9 @@ class AccountController extends FrontendController
             $uploadedFile = $request->files->get('profileimage');
             $imagePath = $uploadedFile->getPathname();
             $this->setProfileImage($user, $imagePath);
+        } else {
+            $imagePath = __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
+            $this->setProfileImage($user, $imagePath );
         }
         return new Response('Account erfolgreich angelegt!Log dich ein!', 200);
     }
