@@ -1,11 +1,3 @@
-/*!
- * Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency)
- * Copyright 2013-2023 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
- */
-//
-// Scripts
-//
 
 window.addEventListener("DOMContentLoaded", (event) => {
     // Navbar shrink function
@@ -50,19 +42,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
-window.addEventListener("DOMContentLoaded", function () {
-    const showButton = document.getElementById("showPopup");
+function myFunction(userIsLoggedIn) {
+    console.log(userIsLoggedIn)
+    // 'userData' will be the JSON data stored in the 'data-user' attribute
     const popupContainer = document.getElementById("popupContainer");
-
-    showButton.addEventListener("click", function () {
+    const popupContainerLogout = document.getElementById("popupContainerLogout");
+    if(userIsLoggedIn) {
+        popupContainerLogout.style.display = "block";
+    } else {
         popupContainer.style.display = "block";
-    });
+    }
+    
+    if(userIsLoggedIn) {
+        popupContainerLogout.addEventListener("click", function (event) {
+            if (event.target === popupContainerLogout) {
+                popupContainerLogout.style.display = "none";
+            }
+        });
+    } else {
+        popupContainer.addEventListener("click", function (event) {
+            if (event.target === popupContainer) {
+                popupContainer.style.display = "none";
+            }
+        });
+    }
+}
 
-    popupContainer.addEventListener("click", function (event) {
-        if (event.target === popupContainer) {
-            popupContainer.style.display = "none";
-        }
-    });
+document.getElementById("showPopup").addEventListener("click", function() {
+    var userAttribute = this.getAttribute("data-user");
+    var userData = JSON.parse(userAttribute);
+    myFunction(userData);
 });
 
 const timelinecontainer = $("#timeline-container");
@@ -148,6 +157,7 @@ function coverLogin() {
 function coverRegister() {
     document.location.href = "#";
 }
+
 
 // sort script
 
@@ -321,6 +331,7 @@ async function startVisualizationSelection(event) {
 
     await selectionSort(array);
 }
+
 // End
 
 let slideIndex = 1;
@@ -353,3 +364,84 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
 }
 
+document.getElementById('show-alert-button').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+    var emailInput = document.getElementById('emailInputRp');
+    var email = emailInput.value;
+    sweetAlert('/resetPassword', email)
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+    var emailInput = document.getElementById('emailInputLogin');
+    var email = emailInput.value;
+    var passwordInput = document.getElementById('passwordInputLogin');
+    var password = passwordInput.value;
+    sweetAlert('/login', email, password);
+  });
+
+  document.getElementById('registerBtn').addEventListener('click', function() {
+    // Use SweetAlert to display a popup
+    event.preventDefault(); // Prevent form submission
+    var emailInput = document.getElementById('emailInputRegister');
+    var email = emailInput.value;
+    var nameInput = document.getElementById('nameInputRegister');
+    var name = nameInput.value;
+    var passwordInput = document.getElementById('passwordInputRegister');
+    var password = passwordInput.value;
+    var passwordInputConfirmRegister = document.getElementById('passwordInputConfirmRegister');
+    var confirmPassword = passwordInputConfirmRegister.value;
+    var profileimageInput = document.getElementById('profileimage');
+    var profileimage = profileimageInput.files[0]; // Get the selected file
+
+    sweetAlert('/register', email, password, confirmPassword, profileimage, name);
+  });
+
+  function sweetAlert(route, email,  password, confirmPassword, profileimage, name,) {
+    const formData = new FormData();
+    formData.append('email', email);
+    if(name) {
+        formData.append('name', name);
+    }
+    if (password) {
+        formData.append('password', password);
+    }
+    if (confirmPassword) {
+        formData.append('confirmPassword', confirmPassword);
+    }
+    if (profileimage) {
+        formData.append('profileimage', profileimage);
+    }
+    fetch(route, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(responseText => {
+      if (responseText.startsWith('/')) {
+        window.location.href = responseText; // Redirect dynamically to the route
+      } else {
+        // Inside the .then(responseText => {...}) block
+        if (responseText.toLowerCase().includes('error:')) {
+            // Handle error response
+            Swal.fire({
+            title: 'Fehler!',
+            text: responseText.replace(/Error:/i, ''), // Remove "Error:" from the message
+            icon: 'error',
+            confirmButtonText: 'Okay'
+            });
+        } else {
+            // Handle success response
+            Swal.fire({
+            title: 'Erfolg!',
+            text: responseText,
+            icon: 'success',
+            confirmButtonText: 'Okay'
+            });
+        }
+      }
+    })
+  }
+  

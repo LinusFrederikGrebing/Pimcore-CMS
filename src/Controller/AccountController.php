@@ -35,21 +35,19 @@ class AccountController extends FrontendController
         // Retrieve the form data
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-
         $user= $this->findUserByEmail($email);
-       
-        // Verify the password
-        if (password_verify($password, $user->getPassword())) {
-            // Password is correct, proceed with the login logic
+        if(!$user instanceof User || !password_verify($password, $user->getPassword())) {
+            return new Response("Error: Überprüfe deine Eingaben!"); // Return the route
+        } else {
+            // Successful login
             $session = $request->getSession();
             $session->set('user_logged_in', true);
             $session->set('user', $user);
-            return $this->render('onepager/onepager.html.twig');
-        
-        }
 
-        // User not found or incorrect password, handle the error accordingly
-        return new Response('Invalid email or password!');
+            // Use Symfony's path function to generate the route
+            $onepagerRoute = $this->generateUrl('onepager');
+            return new Response($onepagerRoute); // Return the route
+        }
     }
 
     public function logout(Request $request): Response
@@ -69,14 +67,11 @@ class AccountController extends FrontendController
         $username = str_replace(' ', '', $username);
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-        $confirmPassword = $request->request->get('confirm_password');
-        
+        $confirmPassword = $request->request->get('confirmPassword');
         // Validate the form data, perform any necessary checks
         if ($password !== $confirmPassword) {
             return new Response('Passwords do not match!');
         }
-        $uploadedFile = $request->files->get('profileimage');
-        $imagePath = $uploadedFile->getPathname();
 
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -96,8 +91,19 @@ class AccountController extends FrontendController
         $user->setEmail($email);
         $user->setPassword($hashedPassword); // Set the hashed password
         $user->save();
-        $userId = $user->getId();
         //Create new Asset from uploaded image
+        if($request->files->get('profileimage')) {
+            $uploadedFile = $request->files->get('profileimage');
+            $imagePath = $uploadedFile->getPathname();
+            $this->setProfileImage($user, $imagePath);
+        } else {
+            $imagePath = __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
+            $this->setProfileImage($user, $imagePath );
+        }
+        return new Response('Account erfolgreich angelegt!Log dich ein!', 200);
+    }
+    public function setProfileImage($user, $imagePath) {
+        $userId = $user->getId();
         $newAsset = new \Pimcore\Model\Asset\Image();
         $newAsset->setFilename($userId."Profileimage.png");
         $newAsset->setData(file_get_contents($imagePath));
@@ -105,35 +111,37 @@ class AccountController extends FrontendController
         $newAsset->save();
         $user->setImage($newAsset);
         $user->save();
-        return $this->render('onepager/onepager.html.twig');
     }
-
     public function sendPasswordResetEmail(Request $request, MailerInterface $mailer, UrlGeneratorInterface $urlGenerator): Response
     {
         // Retrieve the user's email from the form data
         $email = $request->request->get('email');
         $user = $this->findUserByEmail($email);
-        $token = $this->createUniqueToken($user);
-        $params = array('username' => $user->getUsername());        
 
-        $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
-        // Create the HTML content for the email
-        $htmlContent = '<p>Hello ' .  $params['username'] . ',</p>'
-                    . '<p>Your password reset link: <a href="'. $resetPasswordUrl .'">Reset Password</a></p>'.
-                    '<p>This link will expire in 20 minutes!</p>';
+        if($user instanceof User) {        
+            $token = $this->createUniqueToken($user);
+            $params = array('username' => $user->getUsername());        
 
-        // Create an Email instance
-        $email = (new Email())
-            ->from('your@email.com') // Set the sender's email address here
-            ->to($email) // Use the provided email from the form data
-            ->subject('Password Reset')
-            ->html($htmlContent);
+            $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
+            // Create the HTML content for the email
+            $htmlContent = '<p>Hallo ' .  $params['username'] . ',</p> <br>'
+                        . '<p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href="'. $resetPasswordUrl .'">Passwort zurücksetzen</a></p><br>'.
+                        '<p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>';
 
-        // Sending the email
-        $mailer->send($email);
+            // Create an Email instance
+            $email = (new Email())
+                ->from('THMStudyPlanner@gmail.com') // Set the sender's email address here
+                ->to($email) // Use the provided email from the form data
+                ->subject('Zurücksetzen deines Passworts')
+                ->html($htmlContent);
 
-        // Return a response
-        return new Response('Password reset email sent successfully');
+            // Sending the email
+            $mailer->send($email);        
+            return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
+
+        } else {
+            return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
+        }
     }
     
     public function showResetPasswordTemplate(Request $request, string $token): Response
@@ -210,5 +218,3 @@ class AccountController extends FrontendController
         }
     }
 }
-
-

@@ -8,6 +8,8 @@
         <title>CMS</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ asset('static/assets/favicon.ico') }}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
         <!-- Font Awesome icons (free version)-->
         {% do pimcore_head_script().appendFile(asset('https://use.fontawesome.com/releases/v6.3.0/js/all.js')) %} 
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> 
@@ -22,8 +24,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
 
-
+        
         <!-- Core theme CSS (includes Bootstrap)-->
         {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.css')) %}
         {% do pimcore_head_link().appendStylesheet(asset('static/css/timeline.css')) %}
@@ -65,7 +68,7 @@
                                 </li>
                             {% endfor %} 
                           {% endif %} 
-                        <button id="showPopup" class="btn"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></button>
+                          <button id="showPopup" data-user="{{ app.session.get('user_logged_in')|json_encode|raw }}" class="btn"><i class="fa-solid fa-user fa-lg" style="color: #ffffff"></i></button>
                         </ul> 
                 </div>
             </div>
