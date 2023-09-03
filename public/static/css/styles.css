@@ -11551,8 +11551,8 @@ text-align: center;
 
 #popup {
   position: absolute;
-  height: 50vh;
   width: 80vw;
+  height: 30em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -11953,44 +11953,48 @@ canvas {
   .logout-card {
     width: 80vw; /* Adjust the width for mobile devices */
   }
+  #popupContainer {
+    overflow: scroll;
+  }
   #cover{  
   color: #fff;
-
-  margin: 80% 0 0 0 ;
+  margin: 30em 0 0 0 ;
   text-align: center;
   transition: margin 0.7s, background 0.5s, display 1s, width 1s;
   z-index: 5;
   position: absolute;
-  height: 50vh;
   width: 80vw;
-  top: 0;
+  height: 30em;
+  top: 15em;
   left: 50%;
   transform: translate(-50%, -50%);
 } 
-#popup{
+#popup {
   position: absolute;
-  height: 40vh;
+  height: 60em;
   width: 80vw;
-  top: 50%;
+  top: 40em;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
 }
 
 .grid-container {
-  height: 80vh;
+  height: 60em;
   width: 80vw;
   display: grid;
   grid-template-columns: 1fr;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  grid-auto-rows: 1fr;
 }
 .grid-item {
   border-radius: 5px;
   text-align: center;
-  max-height: 40vh; /* Limit the height of grid items */
+  max-height: 60em; /* Limit the height of grid items */
   overflow: auto; /* Add scroll if content overflows */
 }
+
 }
 
 #grid-item h1 {
