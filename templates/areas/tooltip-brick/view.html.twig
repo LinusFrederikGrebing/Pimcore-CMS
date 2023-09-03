@@ -9,8 +9,8 @@
     <p class="section-heading text-uppercase text-secondary">{{ pimcore_input('input_tooltip') }}</p>
 {% endif %}
 {% set tooltipText = pimcore_input('input_tooltip').getData() %}
-<span class="card__infoicon">
-    <i class=" {{ pimcore_select("float_direction").getData() }} fa-sharp fa-solid fa-question fa-2xl" style="color: #80ba24;"></i>  
+<span class="{{ pimcore_select("float_direction").getData() }} card__infoicon">
+    <i class="fa-sharp fa-solid fa-question fa-2xl" style="color: #80ba24;"></i>  
 </span>
 
   

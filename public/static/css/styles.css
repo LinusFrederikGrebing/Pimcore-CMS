@@ -601,7 +601,7 @@ progress {
 
 .img-fluid {
   width: 100%;
-  height: 8em;
+  height: auto;
 }
 
 .img-thumbnail {
@@ -11936,4 +11936,10 @@ canvas {
   border-radius: 5px;
   text-decoration: none;
   color: white;
+}
+
+
+.profile-img {
+  width: 100%;
+  height: 8em;
 }

@@ -298,7 +298,6 @@ input[type="range"] {
 
   .card__infoicon {
 	position: relative;
-	float:right;
 	font-size: 1.4em;
 	color: #000000;
 	transition: ease-out 0.3s;

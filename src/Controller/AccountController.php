@@ -37,7 +37,7 @@ class AccountController extends FrontendController
         $password = $request->request->get('password');
         $user= $this->findUserByEmail($email);
         if(!$user instanceof User || !password_verify($password, $user->getPassword())) {
-            return new Response("Error: Überprüfe deine Eingaben!"); // Return the route
+          return new Response("Error: Überprüfe deine Eingaben!"); // Return the route
         } else {
             // Successful login
             $session = $request->getSession();

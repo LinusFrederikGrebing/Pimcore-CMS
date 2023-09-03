@@ -10,8 +10,8 @@
  * - email [input]
  * - image [image]
  * - token [input]
- * - Degree [input]
- * - Specialization [input]
+ * - degree [input]
+ * - specialization [input]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -21,7 +21,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1693297239,
+   'modificationDate' => 1693330366,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -209,7 +209,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           5 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'Degree',
+             'name' => 'degree',
              'title' => 'Degree',
              'tooltip' => '',
              'mandatory' => false,
@@ -239,8 +239,8 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           6 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'Specialization',
-             'title' => 'Specialization  ',
+             'name' => 'specialization',
+             'title' => 'Specialization',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,

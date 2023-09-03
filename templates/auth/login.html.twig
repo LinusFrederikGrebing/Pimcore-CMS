@@ -24,7 +24,7 @@
                 <input type="email" id="emailInputLogin" placeholder="Email" name="email"><br>
                 <input type="password" id="passwordInputLogin" placeholder="Passwort" name="password" class="mb-4"><br>
                 <a id="forgot-pass" href="#">Passwort vergessen?</a><br>
-                <input class="submit-btn" type="submit" id="loginBtn" value="Einloggen">
+                <input onclick="login(event)" class="submit-btn" type="submit" id="loginBtn" value="Einloggen">
             </form>
         </div>
         <!-- Register Box -->
@@ -37,7 +37,7 @@
                 <input id="passwordInputConfirmRegister" type="password" placeholder="Bestätige das Passwort"
                     name="confirmPassword" value="" />
                 <input id="profileimage" type="file" name="profileimage"><br>
-                <input id="registerBtn" class="submit-btn" type="submit" value="Registrieren">
+                <input id="registerBtn" onclick="register(event)" class="submit-btn" type="submit" value="Registrieren">
             </form>
         </div>
         <div id="popupContainerRP">
@@ -58,7 +58,7 @@
                                     name="email">
                             </div>
                             <div class="d-flex justify-content-center mt-4">
-                                <input id="show-alert-button" class="btn btn-primary" type="submit"
+                                <input onclick="resetPassword(event)" id="show-alert-button" class="btn btn-primary" type="submit"
                                     value="Versende den Link">
                             </div>
                         </form>
@@ -74,7 +74,7 @@
     <div class="container d-flex justify-content-center align-items-center">
         <div class="logout-card">
             <div class="upper">
-                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid" alt="Background Image">
+                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="profile-img" alt="Background Image">
                 <div class="user">
                     <div class="profile">
                         <img src="{{ user.getImage() }}" class="rounded-circle" alt="User Image">
