@@ -389,7 +389,6 @@ document.getElementById('show-alert-button').addEventListener('click', function(
       if (responseText.startsWith('/')) {
         window.location.href = responseText; // Redirect dynamically to the route
       } else {
-        // Inside the .then(responseText => {...}) block
         if (responseText.toLowerCase().includes('error:')) {
             // Handle error response
             Swal.fire({
