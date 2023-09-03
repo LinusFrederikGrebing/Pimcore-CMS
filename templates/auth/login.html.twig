@@ -24,11 +24,11 @@
                 <input type="email" id="emailInputLogin" placeholder="Email" name="email"><br>
                 <input type="password" id="passwordInputLogin" placeholder="Passwort" name="password" class="mb-4"><br>
                 <a id="forgot-pass" href="#">Passwort vergessen?</a><br>
-                <input onclick="login(event)" class="submit-btn" type="submit" id="loginBtn" value="Einloggen">
+                <input class="submit-btn" type="submit" id="loginBtn" value="Einloggen">
             </form>
         </div>
         <!-- Register Box -->
-        <div id="register">
+        <div class="grid-item">
             <h1 class="mb-4">Lege einen Account an</h1>
             <form id="registerForm" method="POST" action="{{ path('register') }}" enctype="multipart/form-data">
                 <input id="nameInputRegister" type="text" placeholder="Name" name="name"><br>
@@ -40,6 +40,8 @@
                 <input id="registerBtn" onclick="register(event)" class="submit-btn" type="submit" value="Registrieren">
             </form>
         </div>
+      </div>
+
         <div id="popupContainerRP">
             <div id="popupRP" class="d-flex flex-column align-items-end justify-content-start">
                 <!-- Close Button -->
@@ -68,6 +70,7 @@
         </div>
     </div>
 </div>
+
 
 {% else %}
 <div id="popupContainerLogout">
@@ -101,4 +104,5 @@
     </div>
 </div>
 {% endif %}
+
 {% endblock %}
