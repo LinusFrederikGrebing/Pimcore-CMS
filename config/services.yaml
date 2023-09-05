@@ -149,3 +149,8 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: tooltip-brick }
+    
+    App\Document\Areabrick\SectionImageTextBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: section-image-text-brick }
