@@ -12032,3 +12032,13 @@ padding: 20px;
   width: 100%;
   height: 100%;
 }
+
+#tip1{
+  opacity: 0;
+}
+#tip2{
+  opacity: 0;
+}
+#tip3{
+  opacity: 0;
+}

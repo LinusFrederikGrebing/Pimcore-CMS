@@ -1,7 +1,7 @@
-<div class="container-test">
+<div class="container-timeline">
 	<div class="timeline" id="timeline-container">
 		{% for timeline in timelines %}
-			<div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}">
+			<div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}" onmouseenter="hoverEnter(event)" onmouseleave="hoverLeave(event)">
 
 					{% if loop.index is even %}
 						<div class="arrow arrow-right" onclick="hideTimeline({{loop.index}})">

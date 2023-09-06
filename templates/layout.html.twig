@@ -25,7 +25,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         
         <!-- Core theme CSS (includes Bootstrap)-->
         {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.css')) %}
@@ -108,6 +109,8 @@
         {% do pimcore_head_script().appendFile(asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')) %}
         <!-- Core theme JS-->
         {% do pimcore_head_script().appendFile(asset('static/js/scripts.js')) %}
+        {% do pimcore_head_script().appendFile(asset('static/js/gsap.js')) %}
+      
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

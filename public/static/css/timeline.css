@@ -63,12 +63,13 @@ body {
 	align-self: flex-end; 
 }
 
-.container-test {
+.container-timeline {
 	margin: auto;
     display: flex;
     height: 100%;
 	width: 95%;
     position: relative;
+	overflow-x: hidden;
 }
 
 .additional-content-order1 {
@@ -224,7 +225,7 @@ body {
 	.timeline-order2 {
 		order: 1;
 	}    
-	.container-test {
+	.container-timeline {
         flex-direction: column; 
     }
 

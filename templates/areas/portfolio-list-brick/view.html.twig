@@ -1,10 +1,10 @@
 <section class="page-section bg-light" id="portfolio">
-<div class="container">
+<div class="container" id="portfolio-header">
 {{ pimcore_areablock('over', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
   <div class="row justify-content-center text-center">
   {% for portfolio in portfolios %}
     <div class="col-lg-6 col-sm-6 mb-4">
-      <div class="portfolio-item">
+      <div class="portfolio-item" id="portfolio-{{ loop.index }}">
         <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ loop.index }}">
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
