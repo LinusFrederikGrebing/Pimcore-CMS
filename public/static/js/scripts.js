@@ -80,6 +80,8 @@ const timelineEvents = $(".timeline__event");
 const arrows = $(".arrow");
 const images = $(".image");
 const additionalcontent = $(".additional-content");
+const closebutton = $(".close-button");
+
 
 function hideTimeline(timelineIndex) {
     additionalcontent
@@ -92,6 +94,7 @@ function hideTimeline(timelineIndex) {
         "timeline-order" + (timelineIndex % 2 === 0 ? "1" : "2")
     );
     timelineEvents.each(function (index, event) {
+        closebutton.show();
         event = $(event);
         if (event.data("timeline-index") !== timelineIndex) {
             event.hide();
@@ -110,6 +113,7 @@ function hideTimeline(timelineIndex) {
 function showTimeline() {
     timelineEvents.each(function (index, event) {
         event = $(event);
+        closebutton.hide();
         event.show();
         event.removeClass(
             "timeline__event_detailed timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right"

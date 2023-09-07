@@ -88,11 +88,13 @@ body {
 }
 
 .timeline__event__title {
+	width: 80%;
 	font-size: 1.2rem;
 	line-height: 1.4;
 	text-transform: uppercase;
 	font-weight: 600;
 	color: #80ba80;
+	overflow-wrap: break-word;
 	letter-spacing: 1.5px;
 }
 
@@ -113,7 +115,7 @@ body {
 	padding: 20px;
 	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
 	background: #fff;
-	min-height: 25em;
+	min-height: 45em;
 	border-radius: 0 6px 6px 0;
 }
 
@@ -154,7 +156,11 @@ body {
 	max-width: 200px; 
 	object-fit: cover;
 }
-
+.close-button {
+	cursor: pointer;
+	float: right;
+	display: none;
+}
 @media (max-width: 786px) {
 	.timeline__event {
 		flex-direction: column;
@@ -335,3 +341,60 @@ input[type="range"] {
 	margin-bottom: 0em;
 	text-align: center;
 }
+
+  
+.business-card {
+	width: 40em;
+	height: 25em;
+	cursor: pointer;
+	position: relative; 
+	border: 0;
+	margin: auto;
+  }
+  
+  .business-card .card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	transform-style: preserve-3d;
+	transition: transform 600ms ease;
+	transform-origin: center;
+	transform: rotateY(0deg);
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5); 
+  }
+  
+  .business-card:hover .card-inner {
+	transform: rotateY(180deg);
+  }
+  
+  .business-card .card-front,
+  .business-card .card-back {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	backface-visibility: hidden;
+  }
+  
+  .business-card .card-front {
+	background-size: cover;
+	background-position: center;
+  }
+  
+  .business-card .card-back {
+	background-size: cover;
+	background-position: center;
+	transform: rotateY(180deg);
+  }
+  
+  .business-card img {
+	border-radius: 10px;
+	perspective: 1000px;
+	width: 40em;
+	height: 25em;
+	position: relative; 
+	z-index: 1; 
+  }
+  

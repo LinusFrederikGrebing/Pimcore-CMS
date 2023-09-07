@@ -154,3 +154,15 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: section-image-text-brick }
+
+    App\Document\Areabrick\ImageGalleryBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: image-gallery-brick }
+
+    App\Document\Areabrick\BusinessCardBrick:
+        arguments: [ '@logger' ]
+        tags:
+            - { name: pimcore.area.brick, id: business-card-brick }
+
+    
