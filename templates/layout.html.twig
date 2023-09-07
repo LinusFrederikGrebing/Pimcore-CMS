@@ -31,6 +31,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.css')) %}
         {% do pimcore_head_link().appendStylesheet(asset('static/css/timeline.css')) %}
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/auth.css')) %}
+
         {{ pimcore_head_link() }}
         {% set user = app.session.get('user') %}
     </head>
@@ -102,7 +104,7 @@
             </div>
         </footer>
 
-        {{ include('auth/login.html.twig') }}
+        {{ include('auth/auth.html.twig') }}
   <!-- Section: Design Block -->
         <!-- Bootstrap core JS-->
 

@@ -11413,64 +11413,6 @@ margin-top: 20px;
 padding: 15px 50px;
 text-transform: uppercase;
 }
-#login .submit-btn {
-background: #80ba24;
-}
-#resetPassword .submit-btn {
-  background: #80ba24;
-}
-#register .submit-btn {
-background: #80ba24;
-color:  #fff;
-}
-
-#login {
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50%;
-  height: 100%; /* Set the height to 100% */
-  text-align: center;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#register {
-  background: #fff;
-  height: 100%;
-  width: 50%;
-  text-align: center;
-  z-index: 1;
-  position: absolute;
-  top: 50%;
-  right:0%;
-  transform: translateY(-50%);
-  text-align: center;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#login h1,
-#register h1 {
-color: #80ba24;
-}
-#resetPassword h1{
-  color: #80ba24;
-}
-
-#login p,
-#register p,
-#resetPassword p {
-font-size: 12px;
-font-weight: 300;
-letter-spacing: 0.3px;
-padding: 20px;
-}
 
 #forgot-pass {
 border-bottom: 1px solid #ccc;
@@ -11925,113 +11867,7 @@ canvas {
   text-align: center;
 }
 
-.logout-btn {
-  display: inline-block;
-  background-color: red;
-  padding: 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: white;
-}
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Display 3 blocks in a row */
-  max-width: 80vw; /* Set a maxi mum width for the container */
-  margin: 0 auto;
-  position: absolute;
-  width: 80vw;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  align-items: center;
-}
-
-
-@media (max-width: 768px) {
-  .logout-card {
-    width: 80vw; /* Adjust the width for mobile devices */
-  }
-  #popupContainer {
-    overflow: scroll;
-  }
-  #cover{  
-  color: #fff;
-  margin: 30em 0 0 0 ;
-  text-align: center;
-  transition: margin 0.7s, background 0.5s, display 1s, width 1s;
-  z-index: 5;
-  position: absolute;
-  width: 80vw;
-  height: 30em;
-  top: 15em;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} 
-#popup {
-  position: absolute;
-  height: 60em;
-  width: 80vw;
-  top: 40em;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-}
-
-.grid-container {
-  height: 60em;
-  width: 80vw;
-  display: grid;
-  grid-template-columns: 1fr;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  grid-auto-rows: 1fr;
-}
-.grid-item {
-  border-radius: 5px;
-  text-align: center;
-  max-height: 60em; /* Limit the height of grid items */
-  overflow: auto; /* Add scroll if content overflows */
-}
-
-}
-
-#grid-item h1 {
-color: #80ba24;
-}
-#resetPassword h1{
-  color: #80ba24;
-}
-
-#grid-item,
-#resetPassword p {
-font-size: 12px;
-font-weight: 300;
-letter-spacing: 0.3px;
-padding: 20px;
-}
-
-#grid-item .submit-btn {
-  background: #80ba24;
-}
-#grid-item.submit-btn {
-  background: #80ba24;
-}
-
-#grid-item .submit-btn {
-  background: #80ba24;
-  color:  #fff;
-}
-.profile-img {
-    width: 100%;
-    height: 8em;
-}
-
-.section-img {
-  width: 100%;
-  height: 100%;
-}
 
 #tip1{
   opacity: 0;
@@ -12042,3 +11878,4 @@ padding: 20px;
 #tip3{
   opacity: 0;
 }
+

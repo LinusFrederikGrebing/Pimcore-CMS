@@ -1,0 +1,41 @@
+{% block content %}
+{% if not app.session.get('user_logged_in') %}
+<div id="popupContainer">
+    <div id="popup">
+        <div id="cover">
+            <!-- Sign Up Section -->
+            <div class="sign-up">
+                <h3 class="section-heading text-white">
+                    {{ pimcore_input('registerHeadline') }}
+                </h3>
+                <p class="text-white">
+                    {{ pimcore_input('registerText') }}
+                </p>
+                <button id="signUpButton" class="coverSwitchBtn" onClick="coverLogin()">
+                    Registrieren
+                </button>
+            </div>
+            <div class="sign-in">
+                <h3 class="section-heading text-white">
+                    {{ pimcore_input('loginHeadline') }}
+                </h3>
+                <p class="text-white">
+                    {{ pimcore_input('loginText') }}
+                </p>
+                <br>
+                <button id="signInButton" class="coverSwitchBtn" onClick="coverRegister()">
+                    Einloggen
+                </button>
+            </div>
+        </div>
+        <div class="grid-container">
+            {{ include('auth/login.html.twig') }}
+            {{ include('auth/register.html.twig') }}
+        </div>
+    </div>
+    {{ include('auth/resetPasswordPopup.html.twig') }}
+</div>
+{% else %}
+    {{ include('auth/profile.html.twig') }}
+{% endif %}
+{% endblock %}
