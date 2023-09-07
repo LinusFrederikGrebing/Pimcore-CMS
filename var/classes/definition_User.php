@@ -11,7 +11,7 @@
  * - image [image]
  * - token [input]
  * - degree [input]
- * - specialization [input]
+ * - specialization [select]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -21,7 +21,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1693330366,
+   'modificationDate' => 1694071851,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -238,7 +238,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           6 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'specialization',
              'title' => 'Specialization',
              'tooltip' => '',
@@ -256,16 +256,26 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => NULL,
-             'columnLength' => 190,
-             'regex' => '',
-             'regexFlags' => 
+             'options' => 
             array (
+              0 => 
+              array (
+                'key' => 'Medienproduktion',
+                'value' => 'Medienproduktion',
+              ),
+              1 => 
+              array (
+                'key' => 'Web & Mobile',
+                'value' => 'Web & Mobile',
+              ),
             ),
-             'unique' => false,
-             'showCharCount' => false,
-             'width' => '',
+             'defaultValue' => '',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
              'defaultValueGenerator' => '',
+             'width' => '',
           )),
         ),
          'locked' => false,

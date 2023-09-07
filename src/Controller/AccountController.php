@@ -6,13 +6,8 @@ use Pimcore\Model\DataObject\User;
 use Pimcore\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Pimcore\Model\Asset;
-use Pimcore\Model\Asset\Image;
 use \Pimcore\Model\DataObject;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Part\HtmlPart;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -31,7 +26,7 @@ class AccountController extends FrontendController
     }
 
     public function login(Request $request): Response
-    {
+    {      
         // Retrieve the form data
         $email = $request->request->get('email');
         $password = $request->request->get('password');
@@ -59,6 +54,7 @@ class AccountController extends FrontendController
         // Redirect to the main page
         return $this->render('onepager/onepager.html.twig'); 
     }
+    
     public function register(Request $request): Response
     {
         // Retrieve the form data
