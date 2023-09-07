@@ -35,6 +35,8 @@
 
         {{ pimcore_head_link() }}
         {% set user = app.session.get('user') %}
+
+
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -103,9 +105,8 @@
                 </div>
             </div>
         </footer>
-
         {{ include('auth/auth.html.twig') }}
-  <!-- Section: Design Block -->
+        <!-- Section: Design Block -->
         <!-- Bootstrap core JS-->
 
         {% do pimcore_head_script().appendFile(asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')) %}
