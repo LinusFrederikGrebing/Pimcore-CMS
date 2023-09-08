@@ -1,12 +1,31 @@
-<main id="app">
-  <aside class="business-card">
-    <div class="card-inner">
-      <div class="card-front">
-        <img src="{{ asset('static/assets/img/Visitenkarte.png') }}" alt="Vorderseite der Visitenkarte">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {% for key, businesscard in businesscards %}
+      <li data-target="#carouselExampleIndicators" data-slide-to="{{ key }}" class="{{ key == 0 ? 'active' }}"></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for key, businesscard in businesscards %}
+      <div class="carousel-item {{ key == 0 ? 'active' }}">
+        <aside class="business-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="{{businesscard.frontimage}}" alt="Vorderseite der Visitenkarte">
+            </div>
+            <div class="card-back">
+              <img src="{{businesscard.backimage}}" alt="Rückseite der Visitenkarte">
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="card-back">
-        <img src="{{ asset('static/assets/img/VisitenkarteHinten.png') }}" alt="Rückseite der Visitenkarte">
-      </div>
-    </div>
-  </aside>
-</main>
+    {% endfor %}
+  </div>
+  <button class="btn-primary carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="btn-primary carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>

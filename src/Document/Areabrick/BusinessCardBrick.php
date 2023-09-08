@@ -4,6 +4,10 @@
 namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
+use Pimcore\Model\Document\Editable\Area\Info;
+use \Pimcore\Model\DataObject;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class BusinessCardBrick extends AbstractTemplateAreabrick
 {
@@ -27,5 +31,11 @@ class BusinessCardBrick extends AbstractTemplateAreabrick
         // here you can decide whether adding this bricks should trigger a reload
         // in the editing interface, this could be necessary in some cases. default=false
         return false;
+    }
+    public function action(Info $info): ?RedirectResponse
+    {
+        $businesscards = new DataObject\BusinessCard\Listing();
+        $info->setParam('businesscards', $businesscards);
+        return null;
     }
 }

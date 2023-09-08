@@ -351,7 +351,7 @@ input[type="range"] {
 	border: 0;
 	margin: auto;
   }
-  
+
   .business-card .card-inner {
 	position: relative;
 	width: 100%;
@@ -397,4 +397,16 @@ input[type="range"] {
 	position: relative; 
 	z-index: 1; 
   }
+
+  @media (max-width: 786px) {
+	.business-card {
+		width: 40vw;
+		height: 25vw;
+	  }
+	.business-card img {
+		width: 40vw;
+		height: 25vw;
+		
+	}
+}
   
