@@ -8,8 +8,8 @@
  * - image [image]
  * - localizedfields [localizedfields]
  * -- name [input]
- * -- description [textarea]
  * -- subheading [input]
+ * -- description [textarea]
  */
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -19,7 +19,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1694102782,
+   'modificationDate' => 1694183757,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -137,31 +137,6 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               1 => 
-              Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-                 'name' => 'description',
-                 'title' => 'Description',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => 0,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'maxLength' => NULL,
-                 'showCharCount' => false,
-                 'excludeFromSearchIndex' => false,
-                 'height' => '',
-                 'width' => '',
-              )),
-              2 => 
               Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'subheading',
                  'title' => 'Subheading',
@@ -190,6 +165,31 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'showCharCount' => false,
                  'width' => '',
                  'defaultValueGenerator' => '',
+              )),
+              2 => 
+              Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                 'name' => 'description',
+                 'title' => 'Description',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => 0,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'maxLength' => NULL,
+                 'showCharCount' => false,
+                 'excludeFromSearchIndex' => false,
+                 'height' => '',
+                 'width' => '',
               )),
             ),
              'region' => NULL,
@@ -266,9 +266,9 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'deletedDataComponents' => 
   array (
     0 => 
-    Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-       'name' => 'name',
-       'title' => 'Name',
+    Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+       'name' => 'description',
+       'title' => 'Description',
        'tooltip' => '',
        'mandatory' => false,
        'noteditable' => false,
@@ -284,16 +284,11 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
        'blockedVarsForExport' => 
       array (
       ),
-       'defaultValue' => NULL,
-       'columnLength' => 190,
-       'regex' => '',
-       'regexFlags' => 
-      array (
-      ),
-       'unique' => false,
+       'maxLength' => NULL,
        'showCharCount' => false,
+       'excludeFromSearchIndex' => false,
+       'height' => '',
        'width' => '',
-       'defaultValueGenerator' => '',
     )),
     1 => 
     Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
@@ -324,31 +319,6 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
        'showCharCount' => false,
        'width' => '',
        'defaultValueGenerator' => '',
-    )),
-    2 => 
-    Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-       'name' => 'description',
-       'title' => 'Description',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => 0,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'maxLength' => NULL,
-       'showCharCount' => false,
-       'excludeFromSearchIndex' => false,
-       'height' => '',
-       'width' => '',
     )),
   ),
    'blockedVarsForExport' => 

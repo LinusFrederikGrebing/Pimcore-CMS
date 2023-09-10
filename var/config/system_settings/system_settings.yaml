@@ -8,7 +8,7 @@ pimcore:
             - de
         fallback_languages:
             en: ''
-            de: ''
+            de: en
         default_language: de
         debug_admin_translations: false
     documents:

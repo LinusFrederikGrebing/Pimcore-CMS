@@ -14,6 +14,7 @@ class OnePagerController extends FrontendController
      */
     public function defaultAction(Request $request): Response
     {
+      
         return $this->render('onepager/onepager.html.twig');
     }
 }
