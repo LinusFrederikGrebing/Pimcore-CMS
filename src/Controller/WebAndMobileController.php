@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use \Pimcore\Model\DataObject;
 
-
 class WebAndMobileController extends FrontendController
 {
     /**
@@ -18,11 +17,10 @@ class WebAndMobileController extends FrontendController
     public function defaultAction(Request $request): Response
     {
         $timeline = new DataObject\Timeline\Listing();
- 
         $timelineOptions = $timeline->getClass()->getFieldDefinition("major")->getOptions();
+        // SplineViewer-Objekte abrufen
         return $this->render('webAndMobile/webAndMobile.html.twig', [
             'timelineOptions' => $timelineOptions,
         ]);
     }
-
 }
