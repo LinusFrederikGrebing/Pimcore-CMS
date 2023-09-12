@@ -1,3 +1,11 @@
+.profile-button {
+    color: #fff;
+}
+
+.profile-button:hover {
+    color: #80ba24;
+}
+
 #cover {
     background: #80ba24;
     color: #fff;
@@ -69,10 +77,8 @@
 }
 
 .logout-card {
-    width: 30vw;
+    width: 70em;
     border: none;
-    border-radius: 15px;
-    padding: 8px;
     background-color: #fff;
     position: absolute;
     /* Change this to absolute positioning */
@@ -86,7 +92,7 @@
 
 
 .upper {
-    height: 100px;
+    height: 25em;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -107,13 +113,18 @@
     justify-content: center;
     /* Center horizontally */
     align-items: center;
-    /* Center vertically */
+    border: 5px solid;
+    border-color: #80ba24;
+}
+
+.profile_informations {
+    margin-top: -5em;
 }
 
 .profile img {
     object-fit: cover;
-    height: 5.5em;
-    width: 5.5em;
+    height: 12em;
+    width: 12em;
     display: block;
     margin: 0 auto;
 }
@@ -175,8 +186,11 @@
 }
 
 .profile-img {
+    object-fit: cover;
     width: 100%;
-    height: 8em;
+    height: 13em;
+    border-bottom: 5px solid;
+    border-color: #80ba24;
 }
 
 .section-img {
@@ -193,6 +207,10 @@
     color: white;
 }
 
+.logout-btn:hover {
+    color: white;
+    background-color: rgb(208, 3, 3);
+}
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
