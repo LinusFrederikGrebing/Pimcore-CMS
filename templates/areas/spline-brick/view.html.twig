@@ -1,13 +1,22 @@
-
 {% if editmode %}
-<p>Gib im folgenden den Link zum Spline-script ein</p>
-{{ pimcore_input("splinescript") }}
-<p>Gib im folgenden den Link zum Spline-viewer ein</p>
-{{ pimcore_input("splineviewer") }}
-{% set splinescript = pimcore_input("splinescript").getValue() %}
-{% set splineviewer = pimcore_input("splineviewer").getValue() %}
+    {{ pimcore_select("viewerData", {
+        "store": viewer,
+    }) }}
 {% endif %}
-<!-- https://prod.spline.design/gMqTSwaHDgNlEu3X/scene.splinecode 
-https://unpkg.com/@splinetool/viewer@0.9.416/build/spline-viewer.js-->
-<script type="module" src="{{splinescript}}"></script>
-<spline-viewer hint loading-anim url="{{splineviewer}}"></spline-viewer>
+<div id="viewer">{{ pimcore_select("viewerData").getData() }}</div>
+
+<script>
+    window.onload = function () {
+        var embeddedCode = document.getElementById("viewer").innerText
+        var outputDiv = document.getElementById("viewer");
+        // Erstellen Sie ein <iframe>-Element
+        var iframe = document.createElement("iframe");
+        iframe.srcdoc = embeddedCode; // Fügen Sie den Code in das <iframe> ein
+    
+        // Fügen Sie das <iframe> in das <div> ein
+        outputDiv.innerHTML = ""; // Löschen Sie den vorherigen Inhalt
+        outputDiv.appendChild(iframe);
+            
+    }
+    
+    </script>
