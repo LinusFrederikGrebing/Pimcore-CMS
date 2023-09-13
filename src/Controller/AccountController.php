@@ -191,7 +191,7 @@ class AccountController extends FrontendController
     
 
     public function findUserByEmail($email) {
-        $users = new User\Listing(); // Get a listing of User objects
+        $users = new User\Listing();
         $users->setCondition("email = ?", [$email]);
         $users->setLimit(1);
         
@@ -203,7 +203,7 @@ class AccountController extends FrontendController
     }
 
     public function findUserByToken($token) {
-        $users = new User\Listing(); // Get a listing of User objects
+        $users = new User\Listing(); 
         $users->setCondition("token = ?", [$token]);
         $users->setLimit(1);
         
@@ -212,5 +212,25 @@ class AccountController extends FrontendController
                 return $user;
             }
         }
+    }
+
+    public function updateProfile(Request $request): Response {
+        $name = $request->request->get('name');
+        $email = $request->request->get('email');
+        $session = $request->getSession();
+        $user = $session->get('user');
+        $uploadedFile = $request->files->get('profileimage');
+        if($uploadedFile) {
+            $imagePath = $uploadedFile->getPathname();
+            $this->setProfileImage($user, $imagePath);
+        }
+        if($name) {
+            $user->setUsername($name);
+        }
+        if($email) {
+            $user->setEmail($email);
+        }
+        $user->save();
+        return new Response('Aktualisiert!');
     }
 }

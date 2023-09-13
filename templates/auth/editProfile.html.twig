@@ -1,0 +1,21 @@
+<div id="editDialog" class="editProfileDialog">
+    <div class="editProfile-content">
+        <div class="editProfileHeader">
+            <h2>Profil anpassen</h2>        
+            <button id = "closeEditDialog" type="button" class="btn-close-custom" aria-label="Close"></button>
+        </div>
+        <form id="editProfileForm" class="mt-4" method="POST" action="{{ path('updateProfile') }}" enctype="multipart/form-data">
+            <input id="nameInputEditProfile" type="text" name="name" value="{{ user.getUsername() }}"/>
+            <br>
+            <input id="emailInputEditProfile" type="email" placeholder="Email" name="email" value="{{ user.getEmail() }}"/>
+            <br>
+            <input id="passwordInputEditProfile" type="password" placeholder="Passwort" name="password" /><br>
+            <input id="passwordInputConfirmEditProfile" type="password" placeholder="Bestätige das Passwort"
+                name="confirmPasswordEditProfile" value="" />
+            <input id="profileimageEditProfile" type="file" name="profileimage" />
+            <br>
+            <input id="editProfileBtn" class="submit-btn" type="submit"
+                value="Änderungen übernehmen">
+        </form>
+    </div>
+</div>
