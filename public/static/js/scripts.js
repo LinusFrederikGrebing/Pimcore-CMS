@@ -164,50 +164,49 @@ function coverRegister() {
 }
 
 // sort script
+$(document).ready(function() {
+    // Initial random array
+    generateAndSetRandomArray();
+    // Handle sort algorithm selection
+    $("#sortAlgorithm-options").on("click", ".sortAlgorithm-option", updateSelectedAlgorithm);
 
-document.addEventListener("DOMContentLoaded", function () {
-    var randomButton = document.getElementById("randomButton");
-    var sortButton = document.getElementById("sortButton");
-    var sortAlgorithmContainer = document.getElementById("sortAlgorithm");
-    var arrayElementsInput = document.getElementById("arrayElements");
-    var sortAlgorithmOptions = document.querySelectorAll(
-        "#sortAlgorithm-option"
-    );
-
-    var randomArray = generateRandomArray(10, 5, 50);
-    arrayElementsInput.value = randomArray.join(", ");
-
-    randomButton.addEventListener("click", function () {
-        var randomArray = generateRandomArray(10, 5, 50);
-        arrayElementsInput.value = randomArray.join(", ");
-    });
-
-    sortButton.addEventListener("click", async function () {
-        var selectedAlgorithm =
-            sortAlgorithmContainer.getAttribute("data-selected");
-        var arrayString = arrayElementsInput.value;
-        var array = arrayString
-            .split(",")
-            .map((element) => parseInt(element.trim()));
-
-        if (selectedAlgorithm === "insertion") {
-            await insertionSort(array);
-        } else if (selectedAlgorithm === "bubble") {
-            await bubbleSort(array);
-        } else if (selectedAlgorithm === "selection") {
-            await selectionSort(array);
-        }
-    });
-
-    sortAlgorithmOptions.forEach(function (option) {
-        option.addEventListener("click", function () {
-            var selectedValue = option.getAttribute("data-value");
-            sortAlgorithmContainer.setAttribute("data-selected", selectedValue);
-            sortAlgorithmContainer.querySelector("h3").textContent =
-                option.textContent;
-        });
-    });
 });
+
+function updateSelectedAlgorithm() {
+    var selectedValue = $(this).data("value");
+    $("#sortAlgorithm").data("selected", selectedValue);
+    $("#sortAlgorithm h3").text($(this).text());
+}
+
+function sortArray() {
+    var selectedAlgorithm = $("#sortAlgorithm").data("selected"); 
+    var array = getArrayFromInput();
+    switch (selectedAlgorithm) {
+        case "insertion":
+            insertionSort(array);
+            break;
+        case "bubble":
+            bubbleSort(array);
+            break;
+        case "selection":
+            selectionSort(array);
+            break;
+        default:
+            break;
+    }
+}
+
+function generateAndSetRandomArray() {
+    var randomArray = generateRandomArray(10, 5, 50);
+    $("#arrayElements").val(randomArray.join(", "));
+}
+
+function getArrayFromInput() {
+    var arrayString = $("#arrayElements").val();
+    return arrayString.split(",").map(function(element) {
+        return parseInt(element.trim());
+    });
+}
 
 function generateRandomArray(length, minValue, maxValue) {
     var randomArray = [];
@@ -217,26 +216,6 @@ function generateRandomArray(length, minValue, maxValue) {
         randomArray.push(randomNumber);
     }
     return randomArray;
-}
-async function bubbleSort(array) {
-    for (var i = 0; i < array.length; i++) {
-        var swaped = false;
-
-        for (var j = 0; j < array.length - i - 1; j++) {
-            if (array[j + 1] < array[j]) {
-                // Swap elements
-                var temp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = temp;
-            }
-            displayBars(array, [j + 1, j]);
-            await sleep(500);
-        }
-        if (swaped) {
-            break;
-        }
-    }
-    displayBars(array);
 }
 
 function displayBars(array, selectedIndexes = []) {
@@ -260,6 +239,33 @@ function displayBars(array, selectedIndexes = []) {
     }
 }
 
+async function bubbleSort(array) {
+    for (var i = 0; i < array.length; i++) {
+        var swaped = false;
+
+        for (var j = 0; j < array.length - i - 1; j++) {
+            if (array[j + 1] < array[j]) {
+                // Swap elements
+                var temp = array[j + 1];
+                array[j + 1] = array[j];
+                array[j] = temp;
+            }
+            var selectedAlgorithm = $("#sortAlgorithm").data("selected"); 
+            if(selectedAlgorithm == 'bubble'){
+                displayBars(array, [j + 1, j]);
+                await sleep(500);
+            }
+          
+        }
+        if (swaped) {
+            break;
+        }
+    }
+    if(selectedAlgorithm == 'selection'){
+        displayBars(array);
+    }
+}
+
 async function insertionSort(array) {
     for (var i = 0; i < array.length; i++) {
         var temp = array[i];
@@ -268,14 +274,17 @@ async function insertionSort(array) {
         while (j >= 0 && temp < array[j]) {
             array[j + 1] = array[j];
             j--;
-
-            displayBars(array, [j + 1]);
-            await sleep(500);
+            var selectedAlgorithm = $("#sortAlgorithm").data("selected"); 
+            if(selectedAlgorithm == 'insertion'){
+                displayBars(array, [j + 1]);
+                await sleep(500);
+            }
         }
         array[j + 1] = temp;
     }
-
-    displayBars(array);
+    if(selectedAlgorithm == 'selection'){
+        displayBars(array);
+    }
 }
 async function selectionSort(inputArr) {
     let n = inputArr.length;
@@ -287,8 +296,11 @@ async function selectionSort(inputArr) {
             if (inputArr[j] < inputArr[min]) {
                 min = j;
             }
-            displayBars(inputArr, [j + 1]);
-            await sleep(500);
+            var selectedAlgorithm = $("#sortAlgorithm").data("selected"); 
+            if(selectedAlgorithm == 'selection'){
+                displayBars(inputArr, [j + 1]);
+                await sleep(500);
+            }
         }
         if (min != i) {
             // Swapping the elements
@@ -297,45 +309,13 @@ async function selectionSort(inputArr) {
             inputArr[min] = tmp;
         }
     }
-    displayBars(inputArr);
+    if(selectedAlgorithm == 'selection'){
+        displayBars(inputArr);
+    }
 }
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-async function startVisualizationBubble(event) {
-    event.preventDefault();
-    var arrayElementsInput = document.getElementById("arrayElements");
-    var arrayString = arrayElementsInput.value;
-    var array = arrayString
-        .split(",")
-        .map((element) => parseInt(element.trim()));
-
-    await bubbleSort(array);
-}
-
-async function startVisualizationInsertion(event) {
-    event.preventDefault();
-    var arrayElementsInput = document.getElementById("arrayElements");
-    var arrayString = arrayElementsInput.value;
-    var array = arrayString
-        .split(",")
-        .map((element) => parseInt(element.trim()));
-
-    await insertionSort(array);
-}
-
-async function startVisualizationSelection(event) {
-    event.preventDefault();
-    var arrayElementsInput = document.getElementById("arrayElements");
-    var arrayString = arrayElementsInput.value;
-    var array = arrayString
-        .split(",")
-        .map((element) => parseInt(element.trim()));
-
-    await selectionSort(array);
-}
-
 // End
 
 let slideIndex = 1;

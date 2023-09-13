@@ -6,6 +6,10 @@
     color: #80ba24;
 }
 
+#showPopup {
+    text-align: left;
+}
+
 #cover {
     background: #80ba24;
     color: #fff;
