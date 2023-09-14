@@ -101,12 +101,16 @@ class AccountController extends FrontendController
     public function setProfileImage($user, $imagePath) {
         $userId = $user->getId();
         $newAsset = new \Pimcore\Model\Asset\Image();
+        $userAsset = \Pimcore\Model\Asset::getByPath("/Users/{$userId}Profileimage.png");
+        if($userAsset) {
+            $userAsset->delete();
+        }
         $newAsset->setFilename($userId."Profileimage.png");
         $newAsset->setData(file_get_contents($imagePath));
         $newAsset->setParent(\Pimcore\Model\Asset::getByPath("/Users"));
         $newAsset->save();
         $user->setImage($newAsset);
-        $user->save();
+        $user->save();      
     }
     public function sendPasswordResetEmail(Request $request, MailerInterface $mailer, UrlGeneratorInterface $urlGenerator): Response
     {
@@ -217,6 +221,9 @@ class AccountController extends FrontendController
     public function updateProfile(Request $request): Response {
         $name = $request->request->get('name');
         $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $confirmPassword = $request->request->get('confirmPassword');
+
         $session = $request->getSession();
         $user = $session->get('user');
         $uploadedFile = $request->files->get('profileimage');
@@ -229,6 +236,9 @@ class AccountController extends FrontendController
         }
         if($email) {
             $user->setEmail($email);
+        }
+        if(($password && $confirmPassword) && ($password == $confirmPassword) ) {
+            $user->setPassword($password);
         }
         $user->save();
         return new Response('Aktualisiert!');
