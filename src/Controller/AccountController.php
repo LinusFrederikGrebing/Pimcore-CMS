@@ -30,19 +30,23 @@ class AccountController extends FrontendController
         // Retrieve the form data
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-        $user= $this->findUserByEmail($email);
-        if(!$user instanceof User || !password_verify($password, $user->getPassword())) {
-          return new Response("Error: Überprüfe deine Eingaben!"); // Return the route
-        } else {
-            // Successful login
-            $session = $request->getSession();
-            $session->set('user_logged_in', true);
-            $session->set('user', $user);
-
-            // Use Symfony's path function to generate the route
-            $onepagerRoute = $this->generateUrl('onepager');
-            return new Response($onepagerRoute); // Return the route
+        
+        // Find the user by email
+        $user = $this->findUserByEmail($email);
+    
+        if (!$user instanceof User || !password_verify($password, $user->getPassword())) {
+            return new Response("Error: Überprüfe deine Eingaben!", 400);
         }
+    
+        // Successful login
+        $session = $request->getSession();
+        $session->set('user_logged_in', true);
+        $session->set('user', $user);
+    
+        // Generate the route using Symfony's path function
+        $onepagerRoute = $this->generateUrl('onepager');
+    
+        return new Response($onepagerRoute, 201);
     }
 
     public function logout(Request $request): Response
@@ -51,6 +55,7 @@ class AccountController extends FrontendController
         $session = $request->getSession();
         $session->remove('user_logged_in');
         $session->remove('user');
+
         // Redirect to the main page
         return $this->render('onepager/onepager.html.twig'); 
     }
@@ -59,16 +64,17 @@ class AccountController extends FrontendController
     {
         // Retrieve the form data
         $username = $request->request->get('name');
-        //remove whitespaces from username
+        // Remove whitespaces from the username
         $username = str_replace(' ', '', $username);
         $email = $request->request->get('email');
         $password = $request->request->get('password');
         $confirmPassword = $request->request->get('confirmPassword');
-        // Validate the form data, perform any necessary checks
+        
+        // Validate the form data
         if ($password !== $confirmPassword) {
-            return new Response('Passwords do not match!');
+            return new Response('Passwords do not match!', 400);
         }
-
+    
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
@@ -77,37 +83,52 @@ class AccountController extends FrontendController
         $userFolder = DataObject::getByPath("/User");
         $userFolderId = $userFolder->getId();
         $user->setKey($username); 
-        // Set the parent folder's ID where users are stored
-        $user->setParentId($userFolderId); 
-        // Mark the user as published
-        $user->setPublished(true); 
-       
+        $user->setParentId($userFolderId);
+        $user->setPublished(true);
+    
         // Set user properties using setter methods
         $user->setUsername($username);
         $user->setEmail($email);
-        $user->setPassword($hashedPassword); // Set the hashed password
+        $user->setPassword($hashedPassword);
         $user->save();
-        //Create new Asset from uploaded image
-        if($request->files->get('profileimage')) {
-            $uploadedFile = $request->files->get('profileimage');
-            $imagePath = $uploadedFile->getPathname();
-            $this->setProfileImage($user, $imagePath);
-        } else {
-            $imagePath = __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
-            $this->setProfileImage($user, $imagePath );
-        }
-        return new Response('Account erfolgreich angelegt!Log dich ein!', 200);
+    
+        // Create new Asset from uploaded image
+        $uploadedFile = $request->files->get('profileimage');
+        $imagePath = $uploadedFile ? $uploadedFile->getPathname() : __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
+        
+        $this->setProfileImage($user, $imagePath);
+    
+        return new Response('Account erfolgreich angelegt! Log dich ein!', 200);
     }
-    public function setProfileImage($user, $imagePath) {
+    
+    public function setProfileImage($user, $imagePath)
+    {
         $userId = $user->getId();
+        
+        $filename = $userId . "Profileimage.png";
+        
+        $parentFolder = \Pimcore\Model\Asset::getByPath("/Users");
+        
+        if (!$parentFolder instanceof \Pimcore\Model\Asset\Folder) {
+            $parentFolder = new \Pimcore\Model\Asset\Folder();
+            $parentFolder->setKey("Users");
+            $parentFolder->setParentId(1); 
+            $parentFolder->save();
+        }
+
         $newAsset = new \Pimcore\Model\Asset\Image();
-        $newAsset->setFilename($userId."Profileimage.png");
+        $newAsset->setFilename($filename);
         $newAsset->setData(file_get_contents($imagePath));
-        $newAsset->setParent(\Pimcore\Model\Asset::getByPath("/Users"));
+    
+        $newAsset->setParent($parentFolder);
+        
         $newAsset->save();
+
         $user->setImage($newAsset);
+    
         $user->save();
     }
+    
     public function sendPasswordResetEmail(Request $request, MailerInterface $mailer, UrlGeneratorInterface $urlGenerator): Response
     {
         // Retrieve the user's email from the form data
@@ -133,7 +154,7 @@ class AccountController extends FrontendController
 
             // Sending the email
             $mailer->send($email);        
-            return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
+            return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!', 200);
 
         } else {
             return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
@@ -149,7 +170,7 @@ class AccountController extends FrontendController
         $expiryTime = $tokenProperty->getTooltip();; // 20 minutes in seconds
 
         if ($currentTime > $expiryTime) {
-            return new Response('Your token expired, request a new password reset!');
+            return new Response('Your token expired, request a new password reset!', 400);
         }
 
         // Render the password reset form, passing the user
@@ -164,7 +185,7 @@ class AccountController extends FrontendController
         $newPassword = $request->request->get('newPassword');
         $confirmPassword = $request->request->get('confirmNewPassword');
         if ($newPassword !== $confirmPassword) {
-            return new Response('Passwords do not match!');
+            return new Response('Passwords do not match!', 400);
         }
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $user->setPassword($hashedNewPassword); // Set the new hashed password

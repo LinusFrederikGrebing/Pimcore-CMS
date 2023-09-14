@@ -67,7 +67,7 @@
                         {{ include('layout/language.html.twig') }}
 
                          <!-- Login- / Profile-Button -->
-                        <a id="showPopup" data-user="{{ app.session.get('user_logged_in')|json_encode|raw }}" class="btn">
+                        <a id="showPopup" onclick="loadUserDataAndTogglePopup(this)" data-user="{{ app.session.get('user_logged_in')|json_encode|raw }}" class="btn">
                             <i class="fa-solid fa-user fa-lg profile-button"></i>
                         </a>
                     </ul>

@@ -40,72 +40,44 @@ window.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 });
+//End
 
-function myFunction(userIsLoggedIn) {
-    console.log(userIsLoggedIn);
-    // 'userData' will be the JSON data stored in the 'data-user' attribute
-    const popupContainer = document.getElementById("popupContainer");
-    const popupContainerLogout = document.getElementById(
-        "popupContainerLogout"
-    );
-    if (userIsLoggedIn) {
-        popupContainerLogout.style.display = "block";
-    } else {
-        popupContainer.style.display = "block";
-    }
+// toggle popup
+function togglePopupContainer(userIsLoggedIn) {
+    const $popupContainer = $("#popupContainer");
+    const $popupContainerLogout = $("#popupContainerLogout");
+    
+    const $targetElement = userIsLoggedIn ? $popupContainerLogout : $popupContainer;
+    $targetElement.show();
 
-    if (userIsLoggedIn) {
-        popupContainerLogout.addEventListener("click", function (event) {
-            if (event.target === popupContainerLogout) {
-                popupContainerLogout.style.display = "none";
-            }
-        });
-    } else {
-        popupContainer.addEventListener("click", function (event) {
-            if (event.target === popupContainer) {
-                popupContainer.style.display = "none";
-            }
-        });
-    }
+    $targetElement.on("click", function (event) {
+        if (event.target === this) {
+            $targetElement.hide();
+        }
+    });
 }
 
-document.getElementById("showPopup").addEventListener("click", function () {
-    var userAttribute = this.getAttribute("data-user");
+function loadUserDataAndTogglePopup(element) {
+    var userAttribute = element.getAttribute("data-user");
     var userData = JSON.parse(userAttribute);
-    myFunction(userData);
-});
+    togglePopupContainer(userData);
+}
+// End
 
-const timelinecontainer = $("#timeline-container");
+
+// Timeline - script
 const timelineEvents = $(".timeline__event");
-const arrows = $(".arrow");
-const images = $(".image");
-const additionalcontent = $(".additional-content");
-const closebutton = $(".close-button");
-
-
 function hideTimeline(timelineIndex) {
-    additionalcontent
-        .eq(timelineIndex - 1)
-        .show()
-        .addClass(
-            "additional-content-order" + (timelineIndex % 2 === 0 ? "2" : "1")
-        );
-    timelinecontainer.addClass(
-        "timeline-order" + (timelineIndex % 2 === 0 ? "1" : "2")
-    );
+    $(".additional-content").eq(timelineIndex - 1).show().addClass("additional-content-order" + (timelineIndex % 2 === 0 ? "2" : "1"));
+    $("#timeline-container").addClass("timeline-order" + (timelineIndex % 2 === 0 ? "1" : "2"));
     timelineEvents.each(function (index, event) {
-        closebutton.show();
         event = $(event);
+        $(".image, .arrow").hide();
+        $(".close-button").show();
+        event.addClass("timeline__event_detailed timeline_detailed_" + (timelineIndex % 2 === 0 ? "left" : "right"));
+        event.removeClass("timeline__event");
         if (event.data("timeline-index") !== timelineIndex) {
             event.hide();
-        } else {
-            images.hide();
-            arrows.hide();
-            event.addClass(
-                "timeline__event_detailed timeline_detailed_" +
-                    (timelineIndex % 2 === 0 ? "left" : "right")
-            );
-            event.removeClass("timeline__event");
         }
     });
 }
@@ -113,55 +85,40 @@ function hideTimeline(timelineIndex) {
 function showTimeline() {
     timelineEvents.each(function (index, event) {
         event = $(event);
-        closebutton.hide();
-        event.show();
-        event.removeClass(
-            "timeline__event_detailed timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right"
-        );
-        event.addClass("timeline__event");
-        $(".additional-content").each(function (index, event) {
-            $(event)
-                .hide()
-                .removeClass(
-                    "additional-content-order1 additional-content-order2"
-                );
-        });
-        images.show();
-        arrows.show();
+        event.show().removeClass("timeline__event_detailed timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right").addClass("timeline__event");
+        $(".additional-content").each(function (index, event) { event = $(event); event.hide().removeClass("additional-content-order1 additional-content-order2")}); 
+        $(".close-button").hide();
+        $(".image, .arrow").show();
     });
 }
+// End
 
-document.addEventListener("DOMContentLoaded", function () {
-    const showButtonRP = document.getElementById("forgot-pass");
-    const popupContainerRP = document.getElementById("popupContainerRP");
+// Forgot password
+function forgot_pass(){
+    $("#popupContainerRP").show();
+}
 
-    showButtonRP.addEventListener("click", function () {
-        popupContainerRP.style.display = "block";
-    });
+function close_button(){
+    $("#popupContainerRP").hide();
+}
 
-    popupContainerRP.addEventListener("click", function (event) {
-        if (event.target === popupContainer) {
-            popupContainer.style.display = "none";
-        }
-    });
-});
+function popupContainerRP(event){
+    if (event.target ===  $("#popupContainerRP")[0]) {
+        $("#popupContainerRP").hide();
+    }
+}
+// End
 
-document.addEventListener("DOMContentLoaded", function () {
-    var popupContainer = document.getElementById("popupContainerRP");
-    var closeButton = document.getElementById("closeButton");
-
-    closeButton.addEventListener("click", function () {
-        popupContainer.style.display = "none";
-    });
-});
-
+// Login cover
 function coverLogin() {
-    document.location.href = "#cover";
+    window.location.href = "#cover";
 }
 
 function coverRegister() {
-    document.location.href = "#";
+    window.location.href = "#";
 }
+// End
+
 
 // sort script
 $(document).ready(function() {
@@ -255,13 +212,12 @@ async function bubbleSort(array) {
                 displayBars(array, [j + 1, j]);
                 await sleep(500);
             }
-          
         }
         if (swaped) {
             break;
         }
     }
-    if(selectedAlgorithm == 'selection'){
+    if(selectedAlgorithm == 'bubble'){
         displayBars(array);
     }
 }
@@ -282,35 +238,36 @@ async function insertionSort(array) {
         }
         array[j + 1] = temp;
     }
-    if(selectedAlgorithm == 'selection'){
+    if(selectedAlgorithm == 'insertion'){
         displayBars(array);
     }
 }
-async function selectionSort(inputArr) {
-    let n = inputArr.length;
+
+async function selectionSort(array) {
+    let n = array.length;
 
     for (let i = 0; i < n; i++) {
         // Finding the smallest number in the subarray
         let min = i;
         for (let j = i + 1; j < n; j++) {
-            if (inputArr[j] < inputArr[min]) {
+            if (array[j] < array[min]) {
                 min = j;
             }
             var selectedAlgorithm = $("#sortAlgorithm").data("selected"); 
             if(selectedAlgorithm == 'selection'){
-                displayBars(inputArr, [j + 1]);
+                displayBars(array, [j + 1]);
                 await sleep(500);
             }
         }
         if (min != i) {
             // Swapping the elements
-            let tmp = inputArr[i];
-            inputArr[i] = inputArr[min];
-            inputArr[min] = tmp;
+            let tmp = array[i];
+            array[i] = array[min];
+            array[min] = tmp;
         }
     }
     if(selectedAlgorithm == 'selection'){
-        displayBars(inputArr);
+        displayBars(array);
     }
 }
 function sleep(ms) {
@@ -318,22 +275,17 @@ function sleep(ms) {
 }
 // End
 
+
+// AV Videoslider
 let slideIndex = 1;
 showSlides(slideIndex);
 
-// Next/previous controls
 function plusSlides(n) {
     showSlides((slideIndex += n));
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-    showSlides((slideIndex = n));
-}
-
 function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
+    let slides = $(".mySlides");
 
     if (n > slides.length) {
         slideIndex = 1;
@@ -341,122 +293,93 @@ function showSlides(n) {
     if (n < 1) {
         slideIndex = slides.length;
     }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
 
-    slides[slideIndex - 1].style.display = "block";
+    slides.hide();
+    slides.eq(slideIndex - 1).show();
 }
+// End
 
-function resetPassword(event){
-        // Use SweetAlert to display a popup
-        event.preventDefault(); // Prevent form submission
-        var emailInput = document.getElementById("emailInputRp");
-        var email = emailInput.value;
-        sweetAlert("/resetPassword", email);
-};
-
- function login(event){
-    // Use SweetAlert to display a popup
-    event.preventDefault(); // Prevent form submission
-    var emailInput = document.getElementById("emailInputLogin");
-    var email = emailInput.value;
-    var passwordInput = document.getElementById("passwordInputLogin");
-    var password = passwordInput.value;
-    console.log("test");
-    sweetAlert("/login", email, password);
-};
-
-function register(event){
-    // Use SweetAlert to display a popup
-    event.preventDefault(); // Prevent form submission
-    var emailInput = document.getElementById("emailInputRegister");
-    var email = emailInput.value;
-    var nameInput = document.getElementById("nameInputRegister");
-    var name = nameInput.value;
-    var passwordInput = document.getElementById("passwordInputRegister");
-    var password = passwordInput.value;
-    var passwordInputConfirmRegister = document.getElementById(
-        "passwordInputConfirmRegister"
-    );
-    var confirmPassword = passwordInputConfirmRegister.value;
-    var profileimageInput = document.getElementById("profileimage");
-    var profileimage = profileimageInput.files[0]; // Get the selected file
-
-    sweetAlert(
-        "/register",
-        email,
-        password,
-        confirmPassword,
-        profileimage,
-        name
-    );
-};
-
-function sweetAlert(
-    route,
-    email,
-    password,
-    confirmPassword,
-    profileimage,
-    name
-) {
-    const formData = new FormData();
-    formData.append("email", email);
-    if (name) {
-        formData.append("name", name);
-    }
-    if (password) {
-        formData.append("password", password);
-    }
-    if (confirmPassword) {
-        formData.append("confirmPassword", confirmPassword);
-    }
-    if (profileimage) {
-        formData.append("profileimage", profileimage);
-    }
+// login routes
+function fetchDataToResponse(route, formData) {
     fetch(route, {
         method: "POST",
         body: formData,
     })
-        .then((response) => response.text())
-        .then((responseText) => {
-            if (responseText.startsWith("/")) {
-                window.location.href = responseText; // Redirect dynamically to the route
-            } else {
-                // Inside the .then(responseText => {...}) block
-                if (responseText.toLowerCase().includes("error:")) {
-                    // Handle error response
-                    Swal.fire({
-                        title: "Fehler!",
-                        text: responseText.replace(/Error:/i, ""), // Remove "Error:" from the message
-                        icon: "error",
-                        confirmButtonText: "Okay",
-                    });
-                } else {
-                    // Handle success response
-                    Swal.fire({
-                        title: "Erfolg!",
-                        text: responseText,
-                        icon: "success",
-                        confirmButtonText: "Okay",
-                    });
-                }
-            }
+    .then((response) => {
+        const status = response.status;
+        return response.text().then((responseText) => {
+            return { status, responseText };
         });
+    })
+    .then(({ status, responseText }) => {
+        let title, text, icon;
+        if (status === 200) {
+            title = "Erfolg!";
+            text = responseText;
+            icon = "success";
+        } else if (status === 400) {
+            title = "Fehler!";
+            text = responseText.replace(/Error:/i, "");
+            icon = "error";
+        } else if (status === 500) {
+            title = "Fehler!";
+            text = "Bitte überprüfe deine Eingaben"
+            icon = "error";
+        }else {
+            if (responseText.startsWith("/")) {
+                window.location.href = responseText;
+                return;
+            } else {
+                title = "Unbekannter Status!";
+                text = "Unbekannter Statuscode: " + status;
+                icon = "error";
+            }
+        }
+        sweetAlert(title, text, icon, responseText);
+    });
 }
 
-$(function(){
-    $('.selectpicker').selectpicker();
+function sweetAlert(title, text, icon, responseText) {
+    Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        confirmButtonText: "Okay",
+    }).then((result) => {
+        if (result.isConfirmed && responseText.startsWith("/")) {
+            window.location.href = responseText;
+        }
+    });
+}
+
+function handleSubmit(event, route) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    fetchDataToResponse(route, formData);
+}
+
+$("#resetPasswordForm").on("submit", function (event) {
+    handleSubmit(event, "/resetPassword");
 });
 
+$("#loginForm").on("submit", function (event) {
+    handleSubmit(event, "/login");
+});
+
+$("#registerForm").on("submit", function (event) {
+    handleSubmit(event, "/register");
+});
+// End
+
+//language
 function setLanguage(langID, language) {
-    document.cookie = `selected_language_id=${langID}; path=/`;
-    document.cookie = `selected_language=${language}; path=/`;
+    $.cookie('selected_language_id', langID, { path: '/' });
+    $.cookie('selected_language', language, { path: '/' });
+
     var currentURL = window.location.pathname;
     var currentPathWithoutLanguage = currentURL.substring(4);
     var newURL = '/' + language + '/' + currentPathWithoutLanguage;
 
     window.location.pathname = newURL;
 }
-
+// End
