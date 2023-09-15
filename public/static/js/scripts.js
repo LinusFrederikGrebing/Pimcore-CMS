@@ -358,7 +358,7 @@ function handleSubmit(event, route) {
     fetchDataToResponse(route, formData);
 }
 
-$("#resetPasswordForm").on("submit", function (event) {
+$("#sendEmailForm").on("submit", function (event) {
     handleSubmit(event, "/resetPassword");
 });
 
@@ -382,4 +382,8 @@ function setLanguage(langID, language) {
 
     window.location.pathname = newURL;
 }
+// End
+
+// CustomCubeBrick
+
 // End

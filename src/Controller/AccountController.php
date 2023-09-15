@@ -59,7 +59,7 @@ class AccountController extends FrontendController
         // Redirect to the main page
         return $this->render('onepager/onepager.html.twig'); 
     }
-    
+  
     public function register(Request $request): Response
     {
         // Retrieve the form data
@@ -119,48 +119,61 @@ class AccountController extends FrontendController
         $newAsset = new \Pimcore\Model\Asset\Image();
         $newAsset->setFilename($filename);
         $newAsset->setData(file_get_contents($imagePath));
-    
         $newAsset->setParent($parentFolder);
-        
         $newAsset->save();
 
         $user->setImage($newAsset);
-    
         $user->save();
     }
     
-    public function sendPasswordResetEmail(Request $request, MailerInterface $mailer, UrlGeneratorInterface $urlGenerator): Response
-    {
-        // Retrieve the user's email from the form data
+    public function sendPasswordResetEmail(
+        Request $request,
+        MailerInterface $mailer,
+        UrlGeneratorInterface $urlGenerator
+    ): Response {
         $email = $request->request->get('email');
         $user = $this->findUserByEmail($email);
 
-        if($user instanceof User) {        
+        if ($user instanceof User) {
             $token = $this->createUniqueToken($user);
-            $params = array('username' => $user->getUsername());        
+            $resetPasswordUrl = $this->generateResetPasswordUrl($token, $urlGenerator);
 
-            $resetPasswordUrl = $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
-            // Create the HTML content for the email
-            $htmlContent = '<p>Hallo ' .  $params['username'] . ',</p> <br>'
-                        . '<p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href="'. $resetPasswordUrl .'">Passwort zurücksetzen</a></p><br>'.
-                        '<p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>';
+            $emailContent = $this->createEmailContent($user, $resetPasswordUrl);
 
-            // Create an Email instance
-            $email = (new Email())
-                ->from('THMStudyPlanner@gmail.com') // Set the sender's email address here
-                ->to($email) // Use the provided email from the form data
-                ->subject('Zurücksetzen deines Passworts')
-                ->html($htmlContent);
+            $this->sendEmail($email, $emailContent, $mailer);
 
-            // Sending the email
-            $mailer->send($email);        
             return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!', 200);
-
         } else {
             return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
         }
     }
-    
+
+    private function generateResetPasswordUrl($token, UrlGeneratorInterface $urlGenerator): string
+    {
+        return $urlGenerator->generate('setNewPassword', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    private function createEmailContent(User $user, string $resetPasswordUrl): string
+    {
+        $username = $user->getUsername();
+
+        return "
+            <p>Hallo $username,</p><br>
+            <p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href='$resetPasswordUrl'>Passwort zurücksetzen</a></p><br>
+            <p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>
+        ";
+    }
+
+    private function sendEmail(string $recipient, string $content, MailerInterface $mailer): void
+    {
+        $email = (new Email())
+            ->from('THMStudyPlanner@gmail.com')
+            ->to($recipient)
+            ->subject('Zurücksetzen deines Passworts')
+            ->html($content);
+
+        $mailer->send($email);
+    }
     public function showResetPasswordTemplate(Request $request, string $token): Response
     {
         // Calculate the current time + 20 minutes        
@@ -184,12 +197,15 @@ class AccountController extends FrontendController
         $user = $this->findUserByEmail($email);
         $newPassword = $request->request->get('newPassword');
         $confirmPassword = $request->request->get('confirmNewPassword');
+
         if ($newPassword !== $confirmPassword) {
             return new Response('Passwords do not match!', 400);
         }
+
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $user->setPassword($hashedNewPassword); // Set the new hashed password
         $user->save();
+        
         return $this->render('onepager/onepager.html.twig');
     }
 
@@ -210,7 +226,6 @@ class AccountController extends FrontendController
         return $combinedToken;
     }
     
-
     public function findUserByEmail($email) {
         $users = new User\Listing(); // Get a listing of User objects
         $users->setCondition("email = ?", [$email]);
