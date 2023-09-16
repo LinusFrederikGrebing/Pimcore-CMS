@@ -34,19 +34,25 @@ class TimelineBrick extends AbstractTemplateAreabrick
 
     public function action(Info $info): ?RedirectResponse
     {
+        // Get the first parameter from the Area Brick configuration
         $param = $info->getEditable()->getConfig()['params'][0];
         
+        // Initialize a listing of Timeline data objects
         $timeline = new DataObject\Timeline\Listing();
+        
+        // Initialize an array to store filtered Timeline items
         $filteredTimelines = [];
 
+        // Loop through the Timeline items and filter based on the 'major' property
         foreach ($timeline as $item) {
             if ($item->getMajor() === $param) {
                 $filteredTimelines[] = $item;
             }
         }
 
+        // Set the 'timelines' parameter in the Info object for later use in the view
         $info->setParam('timelines', $filteredTimelines);
 
-        return null;
+        return null; // Return null as this action does not perform redirection
     }
 }

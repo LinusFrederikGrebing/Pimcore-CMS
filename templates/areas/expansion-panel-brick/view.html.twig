@@ -2,9 +2,9 @@
 	{{ pimcore_areablock('headline', { allowed: ['headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
 	<div class="row">
 		<div id="accordion">
-			{% for timeline in pdfassets %}
+			{% for pdf in pdfassets %}
 				<div class="card">
-					<div class="card-header" id="heading{{ timeline.key }}">
+					<div class="card-header" id="heading{{ pdf.key }}">
 						<h5 class="mb-0">
 							<button class="btn btn-link{% if loop.first %} collapsed{% endif %}" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
 								{{filenames[(loop.index)-1]}}
@@ -14,7 +14,7 @@
 					<div id="collapse{{ loop.index }}" class="collapse{% if loop.first %} show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
 						<div class="card-body">
 							<div class="row">
-								<iframe style="height: 40em" src="{{timeline}}"></iframe>
+								<iframe class="pdf-iframe" src="{{pdf}}"></iframe>
 							</div>
 						</div>
 					</div>

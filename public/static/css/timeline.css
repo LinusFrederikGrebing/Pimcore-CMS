@@ -1,52 +1,58 @@
-
+/* Set the base font size for the HTML element */
 html {
-	font-size: 14px;
+    font-size: 14px;
 }
 
+/* Define the default styles for the body */
 body {
-	background: #f6f9fc;
-	font-family: "Open Sans", sans-serif;
-	color: #525f7f;
+    background: #f6f9fc;
+    font-family: "Open Sans", sans-serif;
+    color: #525f7f;
 }
 
+/* Styles for the timeline container */
 .timeline {
-	padding-top: 2em;
-	padding-bottom: 2em;
-	display: flex;
-	flex-direction: column;
-	margin: 20px auto;
-	position: relative;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    position: relative;
 }
 
+/* Order styles for timeline events */
 .timeline-order1 {
-	order: 1;
+    order: 1;
 }
 
 .timeline-order2 {
-	order: 2;
+    order: 2;
 }
 
+/* Styles for individual timeline events */
 .timeline__event {
-	margin-bottom: 20px;
-	position: relative;
-	display: flex;
-	margin: 20px 0;
-	border-radius: 6px;
-	align-self: center;
-	width: 80vw;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    margin: 20px 0;
+    border-radius: 6px;
+    align-self: center;
+    width: 80vw;
 }
 
+/* Styles for detailed timeline container */
 .timeline_detailed {
-	padding-top: 2em;
-	padding-bottom: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
+    align-items: flex-start;
     margin: 20px auto;
     position: relative;
     height: 100vh;
 }
 
+/* Styles for detailed timeline events */
 .timeline__event_detailed {
     margin-bottom: 20px;
     position: relative;
@@ -54,211 +60,245 @@ body {
     margin: 0;
     border-radius: 6px;
     width: 20vw;
-    height: 100%; 
-}
-.timeline_detailed_left {
-	align-self: flex-start; 
-}
-.timeline_detailed_right {
-	align-self: flex-end; 
+    height: 100%;
 }
 
+/* Align detailed timeline events */
+.timeline_detailed_left {
+    align-self: flex-start;
+}
+
+.timeline_detailed_right {
+    align-self: flex-end;
+}
+
+/* Styles for the timeline container */
 .container-timeline {
-	margin: auto;
+    margin: auto;
     display: flex;
     height: 100%;
-	width: 95%;
+    width: 95%;
     position: relative;
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 
+/* Order styles for additional content sections */
 .additional-content-order1 {
-	order: 1;
+    order: 1;
     flex: 1;
 }
 
 .additional-content-order2 {
-	order: 2;
+    order: 2;
     flex: 1;
 }
 
-
+/* Alternate styles for odd timeline events */
 .timeline__event:nth-child(2n + 1) {
-	flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
+/* Styles for timeline event titles */
 .timeline__event__title {
-	width: 80%;
-	font-size: 1.2rem;
-	line-height: 1.4;
-	text-transform: uppercase;
-	font-weight: 600;
-	color: #80ba80;
-	overflow-wrap: break-word;
-	letter-spacing: 1.5px;
+    width: 80%;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #80ba80;
+    overflow-wrap: break-word;
+    letter-spacing: 1.5px;
 }
 
+/* Styles for timeline event content */
 .timeline__event__content {
-	border: #80ba24 2px;
-	padding: 20px;
-	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-	background: #fff;
-	width: calc(65vw - 84px);
-	border-radius: 0 6px 6px 0;
+    border: #80ba24 2px;
+    padding: 20px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    background: #fff;
+    width: calc(65vw - 84px);
+    border-radius: 0 6px 6px 0;
 }
 
+/* Styles for additional content container */
 .timeline_additional_content {
-	position: relative;
-	margin-top: 3.5em;
-	margin-bottom: 3.5em;
-	border: #80ba24 2px;
-	padding: 20px;
-	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-	background: #fff;
-	min-height: 45em;
-	border-radius: 0 6px 6px 0;
+    position: relative;
+    margin-top: 3.5em;
+    margin-bottom: 3.5em;
+    border: #80ba24 2px;
+    padding: 20px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    background: #fff;
+    min-height: 45em;
+    border-radius: 0 6px 6px 0;
 }
 
+/* Styles for timeline event dates */
 .timeline__event__date {
-	color: #ffffff;
-	font-size: 1.5rem;
-	font-weight: 600;
-	background: #80ba24;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	white-space: nowrap;
-	padding: 0 20px;
-	border-radius: 6px 0 0 6px;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: #80ba24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 20px;
+    border-radius: 6px 0 0 6px;
 }
 
+/* Styles for timeline event icons */
 .timeline__event__icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #80ba80;
-	padding: 20px;
-	align-self: center;
-	margin: 0 20px;
-	background: #80ba24;
-	border-radius: 100%;
-	width: 40px;
-	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-	height: 40px;
-	position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #80ba80;
+    padding: 20px;
+    align-self: center;
+    margin: 0 20px;
+    background: #80ba24;
+    border-radius: 100%;
+    width: 40px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    height: 40px;
+    position: relative;
 }
 
+/* Hide pseudo-elements for the last timeline event */
 .timeline__event:last-child .timeline__event__icon:before {
-	content: none;
+    content: none;
 }
+
+/* Styles for timeline event images */
 .timeline_image {
-	height: 100%; 
-	max-width: 200px; 
-	object-fit: cover;
+    height: 100%;
+    max-width: 200px;
+    object-fit: cover;
 }
+
+/* Styles for close buttons */
 .close-button {
-	cursor: pointer;
-	float: right;
-	display: none;
+    cursor: pointer;
+    float: right;
+    display: none;
+    color: #cb1010;
 }
+
+/* Hide additional content sections */
+.additional-content {
+    display: none;
+}
+
 @media (max-width: 786px) {
-	.timeline__event {
-		flex-direction: column;
-		align-self: center;
-		display: flex;
-	}
-	.timeline_image {
-		width: 100%; 
-		max-height: 40px; 
-		max-width: 100%; 
-		object-fit: cover;
-	}
-
-	.timeline__event__content {
-		width: 100%;
-	}
-
-	.timeline__event__icon {
-		border-radius: 6px 6px 0 0;
-		width: 100%;
-		margin: 0;
-		box-shadow: none;
-	}
-
-	.timeline__event__icon:before,
-	.timeline__event__icon:after {
-		display: none;
-	}
-
-	.timeline__event__date {
-		border-radius: 0;
-		padding: 20px;
-	}
-
-	.timeline__event:nth-child(2n + 1) {
-		flex-direction: column;
-		align-self: center;
-	}
-
-	.timeline__event:nth-child(2n + 1) .timeline__event__date {
-		border-radius: 0;
-		padding: 20px;
-	}
-
-	.timeline__event:nth-child(2n + 1) .timeline__event__icon {
-		border-radius: 6px 6px 0 0;
-		margin: 0;
-	}
-	
-	.timeline__event_detailed {
-		width: 100%; 
-	}
-
-	.additional-content-order1 {
-		order: 1;
-		flex: 1;
-	}
-	
-	.additional-content-order2 {
-		order: 1;
-		flex: 1;
-	}
-	
-	.timeline-order1 {
-		order: 1;
-	}
-
-	.timeline-order2 {
-		order: 1;
-	}    
-	.container-timeline {
-        flex-direction: column; 
+    /* Stack timeline events vertically and center them */
+    .timeline__event {
+        flex-direction: column;
+        align-self: center;
+        display: flex;
     }
 
+    /* Adjust the size and alignment of timeline images */
+    .timeline_image {
+        width: 100%;
+        max-height: 40px;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    /* Expand timeline event content to full width */
+    .timeline__event__content {
+        width: 100%;
+    }
+
+    /* Modify the appearance of timeline event icons */
+    .timeline__event__icon {
+        border-radius: 6px 6px 0 0;
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
+
+    /* Hide pseudo-elements of timeline event icons */
+    .timeline__event__icon:before,
+    .timeline__event__icon:after {
+        display: none;
+    }
+
+    /* Adjust the appearance of timeline event dates */
+    .timeline__event__date {
+        border-radius: 0;
+        padding: 20px;
+    }
+
+    /* Stack alternating timeline events vertically */
+    .timeline__event:nth-child(2n + 1) {
+        flex-direction: column;
+        align-self: center;
+    }
+
+    /* Modify the appearance of dates in alternating timeline events */
+    .timeline__event:nth-child(2n + 1) .timeline__event__date {
+        border-radius: 0;
+        padding: 20px;
+    }
+
+    /* Adjust the appearance of icons in alternating timeline events */
+    .timeline__event:nth-child(2n + 1) .timeline__event__icon {
+        border-radius: 6px 6px 0 0;
+        margin: 0;
+    }
+
+    /* Expand detailed timeline events to full width */
+    .timeline__event_detailed {
+        width: 100%;
+    }
+
+    /* Adjust the order and flexibility of additional content sections */
+    .additional-content-order1,
+    .additional-content-order2,
+    .timeline-order1,
+    .timeline-order2 {
+        order: 1;
+        flex: 1;
+    }
+
+    /* Adjust the order and display of timeline containers */
+    .container-timeline {
+        flex-direction: column;
+    }
+
+    /* Hide additional content sections */
     .additional-content {
-        display: block; 
+        display: none;
     }
 
-	.timeline_additional_content {
-		width: 100%;
-	}
+    /* Expand the width of additional content sections */
+    .timeline_additional_content {
+        width: 100%;
+    }
+
+    /* Adjust the maximum width of images */
     .image {
-        max-width: 100%; 
+        max-width: 100%;
     }
 
+    /* Center images and arrow elements */
     .image,
     .arrow {
-        flex: 1; 
+        flex: 1;
         text-align: center;
     }
 }
 
+
+/* Center the arrow and make it a pointer */
 .arrow {
-	margin: auto;
+    margin: auto;
     transform: rotate(90deg);
     cursor: pointer;
 }
 
+/* Define the appearance and animation for the arrow */
 .arrow span {
     display: block;
     width: 2em;
@@ -269,14 +309,17 @@ body {
     animation: animate 2s infinite;
 }
 
+/* Rotate the arrow left */
 .arrow-left {
-	transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
+/* Rotate the arrow right */
 .arrow-right {
-	transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
+/* Define animation delays for arrow segments */
 .arrow span:nth-child(2) {
     animation-delay: -0.2s;
 }
@@ -285,6 +328,7 @@ body {
     animation-delay: -0.4s;
 }
 
+/* Keyframes animation for the arrow */
 @keyframes animate {
     0% {
         opacity: 0;
@@ -298,115 +342,3 @@ body {
         transform: rotate(45deg) translate(20px, 20px);
     }
 }
-
-input[type="range"] {
-	accent-color: #80ba24;
-  }
-
-  .card__infoicon {
-	position: relative;
-	font-size: 1.4em;
-	color: #000000;
-	transition: ease-out 0.3s;
-}
-
-.card__infoicon + .card_container {
-	opacity: 0;
-	z-index: 2;
-}
-
-.card__infoicon:hover + .card_container {
-  opacity: 1;
-  z-index: 2;
-}
-
-.card_container {
-	background: white;
-	position: absolute;
-	z-index: 1; 
-	left: 5%;
-	width: 90%;
-	padding: 1em;
-	border-radius: 15px;
-	transition: top 0.3s ease-in-out;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8);
-	opacity: 0; 
-	pointer-events: none; 
-}
-
-.card:focus {
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08), 0px 0px 0px 4px rgba(0, 0, 0, 0.2);
-}
-.card__description {
-	margin-bottom: 0em;
-	text-align: center;
-}
-
-  
-.business-card {
-	width: 40em;
-	height: 25em;
-	cursor: pointer;
-	position: relative; 
-	border: 0;
-	margin: auto;
-  }
-
-  .business-card .card-inner {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	transform-style: preserve-3d;
-	transition: transform 600ms ease;
-	transform-origin: center;
-	transform: rotateY(0deg);
-	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5); 
-  }
-  
-  .business-card:hover .card-inner {
-	transform: rotateY(180deg);
-  }
-  
-  .business-card .card-front,
-  .business-card .card-back {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	backface-visibility: hidden;
-  }
-  
-  .business-card .card-front {
-	background-size: cover;
-	background-position: center;
-  }
-  
-  .business-card .card-back {
-	background-size: cover;
-	background-position: center;
-	transform: rotateY(180deg);
-  }
-  
-  .business-card img {
-	border-radius: 10px;
-	perspective: 1000px;
-	width: 40em;
-	height: 25em;
-	position: relative; 
-	z-index: 1; 
-  }
-
-  @media (max-width: 786px) {
-	.business-card {
-		width: 40vw;
-		height: 25vw;
-	  }
-	.business-card img {
-		width: 40vw;
-		height: 25vw;
-		
-	}
-}
-  

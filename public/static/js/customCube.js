@@ -1,17 +1,15 @@
 const canvas = document.getElementById("characterCanvas");
 const ctx = canvas.getContext("2d");
 
-  const x1 = document.querySelector("#x1");
-    const x2 = document.querySelector("#x2");
-    const y = document.querySelector("#y");
-    const color = document.querySelector("#color");
+const x1 = document.querySelector("#x1");
+const x2 = document.querySelector("#x2");
+const y = document.querySelector("#y");
+const color = document.querySelector("#color");
 
 let xPosition = canvas.width / 2;
 let yPosition = canvas.height;
 
-
 function draw() {
-  
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawCube(xPosition, yPosition, +x1.value, +x2.value, +y.value, color.value);
     requestAnimationFrame(draw);

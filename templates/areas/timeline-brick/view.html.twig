@@ -20,7 +20,7 @@
                 </div>
                 <div class="timeline__event__content">
                 
-					<i onclick="showTimeline(this)" class="close-button fa-solid fa-xmark fa-2xl" style="color: #cb1010;"></i>
+					<i onclick="showTimeline(this)" class="close-button fa-solid fa-xmark fa-2xl"></i>
                     <div class="timeline__event__title">
                         {{ timeline.name }}
                     </div>
@@ -34,7 +34,7 @@
         {% endfor %}
     </div>
     {% for timeline in timelines %}
-        <div class="additional-content mx-5" style="display: none;" data-timeline-index="{{ loop.index }}">
+        <div class="additional-content mx-5" data-timeline-index="{{ loop.index }}">
             {% set areaName = 'spline' ~ loop.index %}
             {% set above = 'above' ~ loop.index %}
             {% set after = 'after' ~ loop.index %}

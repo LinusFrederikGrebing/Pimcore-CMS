@@ -33,8 +33,12 @@ class PortfolioListBrick extends AbstractTemplateAreabrick
     }
     public function action(Info $info): ?RedirectResponse
     {
+        // Initialize a listing of Portfolio data objects
         $portfolio = new DataObject\Portfolio\Listing();
+        
+        // Set the 'portfolios' parameter in the Info object for later use in the view
         $info->setParam('portfolios', $portfolio);
+    
         return null;
     }
 
