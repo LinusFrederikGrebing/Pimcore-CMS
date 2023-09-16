@@ -156,8 +156,8 @@ class AccountController extends FrontendController
     private function createEmailContent(User $user, string $resetPasswordUrl): string
     {
         $username = $user->getUsername();
-        $selectedLanguage = $request->getLocale();
-        if($selectedLanguage == "de") {
+        $language = $this->document->getProperty("language");
+        if($language == "de") {
             return "
             <p>Hallo $username,</p><br>
             <p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href='$resetPasswordUrl'>Passwort zurücksetzen</a></p><br>
@@ -170,7 +170,6 @@ class AccountController extends FrontendController
             <p>This link will expire in 20 minutes!</p>
         ";
         }
-        
     }
 
     private function sendEmail(string $recipient, string $content, MailerInterface $mailer): void
@@ -183,6 +182,7 @@ class AccountController extends FrontendController
 
         $mailer->send($email);
     }
+    
     public function showResetPasswordTemplate(Request $request, string $token): Response
     {
         // Calculate the current time + 20 minutes        

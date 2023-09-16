@@ -3,12 +3,11 @@
         <div class="col-lg-2 order-lg-2">
             <div class="">
             {% if editmode %}
-            {{ pimcore_image("image1") }}
+                {{ pimcore_image("image1") }}
             {% else %}
-            {% set image = pimcore_image("image1").getSrc() %}
-            <img class="section-img rounded-circle" src="{{ image }}" />
+                {% set image = pimcore_image("image1").getSrc() %}
+                <img class="section-img rounded-circle" src="{{ image }}" />
             {% endif %}
-
             </div>
         </div>
         <div class="col-lg-10 order-lg-1">
@@ -17,7 +16,7 @@
                     {{ pimcore_input("headlineContent1", {'placeholder': 'Title'}) }}
                 </h2>
                 <p class="text-secondary">
-                  {{ pimcore_input("content1", {'placeholder': 'Text'}) }}
+                    {{ pimcore_input("content1", {'placeholder': 'Text'}) }}
                 </p>
             </div>
         </div>

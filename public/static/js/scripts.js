@@ -359,7 +359,7 @@ function sweetAlert(title, text, icon, responseText) {
     });
 }
 
-function handleSubmit(event, route, lang) {
+function handleSubmit(event, route) {
     event.preventDefault();
     const formData = new FormData(event.target);
     fetchDataToResponse(route, formData);
@@ -369,9 +369,9 @@ $("#sendEmailForm").on("submit", function (event) {
     handleSubmit(event, "/resetPassword");
 });
 
- function login (event, lang) {
-    handleSubmit(event, "/login", lang);
-};
+$("#loginForm").on("submit", function (event) {
+    handleSubmit(event, "/login");
+});
 
 $("#registerForm").on("submit", function (event) {
     handleSubmit(event, "/register");

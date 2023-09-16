@@ -129,11 +129,6 @@ services:
         arguments: [ '@logger' ]
         tags:
             - { name: pimcore.area.brick, id: expansion-panel-brick }
-
-    App\Document\Areabrick\GDVMBrick:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: pimcore.area.brick, id: gdvm-brick }
     
     App\Document\Areabrick\VideoSliderBrick:
         arguments: [ '@logger' ]
