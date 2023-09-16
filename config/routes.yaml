@@ -35,6 +35,11 @@ setNewUserPassword:
     controller: App\Controller\AccountController::setNewUserPassword
     methods: [GET, POST]
 
+changeLanguage:
+    path: /changeLang/{lang}
+    controller: App\Controller\LanguageController::changeLanguage
+    methods: [GET, POST]
+
 onepager:
     path: /onepager
     controller: App\Controller\OnePagerController::defaultAction

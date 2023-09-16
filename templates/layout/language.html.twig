@@ -1,23 +1,16 @@
-<div class="dropdown ">
-	<button class="btn dropdown-toggle text-white" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-		{% if selectedLanguage == 'de' %}
-			<img class="language_icon" src="{{ asset('static/assets/img/language-icons/german.svg') }}" alt="..."/>
-		{% else %}
-			<img class="language_icon" src="{{ asset('static/assets/img/language-icons/english.svg') }}" alt="..."/>
-		{% endif %}
-	</button>
-	<ul class="dropdown-menu" aria-labelledby="languageDropdown">
-		<li>
-			<a class="dropdown-item" href="#" onclick="setLanguage('14', 'de')">
-				<img class="language_icon" src="{{ asset('static/assets/img/language-icons/german.svg') }}" alt="..."/>
-				Deutsch
-			</a>
-		</li>
-		<li>
-			<a class="dropdown-item" href="#" onclick="setLanguage('15', 'en')">
-				<img class="language_icon" src="{{ asset('static/assets/img/language-icons/english.svg') }}" alt="..."/>
-				English
-			</a>
-		</li>
-	</ul>
+<div class="dropdown">
+    <button class="btn dropdown-toggle text-white" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <img class="language_icon" src="{{ asset('static/assets/img/language-icons/' ~ (documentLanguage == 'de' ? 'de' : 'en') ~ '.svg') }}" alt="{{documentLanguage}}"/>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+        {% for lang in ['de', 'en'] %}
+            <li>
+                <a class="dropdown-item" href="{{ path('changeLanguage', {'lang': lang}) }}">
+                    <img class="language_icon" src="{{ asset('static/assets/img/language-icons/' ~ lang ~ '.svg') }}" alt="{{documentLanguage}}"/>
+                    {% if lang == 'de' %} Deutsch {% elseif lang == 'en' %} English {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
+

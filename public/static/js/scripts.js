@@ -377,16 +377,3 @@ $("#registerForm").on("submit", function (event) {
     handleSubmit(event, "/register");
 });
 // End
-
-//language
-function setLanguage(langID, language) {
-    document.cookie = `selected_language_id=${langID}; path=/`;
-    document.cookie = `selected_language=${language}; path=/`;
-
-    var currentURL = window.location.pathname;
-    var currentPathWithoutLanguage = currentURL.substring(4);
-    var newURL = '/' + language + '/' + currentPathWithoutLanguage;
-
-    window.location.pathname = newURL;
-}
-// End

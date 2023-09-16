@@ -189,7 +189,7 @@ body {
     display: none;
 }
 
-@media (max-width: 786px) {
+@media (max-width: 1200px) {
     /* Stack timeline events vertically and center them */
     .timeline__event {
         flex-direction: column;

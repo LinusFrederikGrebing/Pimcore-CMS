@@ -14,14 +14,12 @@
         <!-- Font Awesome icons (free version)-->
         {% do pimcore_head_script().appendFile(asset('https://use.fontawesome.com/releases/v6.3.0/js/all.js')) %}
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+    
         <!-- Google fonts-->
         {% do pimcore_head_link().appendStylesheet('https://fonts.googleapis.com/css?family=Montserrat:400,700') %}
         {% do pimcore_head_link().appendStylesheet('https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700') %}
         <!-- script -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -37,16 +35,16 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                {% set selectedLanguage = app.request.cookies.get('selected_language', 'de') %}
-                <a class="navbar-brand" href="/{{ selectedLanguage }}">
+                {% set documentLanguage = document.getProperty('language') %}
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('static/assets/img/logos/schriftzug-logo.svg') }}" alt="..." />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    {% set selectedLanguageId = app.request.cookies.get('selected_language_id', '15') %}
-                    {% set langDocument = pimcore_document(selectedLanguageId) %}
+                    {% set langDocument = (documentLanguage == "de") ? pimcore_document(14) : pimcore_document(15) %}
+                
                     {% set mainNavigation = pimcore_build_nav({
                         active: document,
                         root: langDocument
