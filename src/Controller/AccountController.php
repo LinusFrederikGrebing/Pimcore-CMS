@@ -10,7 +10,7 @@ use \Pimcore\Model\DataObject;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 class AccountController extends FrontendController
@@ -33,9 +33,9 @@ class AccountController extends FrontendController
         
         // Find the user by email
         $user = $this->findUserByEmail($email);
-    
+        //Return Error if password or user is not correct
         if (!$user instanceof User || !password_verify($password, $user->getPassword())) {
-            return new Response("Error: Überprüfe deine Eingaben!", 400);
+            return new Response("Überprüfe deine Eingaben!", 400);
         }
     
         // Successful login
@@ -53,14 +53,13 @@ class AccountController extends FrontendController
     {
         // Clear the user's session
         $session = $request->getSession();
-        $session->remove('user_logged_in');
-        $session->remove('user');
+        $session->clear();
 
         // Redirect to the main page
         return $this->render('onepager/onepager.html.twig'); 
     }
-  
-    public function register(Request $request): Response
+    
+    public function register(Request $request, TranslatorInterface $translator): Response
     {
         // Retrieve the form data
         $username = $request->request->get('name');
@@ -69,16 +68,23 @@ class AccountController extends FrontendController
         $email = $request->request->get('email');
         $password = $request->request->get('password');
         $confirmPassword = $request->request->get('confirmPassword');
-        
-        // Validate the form data
+        $translatedUsernameErrormessage = $translator->trans("UsernameErrormessage");
+        // Validate the password
         if ($password !== $confirmPassword) {
             return new Response('Passwords do not match!', 400);
         }
-    
+        //Check if the username is already taken
+        if($this->findUserByUsername($username)) {
+            return new Response($translatedUsernameErrormessage, 400);
+        }
+        //Check if this email already exists 
+        if($this->findUserByEmail($email)) {
+            return new Response('Diese Emailadresse ist bereits vergeben', 400);
+        } 
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
-        // Create a new User object (Pimcore DataObject)
+        // Create a new User (Pimcore DataObject) and store in User-folder
         $user = new User();
         $userFolder = DataObject::getByPath("/User");
         $userFolderId = $userFolder->getId();
@@ -86,17 +92,11 @@ class AccountController extends FrontendController
         $user->setParentId($userFolderId);
         $user->setPublished(true);
     
-        // Set user properties using setter methods
+        // Set user properties
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setPassword($hashedPassword);
         $user->save();
-    
-        // Create new Asset from uploaded image
-        $uploadedFile = $request->files->get('profileimage');
-        $imagePath = $uploadedFile ? $uploadedFile->getPathname() : __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
-        
-        $this->setProfileImage($user, $imagePath);
     
         return new Response('Account erfolgreich angelegt! Log dich ein!', 200);
     }
@@ -238,8 +238,21 @@ class AccountController extends FrontendController
         }
     }
 
-    public function findUserByToken($token) {
+    public function findUserByUsername($username)  {
         $users = new User\Listing(); // Get a listing of User objects
+        $users->setCondition("username = ?", [$username]);
+        $users->setLimit(1);
+        
+        foreach ($users as $user) {
+            if ($user instanceof User) {
+                return $user;
+            }
+        }
+    }
+
+    public function findUserByToken($token) {
+        // Get a listing of User objects
+        $users = new User\Listing(); 
         $users->setCondition("token = ?", [$token]);
         $users->setLimit(1);
         

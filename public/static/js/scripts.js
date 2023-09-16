@@ -299,7 +299,11 @@ function showSlides(n) {
 }
 // End
 
-// login routes
+//Handle Requests and show Alerts depending on response
+//Statuscode 200: request and response successfull -> Show success-alert
+//Statuscode 201: request and response successfull -> Don't show an alert
+//Statuscode 400: response is a catched error with errormessage -> show error-alert with errormessage
+//Statuscode 500: Servererror -> show error-alert
 function fetchDataToResponse(route, formData) {
     fetch(route, {
         method: "POST",
@@ -313,19 +317,21 @@ function fetchDataToResponse(route, formData) {
     })
     .then(({ status, responseText }) => {
         let title, text, icon;
+        //Handle response as success and show Success-Alert
         if (status === 200) {
             title = "Erfolg!";
             text = responseText;
             icon = "success";
+        //Handle response as Error and show Error-Alert
         } else if (status === 400) {
             title = "Fehler!";
-            text = responseText.replace(/Error:/i, "");
+            text = responseText;
             icon = "error";
         } else if (status === 500) {
             title = "Fehler!";
             text = "Bitte überprüfe deine Eingaben"
             icon = "error";
-        }else {
+        } else {
             if (responseText.startsWith("/")) {
                 window.location.href = responseText;
                 return;
@@ -373,8 +379,8 @@ $("#registerForm").on("submit", function (event) {
 
 //language
 function setLanguage(langID, language) {
-    $.cookie('selected_language_id', langID, { path: '/' });
-    $.cookie('selected_language', language, { path: '/' });
+    document.cookie = "selected_language_id=${langID}; path=/";
+    document.cookie = "selected_language=${language}; path=/";
 
     var currentURL = window.location.pathname;
     var currentPathWithoutLanguage = currentURL.substring(4);
@@ -382,8 +388,4 @@ function setLanguage(langID, language) {
 
     window.location.pathname = newURL;
 }
-// End
-
-// CustomCubeBrick
-
 // End

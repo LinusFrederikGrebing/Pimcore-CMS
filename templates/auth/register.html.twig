@@ -2,7 +2,7 @@
     <h1 class="mb-4 greenHeadline">
         Lege einen Account an
     </h1>
-    <form id="registerForm" method="POST" action="{{ path('register') }}" enctype="multipart/form-data">
+    <form id="registerForm" method="POST" action="{{ path('register') }}">
         <input id="nameInputRegister" type="text" placeholder="Name" name="name">
         <br>
         <input id="emailInputRegister" type="email" placeholder="Email" name="email" />
@@ -10,7 +10,6 @@
         <input id="passwordInputRegister" type="password" placeholder="Passwort" name="password" /><br>
         <input id="passwordInputConfirmRegister" type="password" placeholder="Bestätige das Passwort"
             name="confirmPassword" value="" />
-        <input id="profileimage" type="file" name="profileimage" />
         <br>
         <input id="registerBtn" class="submit-btn" type="submit"
             value="Registrieren" />
