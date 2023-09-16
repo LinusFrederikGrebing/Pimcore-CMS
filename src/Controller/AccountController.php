@@ -160,7 +160,6 @@ class AccountController extends FrontendController
             <p>This link will expire in 20 minutes!</p>
         ";
         }
-        
     }
 
     private function sendEmail(string $recipient, string $content, MailerInterface $mailer): void
@@ -173,6 +172,7 @@ class AccountController extends FrontendController
 
         $mailer->send($email);
     }
+    
     public function showResetPasswordTemplate(Request $request, string $token): Response
     {
         // Calculate the current time + 20 minutes        

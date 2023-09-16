@@ -366,26 +366,3 @@ function handleSubmit(event, id, route, lang) {
     fetchDataToResponse(route, formData, lang);
 }
 // End
-function updateSpecializationInput() {
-    const selectField = document.getElementById('selectField');
-    const specializationInput = document.getElementById('specializationInput');
-    specializationInput.value = selectField.value;
-}
-
-const editIcon = document.querySelector(".fa-pen-to-square");
-const editDialog = document.getElementById("editDialog");
-const closeEditDialog = document.getElementById("closeEditDialog");
-
-// Funktion zum Öffnen des Edit-Dialogs
-editIcon.addEventListener("click", function() {
-    editDialog.style.display = "block";
-});
-
-// Funktion zum Schließen des Edit-Dialogs
-closeEditDialog.addEventListener("click", function() {
-    editDialog.style.display = "none";
-});
-
-// Verstecke den editProfileDialog standardmäßig
-editDialog.style.display = "none";
-
