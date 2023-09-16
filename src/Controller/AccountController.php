@@ -104,18 +104,10 @@ class AccountController extends FrontendController
     public function setProfileImage($user, $imagePath)
     {
         $userId = $user->getId();
-        
-        $filename = $userId . "Profileimage.png";
-        
-        $parentFolder = \Pimcore\Model\Asset::getByPath("/Users");
-        
-        if (!$parentFolder instanceof \Pimcore\Model\Asset\Folder) {
-            $parentFolder = new \Pimcore\Model\Asset\Folder();
-            $parentFolder->setKey("Users");
-            $parentFolder->setParentId(1); 
-            $parentFolder->save();
-        }
-
+        $userAsset = \Pimcore\Model\Asset::getByPath("/Users/{$userId}Profileimage.png");
+        if($userAsset) {
+            $userAsset->delete();
+        }        
         $newAsset = new \Pimcore\Model\Asset\Image();
         $newAsset->setFilename($filename);
         $newAsset->setData(file_get_contents($imagePath));
@@ -123,7 +115,7 @@ class AccountController extends FrontendController
         $newAsset->save();
 
         $user->setImage($newAsset);
-        $user->save();
+        $user->save();      
     }
     
     public function sendPasswordResetEmail(
@@ -144,7 +136,7 @@ class AccountController extends FrontendController
 
             return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!', 200);
         } else {
-            return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
+            return new Response('Error: Überprüfe deine Mail oder wende dich an unseren Support!', 400);
         }
     }
 
@@ -236,7 +228,7 @@ class AccountController extends FrontendController
     }
     
     public function findUserByEmail($email) {
-        $users = new User\Listing(); // Get a listing of User objects
+        $users = new User\Listing();
         $users->setCondition("email = ?", [$email]);
         $users->setLimit(1);
         
@@ -270,5 +262,31 @@ class AccountController extends FrontendController
                 return $user;
             }
         }
+    }
+
+    public function updateProfile(Request $request): Response {
+        $name = $request->request->get('name');
+        $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $confirmPassword = $request->request->get('confirmPassword');
+
+        $session = $request->getSession();
+        $user = $session->get('user');
+        $uploadedFile = $request->files->get('profileimage');
+        if($uploadedFile) {
+            $imagePath = $uploadedFile->getPathname();
+            $this->setProfileImage($user, $imagePath);
+        }
+        if($name) {
+            $user->setUsername($name);
+        }
+        if($email) {
+            $user->setEmail($email);
+        }
+        if(($password && $confirmPassword) && ($password == $confirmPassword) ) {
+            $user->setPassword($password);
+        }
+        $user->save();
+        return new Response('Aktualisiert!');
     }
 }

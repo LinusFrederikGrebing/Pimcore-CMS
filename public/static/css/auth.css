@@ -102,25 +102,61 @@
     transform: translate(-50%, -50%);
     z-index: 2;
 }
-
-.profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid;
+.profile-img {
+    object-fit: cover;
+    width: 100%;
+    height: 13em;
+    border-bottom: 5px solid;
+    border-color: #80ba24;
+}
+.profile-img {
+    object-fit: cover;
+    width: 100%;
+    height: 13em;
+    border-bottom: 5px solid;
     border-color: #80ba24;
 }
 
-.profile_informations {
-    margin-top: -5em;
+.profile {
+    position: relative;
+    width: 12em;
+    height: 12em;
+    border: 5px solid #80ba24;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profile img {
     object-fit: cover;
-    height: 12em;
-    width: 12em;
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    transition: filter 0.3s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+
+
+.profile:hover .overlay {
+    opacity: 1;
+}
+
+
+.profile_informations {
+    margin-top: -5em;
 }
 
 .btn-close-custom {
@@ -175,14 +211,6 @@
 #grid-item .submit-btn {
     background: #80ba24;
     color: #fff;
-}
-
-.profile-img {
-    object-fit: cover;
-    width: 100%;
-    height: 13em;
-    border-bottom: 5px solid;
-    border-color: #80ba24;
 }
 
 .section-img {
@@ -302,6 +330,37 @@ input[type="file"] {
     margin-top: 20px;
     padding: 15px 50px;
     text-transform: uppercase;
+}
+
+.editProfileDialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.editProfile-content{
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+.editProfileHeader {
+    display: flex; /* Verwenden Sie Flexbox */
+    justify-content: space-between; /* Platziert die Elemente horizontal mit Abstand dazwischen */
+    align-items: center; /* Zentriert die Elemente vertikal in der Mitte */
+}
+
+.editProfileHeader h2 {
+    text-align: center; /* Zentriert den Text horizontal */
+    flex-grow: 1; /* Lässt die Überschrift wachsen, um den verbleibenden Platz einzunehmen */
 }
 
 @media (max-width: 768px) {
