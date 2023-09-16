@@ -12,7 +12,6 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 class AccountController extends FrontendController
 {
     /**
@@ -69,6 +68,7 @@ class AccountController extends FrontendController
         $password = $request->request->get('password');
         $confirmPassword = $request->request->get('confirmPassword');
         $translatedUsernameErrormessage = $translator->trans("UsernameErrormessage");
+        $translatedEmailErrormessage = $translator->trans("UsernameErrormessage");
         // Validate the password
         if ($password !== $confirmPassword) {
             return new Response('Passwords do not match!', 400);
@@ -156,12 +156,21 @@ class AccountController extends FrontendController
     private function createEmailContent(User $user, string $resetPasswordUrl): string
     {
         $username = $user->getUsername();
-
-        return "
+        $selectedLanguage = $request->getLocale();
+        if($selectedLanguage == "de") {
+            return "
             <p>Hallo $username,</p><br>
             <p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href='$resetPasswordUrl'>Passwort zurücksetzen</a></p><br>
             <p>Dieser Link wird nur für die nächsten 20 Minuten gültig sein!</p>
         ";
+        } else {
+            return "
+            <p>Hello $username,</p><br>
+            <p>Here you got the link to reset your password: <a href='$resetPasswordUrl'>Reset your password</a></p><br>
+            <p>This link will expire in 20 minutes!</p>
+        ";
+        }
+        
     }
 
     private function sendEmail(string $recipient, string $content, MailerInterface $mailer): void
