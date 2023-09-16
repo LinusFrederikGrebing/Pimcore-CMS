@@ -100,11 +100,11 @@ class AccountController extends FrontendController
     }
     public function setProfileImage($user, $imagePath) {
         $userId = $user->getId();
-        $newAsset = new \Pimcore\Model\Asset\Image();
         $userAsset = \Pimcore\Model\Asset::getByPath("/Users/{$userId}Profileimage.png");
         if($userAsset) {
             $userAsset->delete();
-        }
+        }        
+        $newAsset = new \Pimcore\Model\Asset\Image();
         $newAsset->setFilename($userId."Profileimage.png");
         $newAsset->setData(file_get_contents($imagePath));
         $newAsset->setParent(\Pimcore\Model\Asset::getByPath("/Users"));
@@ -140,7 +140,7 @@ class AccountController extends FrontendController
             return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!');
 
         } else {
-            return new Response('Überprüfe deine Mail oder wende dich an unseren Support!', 400);
+            return new Response('Error: Überprüfe deine Mail oder wende dich an unseren Support!', 400);
         }
     }
     
