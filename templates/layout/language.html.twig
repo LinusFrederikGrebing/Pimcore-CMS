@@ -1,21 +1,21 @@
 <div class="dropdown ">
 	<button class="btn dropdown-toggle text-white" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
 		{% if selectedLanguage == 'de' %}
-			<img class="language_icon" src="{{ asset('static/assets/img/svg/german.svg') }}" alt="..."/>
+			<img class="language_icon" src="{{ asset('static/assets/img/language-icons/german.svg') }}" alt="..."/>
 		{% else %}
-			<img class="language_icon" src="{{ asset('static/assets/img/svg/english.svg') }}" alt="..."/>
+			<img class="language_icon" src="{{ asset('static/assets/img/language-icons/english.svg') }}" alt="..."/>
 		{% endif %}
 	</button>
 	<ul class="dropdown-menu" aria-labelledby="languageDropdown">
 		<li>
 			<a class="dropdown-item" href="#" onclick="setLanguage('14', 'de')">
-				<img class="language_icon" src="{{ asset('static/assets/img/svg/german.svg') }}" alt="..."/>
+				<img class="language_icon" src="{{ asset('static/assets/img/language-icons/german.svg') }}" alt="..."/>
 				Deutsch
 			</a>
 		</li>
 		<li>
 			<a class="dropdown-item" href="#" onclick="setLanguage('15', 'en')">
-				<img class="language_icon" src="{{ asset('static/assets/img/svg/english.svg') }}" alt="..."/>
+				<img class="language_icon" src="{{ asset('static/assets/img/language-icons/english.svg') }}" alt="..."/>
 				English
 			</a>
 		</li>

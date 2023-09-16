@@ -34,17 +34,23 @@ class TeamListBrick extends AbstractTemplateAreabrick
 
     public function action(Info $info): ?RedirectResponse
     {
+        // Initialize a listing of Team data objects
         $teamMembers = new DataObject\Team\Listing();
+        
+        // Set the order for sorting by "lastname" in ascending order
         $teamMembers->setOrderKey("lastname");
         $teamMembers->setOrder("asc");     
-        
+
+        // Get the options for the "team" field and sort them alphabetically
         $teamValues = $teamMembers->getClass()->getFieldDefinition("team")->getOptions();
         usort($teamValues, function ($a, $b) {
             return -strcmp($a['value'], $b['value']);
         });
 
+        // Set the 'teamValues' and 'teams' parameters in the Info object for later use in the view
         $info->setParam('teamValues', $teamValues);
         $info->setParam('teams', $teamMembers);
-        return null;
+        
+        return null; // Return null as this action does not perform redirection
     }
 }

@@ -155,6 +155,7 @@ function sortArray() {
 
 function generateAndSetRandomArray() {
     var randomArray = generateRandomArray(10, 5, 50);
+    displayBars(randomArray);
     $("#arrayElements").val(randomArray.join(", "));
 }
 
@@ -373,8 +374,8 @@ $("#registerForm").on("submit", function (event) {
 
 //language
 function setLanguage(langID, language) {
-    $.cookie('selected_language_id', langID, { path: '/' });
-    $.cookie('selected_language', language, { path: '/' });
+    document.cookie = `selected_language_id=${langID}; path=/`;
+    document.cookie = `selected_language=${language}; path=/`;
 
     var currentURL = window.location.pathname;
     var currentPathWithoutLanguage = currentURL.substring(4);
@@ -384,6 +385,3 @@ function setLanguage(langID, language) {
 }
 // End
 
-// CustomCubeBrick
-
-// End

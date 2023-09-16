@@ -1,9 +1,10 @@
 <div class="container_video">
 	{% for link in links %}
 		<div class="mySlides">
-			<div class="numbertext">{{ loop.index }}/
-				{{ links|length }}</div>
-			<iframe style="width:100%" src="{{ link.getHref() }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<div class="numbertext">
+				{{ loop.index }}/{{ links|length }}
+			</div>
+			<iframe class="w-100" src="{{ link.getHref() }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 			<div class="caption-container">
 				<p id="caption">{{fileNames[(loop.index)-1]}}</p>

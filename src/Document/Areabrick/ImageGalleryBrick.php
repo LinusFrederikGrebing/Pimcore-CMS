@@ -6,8 +6,6 @@ namespace App\Document\Areabrick;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use \Pimcore\Model\Document;
-
 
 class ImageGalleryBrick extends AbstractTemplateAreabrick
 {
@@ -35,11 +33,16 @@ class ImageGalleryBrick extends AbstractTemplateAreabrick
     
     public function action(Info $info): ?RedirectResponse
     {
-        $pdfassets = \Pimcore\Model\Asset::getByPath("/GDVS");
-        foreach ($pdfassets->getChildren() as $document) {
+        // Get the root folder containing GDVS images/assets
+        $gdvsImagesAssets = \Pimcore\Model\Asset::getByPath("/GDVS");
+
+        // Loop through child assets in the folder
+        foreach ($gdvsImagesAssets->getChildren() as $document) {
             $images[] = $document; 
         }
+        // Set the 'images' parameter in the Info object for later use in the view
         $info->setParam('images', $images);
+
         return null;
     }
 }

@@ -13619,3 +13619,122 @@ canvas {
   object-fit: cover;
 }
 /* End */
+
+.pdf-iframe {
+  height: 40em;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+  
+.business-card {
+	width: 40em;
+	height: 25em;
+	cursor: pointer;
+	position: relative; 
+	border: 0;
+	margin: auto;
+  }
+
+  .business-card .card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	transform-style: preserve-3d;
+	transition: transform 600ms ease;
+	transform-origin: center;
+	transform: rotateY(0deg);
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5); 
+  }
+  
+  .business-card:hover .card-inner {
+	transform: rotateY(180deg);
+  }
+  
+  .business-card .card-front,
+  .business-card .card-back {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	backface-visibility: hidden;
+  }
+  
+  .business-card .card-front {
+	background-size: cover;
+	background-position: center;
+  }
+  
+  .business-card .card-back {
+	background-size: cover;
+	background-position: center;
+	transform: rotateY(180deg);
+  }
+  
+  .business-card img {
+	border-radius: 10px;
+	perspective: 1000px;
+	width: 40em;
+	height: 25em;
+	position: relative; 
+	z-index: 1; 
+  }
+
+  @media (max-width: 786px) {
+	.business-card {
+		width: 40vw;
+		height: 25vw;
+	  }
+	.business-card img {
+		width: 40vw;
+		height: 25vw;
+		
+	}
+}
+
+input[type="range"] {
+	accent-color: #80ba24;
+  }
+
+  .card__infoicon {
+	position: relative;
+	font-size: 1.4em;
+	color: #000000;
+	transition: ease-out 0.3s;
+}
+
+.card__infoicon + .card_container {
+	opacity: 0;
+	z-index: 2;
+}
+
+.card__infoicon:hover + .card_container {
+  opacity: 1;
+  z-index: 2;
+}
+
+.card_container {
+	background: white;
+	position: absolute;
+	z-index: 1; 
+	left: 5%;
+	width: 90%;
+	padding: 1em;
+	border-radius: 15px;
+	transition: top 0.3s ease-in-out;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.8);
+	opacity: 0; 
+	pointer-events: none; 
+}
+
+.card:focus {
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08), 0px 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+.card__description {
+	margin-bottom: 0em;
+	text-align: center;
+}

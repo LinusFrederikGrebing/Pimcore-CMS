@@ -33,16 +33,21 @@ class ExpansionPanelBrick extends AbstractTemplateAreabrick
 
     public function action(Info $info): ?RedirectResponse
     {
-        $pdfassets = \Pimcore\Model\Asset::getByPath("/Mediengestaltung");
-        foreach ($pdfassets->getChildren() as $document) {
+        // Get the root folder containing PDF assets
+        $pdfAssetsFolder  = \Pimcore\Model\Asset::getByPath("/Mediengestaltung");
+
+        // Loop through child assets in the folder
+        foreach ($pdfAssetsFolder->getChildren() as $document) {
             $hrefArray[] = $document; 
             $filename = $document->getFilename();
             $filenameWithoutExtension = str_replace('.pdf', '', $filename);
         
             $fileNames[] = $filenameWithoutExtension;
         }
+        // Set parameters in the Info object for later use in the view
         $info->setParam('filenames', $fileNames);
         $info->setParam('pdfassets', $hrefArray);
+        
         return null;
     }
 }
