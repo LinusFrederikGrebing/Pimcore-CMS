@@ -40,6 +40,12 @@ changeLanguage:
     controller: App\Controller\LanguageController::changeLanguage
     methods: [GET, POST]
 
+updateProfile:
+    path: /updateProfile
+    controller: App\Controller\AccountController::updateProfile
+    methods: [GET, POST]
+
+
 onepager:
     path: /onepager
     controller: App\Controller\OnePagerController::defaultAction
