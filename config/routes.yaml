@@ -45,7 +45,6 @@ updateProfile:
     controller: App\Controller\AccountController::updateProfile
     methods: [GET, POST]
 
-
 onepager:
     path: /onepager
     controller: App\Controller\OnePagerController::defaultAction

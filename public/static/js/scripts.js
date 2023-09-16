@@ -360,21 +360,32 @@ function sweetAlert(title, text, icon, responseText) {
 }
 
 function handleSubmit(event, id, route, lang) {
+    console.log(id)
     event.preventDefault();
     const formData = new FormData(document.getElementById(id));
     fetchDataToResponse(route, formData, lang);
 }
 // End
-
-//language
-function setLanguage(langID, language) {
-    document.cookie = `selected_language_id=${langID}; path=/`;
-    document.cookie = `selected_language=${language}; path=/`;
-
-    var currentURL = window.location.pathname;
-    var currentPathWithoutLanguage = currentURL.substring(4);
-    var newURL = '/' + language + '/' + currentPathWithoutLanguage;
-
-    window.location.pathname = newURL;
+function updateSpecializationInput() {
+    const selectField = document.getElementById('selectField');
+    const specializationInput = document.getElementById('specializationInput');
+    specializationInput.value = selectField.value;
 }
-// End
+
+const editIcon = document.querySelector(".fa-pen-to-square");
+const editDialog = document.getElementById("editDialog");
+const closeEditDialog = document.getElementById("closeEditDialog");
+
+// Funktion zum Öffnen des Edit-Dialogs
+editIcon.addEventListener("click", function() {
+    editDialog.style.display = "block";
+});
+
+// Funktion zum Schließen des Edit-Dialogs
+closeEditDialog.addEventListener("click", function() {
+    editDialog.style.display = "none";
+});
+
+// Verstecke den editProfileDialog standardmäßig
+editDialog.style.display = "none";
+

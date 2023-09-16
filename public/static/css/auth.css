@@ -310,7 +310,8 @@
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="file"] {
+input[type="file"],
+#selectField {
     background: #f4f8f7;
     border: none;
     font-weight: 300;

@@ -41,10 +41,10 @@ class AccountController extends FrontendController
         $session = $request->getSession();
         $session->set('user_logged_in', true);
         $session->set('user', $user);
-    
+        
         // Generate the route using Symfony's path function
         $onepagerRoute = $this->generateUrl('onepager');
-    
+        
         return new Response($onepagerRoute, 201);
     }
 
@@ -97,27 +97,25 @@ class AccountController extends FrontendController
         $user->setEmail($email);
         $user->setPassword($hashedPassword);
         $user->save();
-    
+        $imagePath = __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
+        $this->setProfileImage($user, $imagePath );
         return new Response('Account erfolgreich angelegt! Log dich ein!', 200);
     }
     
-    public function setProfileImage($user, $imagePath)
-    {
+    public function setProfileImage($user, $imagePath) {
         $userId = $user->getId();
+        $newAsset = new \Pimcore\Model\Asset\Image();
         $userAsset = \Pimcore\Model\Asset::getByPath("/Users/{$userId}Profileimage.png");
         if($userAsset) {
             $userAsset->delete();
-        }        
-        $newAsset = new \Pimcore\Model\Asset\Image();
-        $newAsset->setFilename($filename);
+        }
+        $newAsset->setFilename($userId."Profileimage.png");
         $newAsset->setData(file_get_contents($imagePath));
-        $newAsset->setParent($parentFolder);
+        $newAsset->setParent(\Pimcore\Model\Asset::getByPath("/Users"));
         $newAsset->save();
-
         $user->setImage($newAsset);
         $user->save();      
     }
-    
     public function sendPasswordResetEmail(
         Request $request,
         MailerInterface $mailer,
@@ -269,7 +267,7 @@ class AccountController extends FrontendController
         $email = $request->request->get('email');
         $password = $request->request->get('password');
         $confirmPassword = $request->request->get('confirmPassword');
-
+        $selectedSpecialization = $request->request->get('specialization');
         $session = $request->getSession();
         $user = $session->get('user');
         $uploadedFile = $request->files->get('profileimage');
@@ -286,7 +284,9 @@ class AccountController extends FrontendController
         if(($password && $confirmPassword) && ($password == $confirmPassword) ) {
             $user->setPassword($password);
         }
+        $user->setSpecialization("Medienproduktion");
+        
         $user->save();
-        return new Response('Aktualisiert!');
+        return new Response('Aktualisiert!', 200);
     }
 }
