@@ -156,8 +156,8 @@ class AccountController extends FrontendController
     private function createEmailContent(User $user, string $resetPasswordUrl): string
     {
         $username = $user->getUsername();
-        $selectedLanguage = $request->getLocale();
-        if($selectedLanguage == "de") {
+        $language = $this->document->getProperty("language");
+        if($language == "de") {
             return "
             <p>Hallo $username,</p><br>
             <p>Hier ist der Link zum Zurücksetzen deines Passworts: <a href='$resetPasswordUrl'>Passwort zurücksetzen</a></p><br>

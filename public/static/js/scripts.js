@@ -305,7 +305,7 @@ function showSlides(n) {
 //Statuscode 201: request and response successfull -> Don't show an alert
 //Statuscode 400: response is a catched error with errormessage -> show error-alert with errormessage
 //Statuscode 500: Servererror -> show error-alert
-function fetchDataToResponse(route, formData) {
+function fetchDataToResponse(route, formData, lang) {
     fetch(route, {
         method: "POST",
         body: formData,
@@ -320,7 +320,7 @@ function fetchDataToResponse(route, formData) {
         let title, text, icon;
         //Handle response as success and show Success-Alert
         if (status === 200) {
-            title = "Erfolg!";
+            title = lang == "de" ? "Erfolg!" : "Success!";
             text = responseText;
             icon = "success";
         //Handle response as Error and show Error-Alert
@@ -359,21 +359,22 @@ function sweetAlert(title, text, icon, responseText) {
     });
 }
 
-function handleSubmit(event, route, lang) {
+function handleSubmit(event, id, route, lang) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    fetchDataToResponse(route, formData);
+    const formData = new FormData(document.getElementById(id));
+    fetchDataToResponse(route, formData, lang);
 }
+// End
 
-$("#sendEmailForm").on("submit", function (event) {
-    handleSubmit(event, "/resetPassword");
-});
+//language
+function setLanguage(langID, language) {
+    document.cookie = `selected_language_id=${langID}; path=/`;
+    document.cookie = `selected_language=${language}; path=/`;
 
- function login (event, lang) {
-    handleSubmit(event, "/login", lang);
-};
+    var currentURL = window.location.pathname;
+    var currentPathWithoutLanguage = currentURL.substring(4);
+    var newURL = '/' + language + '/' + currentPathWithoutLanguage;
 
-$("#registerForm").on("submit", function (event) {
-    handleSubmit(event, "/register");
-});
+    window.location.pathname = newURL;
+}
 // End
