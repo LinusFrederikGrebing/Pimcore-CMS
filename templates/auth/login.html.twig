@@ -1,16 +1,16 @@
 <div class="grid-item">
     <h1 class="mb-4 greenHeadline">
-        Log dich ein
+       {{ 'LoginHeadline'|trans }}
     </h1>
     <form id="loginForm" method="POST" action="{{ path('login') }}">
         <input type="email" id="emailInputLogin" placeholder="Email" name="email">
         <br>
-        <input type="password" id="passwordInputLogin" placeholder="Passwort" name="password" class="mb-4">
+        <input type="password" id="passwordInputLogin" placeholder="{{ 'PasswordPlaceholder'|trans }}" name="password" class="mb-4">
         <br>
         <a id="forgot-pass" onclick="forgot_pass()" href="#">
-            Passwort vergessen?
+            {{ 'ForgotPassword'|trans }}
         </a>
         <br>
-        <input class="submit-btn" type="submit" id="loginBtn" value="Einloggen" onclick="handleSubmit(event, 'loginForm', '/login', '{{ documentLanguage }}')"/>
+        <input class="submit-btn" type="submit" id="loginBtn" value="{{ 'LoginBtn'|trans }}" onclick="handleSubmit(event, 'loginForm', '/login', '{{ documentLanguage }}')"/>
     </form>
 </div>

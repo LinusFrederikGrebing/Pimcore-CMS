@@ -1,17 +1,17 @@
 <div class="grid-item">
     <h1 class="mb-4 greenHeadline">
-        Lege einen Account an
+        {{ 'RegisterHeadline'|trans }}
     </h1>
     <form id="registerForm" method="POST" action="{{ path('register') }}">
         <input id="nameInputRegister" type="text" placeholder="Name" name="name">
         <br>
         <input id="emailInputRegister" type="email" placeholder="Email" name="email" />
         <br>
-        <input id="passwordInputRegister" type="password" placeholder="Passwort" name="password" /><br>
-        <input id="passwordInputConfirmRegister" type="password" placeholder="Bestätige das Passwort"
+        <input id="passwordInputRegister" type="password" placeholder="{{ 'PasswordPlaceholder'|trans }}" name="password" /><br>
+        <input id="passwordInputConfirmRegister" type="password" placeholder="{{ 'ConfirmPasswordPlaceholder'|trans }}"
             name="confirmPassword" value="" />
         <br>
         <input id="registerBtn" class="submit-btn" type="submit"
-            value="Registrieren" onclick="handleSubmit(event, 'registerForm', '/register', '{{ documentLanguage }}')"/>
+            value="{{ 'RegisterBtn'|trans }}" onclick="handleSubmit(event, 'registerForm', '/register', '{{ documentLanguage }}')"/>
     </form>
 </div>

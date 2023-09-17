@@ -295,8 +295,9 @@ class AccountController extends FrontendController
         if(($password && $confirmPassword) && ($password == $confirmPassword) ) {
             $user->setPassword($password);
         }
-       
-        $user->setSpecialization($selectedSpecialization);
+        if($selectedSpecialization) {
+            $user->setSpecialization($selectedSpecialization);
+        }
         $user->save();
 
         return new Response($translatedUpdated, 200);
