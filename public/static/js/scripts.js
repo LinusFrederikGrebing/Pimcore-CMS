@@ -325,20 +325,20 @@ function fetchDataToResponse(route, formData, lang) {
             icon = "success";
         //Handle response as Error and show Error-Alert
         } else if (status === 400) {
-            title = "Fehler!";
+            title = lang == "de" ? "Fehler!" : "Error!";
             text = responseText;
             icon = "error";
         } else if (status === 500) {
-            title = "Fehler!";
-            text = "Bitte überprüfe deine Eingaben"
+            title = lang == "de" ? "Fehler!" : "Error!";
+            text = lang == "de" ? "Bitte überprüfe deine Eingaben" : "Please check your entered information" 
             icon = "error";
         } else {
             if (responseText.startsWith("/")) {
                 window.location.href = responseText;
                 return;
             } else {
-                title = "Unbekannter Status!";
-                text = "Unbekannter Statuscode: " + status;
+                title = lang == "de" ? "Unbekannter Status!" : "Unknown status!";
+                text = lang == "de" ? "Unbekannter Statucode:" + status : "Unknown statuscode:" + status;
                 icon = "error";
             }
         }
@@ -370,7 +370,7 @@ function fireLoadingAlert(event, lang) {
     handleSubmit(event, 'sendEmailForm', '/resetPassword', lang)
     let timerInterval
     Swal.fire({
-    title: lang == 'de' ? 'Email versenden...' : 'Sending mail...',
+    title: lang == "de" ? 'Email versenden...' : 'Sending mail...',
     timer: 1500,
     timerProgressBar: true,
     didOpen: () => {

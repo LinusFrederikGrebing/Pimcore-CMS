@@ -24,17 +24,17 @@ class AccountController extends FrontendController
         return $this->render('main/main.html.twig');
     }
 
-    public function login(Request $request): Response
+    public function login(Request $request, TranslatorInterface $translator): Response
     {      
         // Retrieve the form data
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-        
+        $translatedCheckInfo= $translator->trans("CheckYourEnteredInformation");
         // Find the user by email
         $user = $this->findUserByEmail($email);
         //Return Error if password or user is not correct
         if (!$user instanceof User || !password_verify($password, $user->getPassword())) {
-            return new Response("Überprüfe deine Eingaben!", 400);
+            return new Response($translatedCheckInfo, 400);
         }
     
         // Successful login
@@ -68,10 +68,12 @@ class AccountController extends FrontendController
         $password = $request->request->get('password');
         $confirmPassword = $request->request->get('confirmPassword');
         $translatedUsernameErrormessage = $translator->trans("UsernameErrormessage");
-        $translatedEmailErrormessage = $translator->trans("UsernameErrormessage");
+        $translatedEmailErrormessage = $translator->trans("EmailErrormessage");
+        $translatedPasswordsErrormessage = $translator->trans("PasswordsDoNotMatchError");
+        $translatedSuccessfullRegistration = $translator->trans("SuccessfullRegistration");
         // Validate the password
         if ($password !== $confirmPassword) {
-            return new Response('Passwords do not match!', 400);
+            return new Response($translatedPasswordsErrormessage, 400);
         }
         //Check if the username is already taken
         if($this->findUserByUsername($username)) {
@@ -79,7 +81,7 @@ class AccountController extends FrontendController
         }
         //Check if this email already exists 
         if($this->findUserByEmail($email)) {
-            return new Response('Diese Emailadresse ist bereits vergeben', 400);
+            return new Response($translatedEmailErrormessage, 400);
         } 
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -99,7 +101,7 @@ class AccountController extends FrontendController
         $user->save();
         $imagePath = __DIR__ . '/../../public/static/assets/img/user-profile-with-cross-grey-icon-doctor-vector-32550061.png';
         $this->setProfileImage($user, $imagePath );
-        return new Response('Account erfolgreich angelegt! Log dich ein!', 200);
+        return new Response($translatedSuccessfullRegistration, 200);
     }
     
     public function setProfileImage($user, $imagePath) {
@@ -119,22 +121,24 @@ class AccountController extends FrontendController
     public function sendPasswordResetEmail(
         Request $request,
         MailerInterface $mailer,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        TranslatorInterface $translator
     ): Response {
         $email = $request->request->get('email');
-        $user = $this->findUserByEmail($email);
-
+        $user = $this->findUserByEmail($email); 
+        $translatedCheckYourMailsOrReachSupport = $translator->trans("CheckYourMailsOrReachSupport");
+        $translatedEmailSentSuccessfully = $translator->trans("EmailSentSuccessfully");
         if ($user instanceof User) {
             $token = $this->createUniqueToken($user);
             $resetPasswordUrl = $this->generateResetPasswordUrl($token, $urlGenerator);
 
             $emailContent = $this->createEmailContent($user, $resetPasswordUrl);
 
-            $this->sendEmail($email, $emailContent, $mailer);
+            $this->sendEmail($email, $emailContent, $mailer, $translator);
 
-            return new Response('Die Email zum Zurücksetzen des Passworts wurde erfolgreich versendet, schau in dein Mailfach!', 200);
+            return new Response($translatedEmailSentSuccessfully, 200);
         } else {
-            return new Response('Error: Überprüfe deine Mail oder wende dich an unseren Support!', 400);
+            return new Response($translatedCheckYourMailsOrReachSupport, 400);
         }
     }
 
@@ -162,27 +166,30 @@ class AccountController extends FrontendController
         }
     }
 
-    private function sendEmail(string $recipient, string $content, MailerInterface $mailer): void
+
+    private function sendEmail(string $recipient, string $content, MailerInterface $mailer, TranslatorInterface $translator): void
     {
+        $translatedResetOfYourPassword= $translator->trans("ResetOfYourPassword");
+
         $email = (new Email())
             ->from('THMStudyPlanner@gmail.com')
             ->to($recipient)
-            ->subject('Zurücksetzen deines Passworts')
+            ->subject($translatedResetOfYourPassword)
             ->html($content);
 
         $mailer->send($email);
     }
     
-    public function showResetPasswordTemplate(Request $request, string $token): Response
+    public function showResetPasswordTemplate(Request $request, string $token, TranslatorInterface $translator): Response
     {
-        // Calculate the current time + 20 minutes        
+        $translatedTokenExpiryText = $translator->trans("TokenExpiryText");
         $user = $this->findUserByToken($token);
         $currentTime = time();
         $tokenProperty = $user->getClass()->getFieldDefinition('token');
         $expiryTime = $tokenProperty->getTooltip();; // 20 minutes in seconds
 
         if ($currentTime > $expiryTime) {
-            return new Response('Your token expired, request a new password reset!', 400);
+            return new Response($translatedTokenExpiryText, 400);
         }
 
         // Render the password reset form, passing the user
@@ -191,14 +198,16 @@ class AccountController extends FrontendController
         ]);
     }
 
-    public function setNewUserPassword(Request $request, string $email): Response
+
+    public function setNewUserPassword(Request $request, string $email, TranslatorInterface $translator): Response
     {
         $user = $this->findUserByEmail($email);
         $newPassword = $request->request->get('newPassword');
         $confirmPassword = $request->request->get('confirmNewPassword');
+        $translatedPasswordsDoNotMatchError = $translator->trans("PasswordsDoNotMatchError");
 
         if ($newPassword !== $confirmPassword) {
-            return new Response('Passwords do not match!', 400);
+            return new Response($translatedPasswordsDoNotMatchError, 400);
         }
 
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -262,7 +271,7 @@ class AccountController extends FrontendController
         }
     }
 
-    public function updateProfile(Request $request): Response {
+    public function updateProfile(Request $request, TranslatorInterface $translator): Response {
         $name = $request->request->get('name');
         $email = $request->request->get('email');
         $password = $request->request->get('password');
@@ -271,6 +280,8 @@ class AccountController extends FrontendController
         $session = $request->getSession();
         $user = $session->get('user');
         $uploadedFile = $request->files->get('profileimage');
+        $translatedUpdated= $translator->trans("Updated");
+
         if($uploadedFile) {
             $imagePath = $uploadedFile->getPathname();
             $this->setProfileImage($user, $imagePath);
@@ -288,6 +299,6 @@ class AccountController extends FrontendController
         $user->setSpecialization($selectedSpecialization);
         $user->save();
 
-        return new Response('Aktualisiert!', 200);
+        return new Response($translatedUpdated, 200);
     }
 }
