@@ -284,9 +284,10 @@ class AccountController extends FrontendController
         if(($password && $confirmPassword) && ($password == $confirmPassword) ) {
             $user->setPassword($password);
         }
-        $user->setSpecialization("Medienproduktion");
-        
+       
+        $user->setSpecialization($selectedSpecialization);
         $user->save();
+
         return new Response('Aktualisiert!', 200);
     }
 }

@@ -18,10 +18,13 @@ class WebAndMobileController extends FrontendController
     {
         $timeline = new DataObject\Timeline\Listing();
         $timelineOptions = $timeline->getClass()->getFieldDefinition("major")->getOptions();
-        
+        $specializations = new DataObject\User\Listing();
+        $specializationsOptions = $specializations->getClass()->getFieldDefinition("specialization")->getOptions();
+
         // SplineViewer-Objekte abrufen
         return $this->render('webAndMobile/webAndMobile.html.twig', [
             'timelineOptions' => $timelineOptions,
+            'specializationsOptions' => $specializationsOptions,
         ]);
     }
 }

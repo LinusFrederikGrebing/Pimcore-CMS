@@ -8,13 +8,12 @@
             <input id="nameInputEditProfile" type="text" name="name" value="{{ user.getUsername() }}"/>
             <br>
             <input id="emailInputEditProfile" type="email" placeholder="Email" name="email" value="{{ user.getEmail() }}"/>
-            <br>            
-            <input type="hidden" id="specializationInput" name="specialization" value="" />
-            <select id="selectField" onchange="updateSpecializationInput()">
+            <br>     
+            <select id="specialization" name="specialization">
                 {% for option in specializationsOptions %}
-                    <option value="{{ option.value }}">{{ option.value }}</option>
+                    <option value="{{ option.value }}">{{ option.key }}</option>
                 {% endfor %}
-            </select>          
+            </select>    
             <input id="profileimageEditProfile" type="file" name="profileimage" />
             <h4 class="mt-4">Verändere dein Passwort</h4>
             <input id="passwordInputEditProfile" type="password" placeholder="Passwort" name="password" /><br>
