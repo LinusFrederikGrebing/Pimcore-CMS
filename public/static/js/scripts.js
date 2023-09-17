@@ -352,6 +352,7 @@ function sweetAlert(title, text, icon, responseText) {
         text: text,
         icon: icon,
         confirmButtonText: "Okay",
+        confirmButtonColor: '#80ba24',
     }).then((result) => {
         if (result.isConfirmed && responseText.startsWith("/")) {
             window.location.href = responseText;
@@ -365,6 +366,7 @@ function handleSubmit(event, id, route, lang) {
     const formData = new FormData(document.getElementById(id));
     fetchDataToResponse(route, formData, lang);
 }
+
 // End
 function fireLoadingAlert(event, lang) {
     handleSubmit(event, 'sendEmailForm', '/resetPassword', lang)
