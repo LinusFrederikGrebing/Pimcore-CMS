@@ -7,7 +7,7 @@
                     <div class="profile rounded-circle">
                         <img src="{{ user.getImage() }}" class="rounded-circle" alt="User Image">
                         <div class="overlay">
-                            <i class="fa-regular fa-2xl fa-pen-to-square fa-beat" style="color: #80ba24;"></i>
+                            <i id="editProfileIcon" class="fa-regular fa-2xl fa-pen-to-square fa-beat"></i>
                         </div>
                     </div>
                 </div>
@@ -17,10 +17,11 @@
 					<h1 class="my-3 greenHeadline">
 						{{ user.getUsername() }}
 					</h1>
-
-					<span class="text-muted d-block mb-2">
-						Studiengang
-					</span>
+					<div class="text-center">
+						<h6 class="mb-0">
+							{{ user.getSpecialization() }}
+                        </h6>
+					</div>
 					<div class="text-center">
 						<h6 class="mb-0">
 							{{ user.getEmail() }}
@@ -30,7 +31,7 @@
 				<div class="centered my-5">
 					<a href="{{ path('logout') }}" class="logout-btn">
 						<span class="btn-text">
-							Logout
+							{{ 'LogoutBtn'|trans}}
 						</span>
 						<i class="fa-solid fa-sign-out fa-lg btn-icon"></i>
 					</a>

@@ -18,11 +18,14 @@ class MediaproductionController extends FrontendController
     public function defaultAction(Request $request): Response
     {
         $timeline = new DataObject\Timeline\Listing();
-      
         $timelineOptions = $timeline->getClass()->getFieldDefinition("major")->getOptions();
-        
-        return $this->render('mediaproduction/mediaproduction.html.twig', [
+        $specializations = new DataObject\User\Listing();
+        $specializationsOptions = $specializations->getClass()->getFieldDefinition("specialization")->getOptions();
+
+        // SplineViewer-Objekte abrufen
+        return $this->render('webAndMobile/webAndMobile.html.twig', [
             'timelineOptions' => $timelineOptions,
+            'specializationsOptions' => $specializationsOptions,
         ]);
     }
 }

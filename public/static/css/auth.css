@@ -363,7 +363,9 @@ input[type="file"],
     text-align: center; /* Zentriert den Text horizontal */
     flex-grow: 1; /* Lässt die Überschrift wachsen, um den verbleibenden Platz einzunehmen */
 }
-
+#editProfileIcon{
+    color: #80ba24;
+}
 @media (max-width: 768px) {
     .logout-card {
         width: 80vw;
