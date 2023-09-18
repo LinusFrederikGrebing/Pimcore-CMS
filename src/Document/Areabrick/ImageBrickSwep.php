@@ -7,11 +7,11 @@ use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ImageBrick extends AbstractTemplateAreabrick
+class ImageBrickSwep extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'ImageBrick';
+        return 'ImageBrickSwep';
     }
     public function getDescription(): string
     {
@@ -31,10 +31,10 @@ class ImageBrick extends AbstractTemplateAreabrick
         return false;
     }
     public function action(Info $info): ?RedirectResponse
-    {
+    {   
         // Get the root folder containing image assets
-        $imageAssetsFolder  = \Pimcore\Model\Asset::getByPath("/Datenbanken");
-
+        $imageAssetsFolder  = \Pimcore\Model\Asset::getByPath("/Softwareentwicklungsprojekt");
+        
         // Loop through child assets in the folder
         foreach ($imageAssetsFolder->getChildren() as $document) {
             $images[] = $document; 
