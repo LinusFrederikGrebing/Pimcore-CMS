@@ -277,7 +277,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2;
+    z-index: 101;
 }
 
 #popupContainerLogout {
@@ -288,7 +288,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2;
+    z-index: 101;
 }
 
 #popup {
@@ -359,12 +359,20 @@ input[type="file"],
     align-items: center; /* Zentriert die Elemente vertikal in der Mitte */
 }
 
-.editProfileHeader h2 {
+.editProfileHeader h1 {
     text-align: center; /* Zentriert den Text horizontal */
     flex-grow: 1; /* Lässt die Überschrift wachsen, um den verbleibenden Platz einzunehmen */
 }
 #editProfileIcon{
     color: #80ba24;
+}
+
+#closeEditDialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1em;
+    margin-right: 1em;
 }
 @media (max-width: 768px) {
     .logout-card {

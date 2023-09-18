@@ -30,6 +30,15 @@ parameters:
     #pimcore_executable_dot: /usr/bin/dot
 
 services:
+    App\Middleware\RouteBlockingMiddleware:
+        arguments:
+            $blockedRoutes:
+                - '/Mediaproduction'
+                - '/Medienproduktion'
+                - '/WebUndMobile'
+                - '/WebAndMobile'
+        tags:
+            - { name: kernel.event_subscriber }
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

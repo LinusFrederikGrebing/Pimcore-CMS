@@ -20,16 +20,16 @@
 <br>
 <div class="my-3">
     <label for="arrayElements">
-        Zahlenfolge:       
+        {{ 'NumberSequence'|trans }}:       
     </label>
     <input type="text" id="arrayElements" name="arrayElements" required placeholder="input number less than 70">
 </div>
 <br>
 <button onclick="sortArray()" class="my-3 btn btn-primary text-uppercase" type="button" id="sortButton">
-    Sortieren        
+    {{ 'Sort'|trans }}        
 </button>
 <button onclick="generateAndSetRandomArray()" id="randomButton" class="my-3 btn btn-primary text-uppercase" type="button">
-    Random              
+    {{ 'Random'|trans }}               
 </button>
 <div id="barsContainer">
     <div id="bars"></div>
