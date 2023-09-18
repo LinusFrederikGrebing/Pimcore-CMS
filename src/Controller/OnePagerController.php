@@ -17,6 +17,7 @@ class OnePagerController extends FrontendController
     {
         $specializations = new DataObject\User\Listing();
         $specializationsOptions = $specializations->getClass()->getFieldDefinition("specialization")->getOptions();
+        
         return $this->render('onepager/onepager.html.twig', [
             'specializationsOptions' => $specializationsOptions,
         ]);

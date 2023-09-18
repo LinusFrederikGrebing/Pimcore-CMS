@@ -1,21 +1,14 @@
 {% if editmode %}
     {{ pimcore_select("viewerData", {
-        "store": viewer,
+        "store": viewerSelect,
     }) }}
 {% endif %}
-<div id="viewer">{{ pimcore_select("viewerData").getData() }}</div>
 
-<script>
-    window.onload = function () {
-        var embeddedCode = document.getElementById("viewer").innerText
-        var outputDiv = document.getElementById("viewer");
-        // Erstellen Sie ein <iframe>-Element
-        var iframe = document.createElement("iframe");
-        iframe.srcdoc = embeddedCode; // Fügen Sie den Code in das <iframe> ein
-    
-        // Fügen Sie das <iframe> in das <div> ein
-        outputDiv.innerHTML = ""; // Löschen Sie den vorherigen Inhalt
-        outputDiv.appendChild(iframe);
-            
-    }    
-</script>
+{% set selectedData = pimcore_select("viewerData").getData() %}
+
+{% for view in viewer %}
+    {% if view.name == selectedData %}
+        <script type="module" src="{{view.splinescript}}"></script>
+        <spline-viewer url="{{view.splineviewer}}"></spline-viewer>
+    {% endif %}
+{% endfor %}

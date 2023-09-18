@@ -186,6 +186,8 @@ body {
 
 /* Hide additional content sections */
 .additional-content {
+    margin-right: 3em;
+    margin-left: 3em;
     display: none;
 }
 
@@ -269,6 +271,7 @@ body {
 
     /* Hide additional content sections */
     .additional-content {
+        margin: 0em;
         display: none;
     }
 

@@ -75,7 +75,8 @@ function hideTimeline(timelineIndex) {
         $(".image, .arrow").hide();
         $(".close-button").show();
         event.addClass("timeline__event_detailed timeline_detailed_" + (timelineIndex % 2 === 0 ? "left" : "right"));
-        event.removeClass("timeline__event");
+        event.removeClass("timeline__event "); 
+        ScrollTrigger.refresh();    
         if (event.data("timeline-index") !== timelineIndex) {
             event.hide();
         }
@@ -84,9 +85,10 @@ function hideTimeline(timelineIndex) {
 
 function showTimeline() {
     timelineEvents.each(function (index, event) {
-        event = $(event);
-        event.show().removeClass("timeline__event_detailed timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right").addClass("timeline__event");
+        event = $(event); 
+        ScrollTrigger.refresh(); 
         $(".additional-content").each(function (index, event) { event = $(event); event.hide().removeClass("additional-content-order1 additional-content-order2")}); 
+        event.show().removeClass("timeline-order1 timeline-order2 timeline_detailed_left timeline_detailed_right timeline__event_detailed").addClass("timeline__event");
         $(".close-button").hide();
         $(".image, .arrow").show();
     });
@@ -404,3 +406,14 @@ closeEditDialog.addEventListener("click", function() {
 // Verstecke den editProfileDialog standardmäßig
 editDialog.style.display = "none";
 
+function showImage(imageSrc) {
+    Swal.fire({
+        imageUrl: imageSrc,
+        width: '80%',
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+            content: 'image-popup'
+        }
+    });
+}

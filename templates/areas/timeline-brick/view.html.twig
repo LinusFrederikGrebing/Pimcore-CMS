@@ -1,7 +1,7 @@
 <div class="container-timeline">
     <div class="timeline" id="timeline-container">
         {% for timeline in timelines %}
-            <div class="timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}" onmouseenter="hoverEnter(event)" onmouseleave="hoverLeave(event)">
+            <div class="timeline__event_animation timeline__event animated fadeInUp" data-timeline-index="{{ loop.index }}" onmouseenter="hoverEnter(event)" onmouseleave="hoverLeave(event)">
                 {% if loop.index is even %}
                     <div class="arrow arrow-right" onclick="hideTimeline({{ loop.index }})">
                         <span></span>
@@ -34,13 +34,13 @@
         {% endfor %}
     </div>
     {% for timeline in timelines %}
-        <div class="additional-content mx-5" data-timeline-index="{{ loop.index }}">
+        <div class="additional-content" data-timeline-index="{{ loop.index }}">
             {% set areaName = 'spline' ~ loop.index %}
             {% set above = 'above' ~ loop.index %}
             {% set after = 'after' ~ loop.index %}
             <div class="timeline_additional_content">
                 {{ pimcore_areablock(above, { allowed: ['tooltip-brick','headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
-                {{ pimcore_areablock(areaName, { allowed: ['spline-brick', 'algorithm-brick', 'expansion-panel-brick', 'videoslider-brick', 'customcube-brick', 'section-image-text-brick', 'image-gallery-brick', 'business-card-brick'] }) }}
+                {{ pimcore_areablock(areaName, { allowed: ['file-brick', 'image-brick', 'spline-brick', 'algorithm-brick', 'expansion-panel-brick', 'videoslider-brick', 'customcube-brick', 'section-image-text-brick', 'image-gallery-brick', 'business-card-brick'] }) }}
                 {{ pimcore_areablock(after, { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
             </div>
         </div>

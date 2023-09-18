@@ -5,15 +5,13 @@ namespace App\Document\Areabrick;
 
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
-use \Pimcore\Model\DataObject;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
-class SplineBrick extends AbstractTemplateAreabrick
+class ImageBrick extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'SplineBrick';
+        return 'ImageBrick';
     }
     public function getDescription(): string
     {
@@ -34,22 +32,17 @@ class SplineBrick extends AbstractTemplateAreabrick
     }
     public function action(Info $info): ?RedirectResponse
     {
-        $viewers = new DataObject\SplineViewer\Listing();
-        $viewersArray = [];
+        // Get the root folder containing image assets
+        $imageAssetsFolder  = \Pimcore\Model\Asset::getByPath("/Datenbanken");
 
-        foreach ($viewers as $viewer) {
-            // Assuming that $viewer is an instance of DataObject\SplineViewer
-            $viewerName = $viewer->getName(); // Replace with the actual method to get the viewer's name
-           
-            
-            // Create an array entry with the viewer name as the key and splineData as the value
-            $viewersArray[] = [
-                $viewerName,
-                $viewerName
-            ];
+        // Loop through child assets in the folder
+        foreach ($imageAssetsFolder->getChildren() as $document) {
+            $images[] = $document; 
         }
-        $info->setParam('viewerSelect', $viewersArray);
-        $info->setParam('viewer', $viewers);
+        // Set parameters in the Info object for later use in the view
+        $info->setParam('images', $images);
+    
+        
         return null;
     }
 }

@@ -1,0 +1,6 @@
+{% if editmode %}
+    {{ pimcore_pdf("file") }}
+{% else %}
+    {% set file = pimcore_pdf("file").getElement() %}
+    <iframe class="pdf-iframe" src="{{ file }}"></iframe>
+{% endif %}

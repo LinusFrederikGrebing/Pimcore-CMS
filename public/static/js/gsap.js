@@ -21,7 +21,7 @@ function hoverLeave(obj) {
 
 gsap.fromTo(
   "#portfolio-1",
-  { y: 0, x: -1000, opacity: 0 },
+  { y: 0, x: -10, opacity: 0 },
   {
     opacity: 1,
     x: 0,
@@ -35,7 +35,7 @@ gsap.fromTo(
 );
 gsap.fromTo(
   "#portfolio-2",
-  { y: 0, x: 1000, opacity: 0 },
+  { y: 0, x: 10, opacity: 0 },
   {
     opacity: 1,
     x: 0,
@@ -48,7 +48,7 @@ gsap.fromTo(
   }
 );
 
-document.querySelectorAll(".timeline__event")
+document.querySelectorAll(".timeline__event_animation")
   .forEach((timelineEvent, index) => {
     const tl = gsap.timeline({
       scrollTrigger: {
