@@ -21,10 +21,11 @@ class RouteBlockingMiddleware implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $pathInfo = $request->getPathInfo();
-
-        if ($this->shouldBlockRoute($pathInfo)) {
+        $session = $request->getSession();
+        $loggedIn = $session->get('user_logged_in');
+        if ($this->shouldBlockRoute($pathInfo) && $loggedIn !== true) {
             $event->setResponse($this->redirect('/'));
-        }
+        } 
     }
 
     private function shouldBlockRoute($path)
