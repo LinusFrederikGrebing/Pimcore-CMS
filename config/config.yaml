@@ -103,7 +103,6 @@ framework:
    mailer:
         transports:
             main: smtps://THMStudyPlanner@gmail.com:dzxcinutcwtcfezv@smtp.gmail.com:465
-            pimcore_newsletter: smtps://THMStudyPlanner@gmail.com:dzxcinutcwtcfezv@smtp.gmail.com:465
 
 
 #### DEFINE LOCATION OF MANIFEST WHEN WORKING WITH SYMFONY ENCORE
