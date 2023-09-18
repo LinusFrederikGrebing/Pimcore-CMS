@@ -131,7 +131,6 @@ class AccountController extends FrontendController
         if ($user instanceof User) {
             $token = $this->createUniqueToken($user);
             $resetPasswordUrl = $this->generateResetPasswordUrl($token, $urlGenerator);
-
             $emailContent = $this->createEmailContent($user, $resetPasswordUrl);
 
             $this->sendEmail($email, $emailContent, $mailer, $translator);

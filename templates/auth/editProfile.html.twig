@@ -1,9 +1,10 @@
 <div id="editDialog" class="editProfileDialog">
     <div class="editProfile-content py-5">
         <div class="editProfileHeader">
-            <h2 class="mt-2">{{ 'EditProfile'|trans  }}</h2>        
+            <h1 class= "mt-2 greenHeadline">{{ 'EditProfile'|trans  }}</h1>        
             <button id = "closeEditDialog" type="button" class="btn-close-custom" aria-label="Close"></button>
         </div>
+        <h4 class="mt-4">{{ 'ChangeProfileImage'|trans }}</h4>
         <form id="editProfileForm" class="mt-4" method="POST" action="{{ path('updateProfile') }}" enctype="multipart/form-data">
             <input id="nameInputEditProfile" type="text" name="name" value="{{ user.getUsername() }}"/>
             <br>
@@ -16,6 +17,7 @@
                     </option>
                 {% endfor %}
             </select>
+            <h4 class="mt-4">{{ 'EditGeneralInformation'|trans }}</h4>
             <input id="profileimageEditProfile" type="file" name="profileimage" />
             <h4 class="mt-4">{{ 'ChangePassword'|trans }}</h4>
             <input id="passwordInputEditProfile" type="password" placeholder=" {{ 'PasswordPlaceholder'|trans }}" name="password" /><br>
