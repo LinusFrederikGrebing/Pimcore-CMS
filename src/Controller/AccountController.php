@@ -106,18 +106,25 @@ class AccountController extends FrontendController
     
     public function setProfileImage($user, $imagePath) {
         $userId = $user->getId();
+        $username = $user->getUsername();  // Benutzernamen holen
+        $timestamp = time(); // Aktueller Zeitstempel
+
         $newAsset = new \Pimcore\Model\Asset\Image();
-        $userAsset = \Pimcore\Model\Asset::getByPath("/Users/{$userId}Profileimage.png");
-        if($userAsset) {
+        $userAsset = (new \Pimcore\Model\Asset\Listing())->setCondition("filename LIKE '%" . $username . "Profileimage%'")->current();
+    
+        if ($userAsset) {
             $userAsset->delete();
         }
-        $newAsset->setFilename($userId."Profileimage.png");
+    
+        $newAsset->setFilename($username . "Profileimage" . $timestamp);
         $newAsset->setData(file_get_contents($imagePath));
         $newAsset->setParent(\Pimcore\Model\Asset::getByPath("/Users"));
         $newAsset->save();
+    
         $user->setImage($newAsset);
-        $user->save();      
+        $user->save();
     }
+    
     public function sendPasswordResetEmail(
         Request $request,
         MailerInterface $mailer,
