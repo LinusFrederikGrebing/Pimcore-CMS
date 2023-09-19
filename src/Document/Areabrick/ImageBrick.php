@@ -6,12 +6,14 @@ namespace App\Document\Areabrick;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Pimcore\Model\DataObject; 
+use Pimcore\Model\DataObject\Links\imageBrickLinks\Listing;
 
-class ImageBrickSwep extends AbstractTemplateAreabrick
+class ImageBrick extends AbstractTemplateAreabrick
 {
     public function getName(): string
     {
-        return 'ImageBrickSwep';
+        return 'ImageBrick';
     }
     public function getDescription(): string
     {
@@ -31,18 +33,20 @@ class ImageBrickSwep extends AbstractTemplateAreabrick
         return false;
     }
     public function action(Info $info): ?RedirectResponse
-    {   
-        // Get the root folder containing image assets
-        $imageAssetsFolder  = \Pimcore\Model\Asset::getByPath("/Softwareentwicklungsprojekt");
-        
-        // Loop through child assets in the folder
-        foreach ($imageAssetsFolder->getChildren() as $document) {
-            $images[] = $document; 
+    {
+        $links = DataObject::getByPath("/Links/ImageBrickLinks");
+        $linksArray = [];
+        foreach ($links->getChildren() as $document) {
+            $linksArray[] = [
+                $document->getLink(),
+                $document->getKey()
+            ];
         }
-        // Set parameters in the Info object for later use in the view
-        $info->setParam('images', $images);
-    
+       
+        $info->setParam('linksSelect', $linksArray);
+        $info->setParam('links', $links);
         
         return null;
     }
+    
 }

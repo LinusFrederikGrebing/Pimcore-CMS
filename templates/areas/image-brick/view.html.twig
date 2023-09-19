@@ -1,0 +1,22 @@
+{% if editmode %}
+    {{ pimcore_select("linkData", {
+        "store": linksSelect,
+    }) }}
+{% endif %}
+
+{% set selectedLink = pimcore_select("linkData").getData() %}
+
+{% if selectedLink %}
+    {% set assetFolder = pimcore_asset_by_path(selectedLink) %}
+    {% if assetFolder %}
+    <div class="gallery_test">            
+        {% for asset in assetFolder.getChildren() %}
+            <div class="image_test" onclick="showImage('{{asset}}')">
+                {{ pimcore_asset_by_path(asset).thumbnail({'format': 'png'}).html|raw }}   
+            </div>    
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No images found in the folder.</p>
+    {% endif %}
+{% endif %}
