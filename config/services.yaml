@@ -169,10 +169,10 @@ services:
         tags:
             - { name: pimcore.area.brick, id: business-card-brick }
     
-    App\Document\Areabrick\ImageBrickSwep:
+    App\Document\Areabrick\ImageBrick:
         arguments: [ '@logger' ]
         tags:
-            - { name: pimcore.area.brick, id: image-brickSwep }
+            - { name: pimcore.area.brick, id: image-brick }
 
     App\Document\Areabrick\FileBrick:
         arguments: [ '@logger' ]
