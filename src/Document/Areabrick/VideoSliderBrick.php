@@ -7,6 +7,7 @@ use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use \Pimcore\Model\Document;
+use Pimcore\Model\DataObject;
 
 class VideoSliderBrick extends AbstractTemplateAreabrick
 {
@@ -35,8 +36,7 @@ class VideoSliderBrick extends AbstractTemplateAreabrick
     public function action(Info $info): ?RedirectResponse
     {
         // Get the folder containing links (adjust the path as needed)
-        $linkFolder = Document::getByPath("/Links/AV2-Links");
-
+        $linkFolder = DataObject::getByPath("/Links/AV2-Links");
         // Initialize arrays to store links and filenames
         $hrefArray = [];
         $fileNames = [];

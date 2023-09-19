@@ -4,7 +4,7 @@
 			<div class="numbertext">
 				{{ loop.index }}/{{ links|length }}
 			</div>
-			<iframe class="w-100" src="{{ link.getHref() }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<iframe class="w-100" src="{{ link.link }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 			<div class="caption-container">
 				<p id="caption">{{fileNames[(loop.index)-1]}}</p>
