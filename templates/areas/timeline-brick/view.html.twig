@@ -40,7 +40,7 @@
             {% set after = 'after' ~ loop.index %}
             <div class="timeline_additional_content">
                 {{ pimcore_areablock(above, { allowed: ['tooltip-brick','headline-brick', 'subheadline-brick', 'centeredtext-brick', 'spacer-brick'] }) }}
-                {{ pimcore_areablock(areaName, { allowed: ['file-brick', 'image-brick', 'spline-brick', 'algorithm-brick', 'expansion-panel-brick', 'videoslider-brick', 'customcube-brick', 'section-image-text-brick', 'image-gallery-brick', 'business-card-brick'] }) }}
+                {{ pimcore_areablock(areaName, { allowed: ['spacer-brick','file-brick', 'image-brickDB', 'image-brickSwep', 'spline-brick', 'algorithm-brick', 'expansion-panel-brick', 'videoslider-brick', 'customcube-brick', 'section-image-text-brick', 'image-gallery-brick', 'business-card-brick'] }) }}
                 {{ pimcore_areablock(after, { allowed: ['centeredtext-brick', 'spacer-brick'] }) }}
             </div>
         </div>
