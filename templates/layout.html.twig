@@ -45,8 +45,7 @@
                     Menu <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    {% set langDocument = (documentLanguage == "de") ? pimcore_document(14) : pimcore_document(15) %}
-                
+                    {% set langDocument = document.getProperty('navRoot' ~ documentLanguage) %}
                     {% set mainNavigation = pimcore_build_nav({
                         active: document,
                         root: langDocument
