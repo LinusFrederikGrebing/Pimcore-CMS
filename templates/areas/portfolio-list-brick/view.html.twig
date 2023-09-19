@@ -45,11 +45,11 @@
               {% if app.session.get('user_logged_in') %}
                 <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                   <i class="fas fa-xmark me-1"></i>
-                  Schließen
+                  {{ 'Close' |trans }}
                 </button>
               {% else  %}
                 <button onclick="loadUserDataAndTogglePopup(this)" class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                  Mehr erfahren?
+                {{ 'LearnMore' |trans }}
                 </button>
               {% endif %}
             </div>
